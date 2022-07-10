@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using PDRPC.Core.Defines;
-using System.Globalization;
 using System.Collections.Generic;
 
 namespace PDRPC.Core.Models
@@ -41,16 +40,11 @@ namespace PDRPC.Core.Models
                 }
                 else
                 {
-                    names += $" • {GetName(performer.chara)} (${GetRoleName(performer.role)})";
+                    names += $" • {GetName(performer.chara)}";
                 }
             }
 
             return names;
-        }
-
-        private static string GetRoleName(string role)
-        {
-            return CultureInfo.InvariantCulture.TextInfo.ToTitleCase(role.ToLowerInvariant());
         }
     }
 }
