@@ -25,7 +25,6 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD reason, LPVOID lpReserved)
     switch (reason)
     {
 		case DLL_PROCESS_ATTACH:
-			Logger::Redirect();
 			CLR_Assembly(hModule);
 			break;
 		case DLL_THREAD_ATTACH: break;
