@@ -1,9 +1,8 @@
 enabled = true
-include = []
 dll = ["PDRPC.dll"]
 
 name = "PDRPC"
-description = "Discord Rich Presence for Steam version of Project Diva."
+description = "Discord Rich Presence for Hatsune Miku: Project DIVA Mega Mix+."
 version = "0.0.1"
 date = "06.07.2022"
 author = "Brasileiro"
