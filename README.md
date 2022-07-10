@@ -1,2 +1,2 @@
 # PDRPC
-Discord Rich Presence for Hatsune Miku: Project DIVA Mega Mix+
+Discord Rich Presence for Hatsune Miku: Project DIVA Mega Mix+.
