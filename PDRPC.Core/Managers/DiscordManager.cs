@@ -8,19 +8,23 @@ namespace PDRPC.Core.Managers
 {
     internal class DiscordManager
     {
-        private const int _UpdateDelay = 5000;
 
+        // RPC
+        private const int _delay = 5000;
         private static RichPresence _activity;
         private static DiscordRpcClient _client;
-        private static CancellationTokenSource _cancelToken = null;
+        private static CancellationTokenSource _cancelToken;
 
+        // Song
         private static DateTime _timePlayed;
         private static SongModel _songModel;
         private static ActivityModel _activityModel;
 
+        // Current IDs
         private static int _lastId = -1;
         private static int _currentId = 0;
-
+        
+        
         public static void Init()
         {
             #pragma warning disable CS0162
@@ -61,18 +65,24 @@ namespace PDRPC.Core.Managers
          */
         private static void OnClientReady()
         {
-            // Activity Update Task
-            OnUpdateActivity();
+            if (!_cancelToken.IsCancellationRequested)
+            {
+                // Activity Update Task
+                OnUpdateActivity();
+            }
         }
         
         private static void OnClientNotReady()
         {
             if (!_cancelToken.IsCancellationRequested)
             {
-                // Request activity update task to stop
+                Logger.Warning("Failed to connect to Discord. Please check if your Discord application is opened and reopen the game.");
+
+                // Stop Activity Updates
                 _cancelToken.Cancel();
 
-                Logger.Warning("Failed to connect to Discord. Please check if your Discord application is opened and reopen the game.");
+                // Dispose Client
+                Dispose();
             }
         }
         
@@ -106,43 +116,49 @@ namespace PDRPC.Core.Managers
                         _lastId = _currentId;
                     }
 
-                    await Task.Delay(_UpdateDelay, _cancelToken.Token);
+                    await Task.Delay(_delay, _cancelToken.Token);
                 }
             }, _cancelToken.Token);
         }
 
         private static void UpdateActivity()
         {
-            // Presence Info
-            _activity = new RichPresence()
+            if (!_client.IsDisposed)
             {
-                Details = _activityModel.GetDetails(),
-                State = _activityModel.GetState(),
-                Assets = new Assets()
+                // Presence Info
+                _activity = new RichPresence()
                 {
-                    LargeImageKey = _activityModel.GetLargeImage(),
-                    LargeImageText = _activityModel.GetLargeImageText(),
-                    SmallImageKey = _activityModel.GetSmallImage(),
-                    SmallImageText = _activityModel.GetSmallImageText(),
-                },
-                Timestamps = new Timestamps()
-                {
-                    Start = _timePlayed
-                },
-                Buttons = ActivityModel.GetDefaultButtons()
-            };
+                    Details = _activityModel.GetDetails(),
+                    State = _activityModel.GetState(),
+                    Assets = new Assets()
+                    {
+                        LargeImageKey = _activityModel.GetLargeImage(),
+                        LargeImageText = _activityModel.GetLargeImageText(),
+                        SmallImageKey = _activityModel.GetSmallImage(),
+                        SmallImageText = _activityModel.GetSmallImageText(),
+                    },
+                    Timestamps = new Timestamps()
+                    {
+                        Start = _timePlayed
+                    },
+                    Buttons = ActivityModel.GetDefaultButtons()
+                };
 
-            // Update Presence
-            _client.SetPresence(_activity);
+                // Update Presence
+                _client.SetPresence(_activity);
+            }
         }
 
         public static void Dispose()
         {
             if (_client != null)
             {
-                _client.Dispose();
+                if (!_client.IsDisposed)
+                {
+                    _client.Dispose();
 
-                Logger.Info("Discord RPC Client disposed.");
+                    Logger.Info("Discord RPC Client disposed.");
+                }
             }
         }
     }
