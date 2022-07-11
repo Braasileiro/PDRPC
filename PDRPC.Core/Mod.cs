@@ -1,26 +1,29 @@
-﻿using System;
-using PDRPC.Core;
-using PDRPC.Core.Managers;
+﻿using PDRPC.Core.Managers;
 
-namespace PDRPC
+namespace PDRPC.Core
 {
     public class Mod
     {
-        public static int Init(string assemblyDir)
+        [DllExport]
+        public static void OnInit()
         {
-            // Set current directory
-            Environment.CurrentDirectory = assemblyDir;
-
             // Attempt to attach to the game process
-            if (!ProcessManager.Attach(GameInfo.Process)) return 1;
+            if (ProcessManager.Attach(GameInfo.Process))
+            {
+                // Load Database
+                if (DatabaseManager.Load())
+                {
+                    // Init Discord RPC
+                    DiscordManager.Init();
+                }
+            }
+        }
 
-            // Load Database
-            if (!DatabaseManager.Load()) return 1;
-
-            // Init Discord RPC
-            if (!DiscordManager.Init()) return 1;
-
-            return 0;
+        [DllExport]
+        public static void OnDispose()
+        {
+            // Dispose things here
+            DiscordManager.Dispose();
         }
     }
 }

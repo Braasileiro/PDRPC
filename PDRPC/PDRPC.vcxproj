@@ -147,11 +147,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\logger.cpp" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\logger.h" />
     <ClInclude Include="include\main.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>

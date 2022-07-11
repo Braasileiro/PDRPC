@@ -1,13 +1,6 @@
 #pragma once
-#pragma comment(lib, "mscoree.lib")
+#define WIN32_LEAN_AND_MEAN
 
-#include <iostream>
 #include <Windows.h>
-#include <filesystem>
 #include <metahost.h>
-
-#include "logger.h"
-
-void CLR_Assembly(HMODULE& hModule);
-void CLR_Start();
-void CLR_Dispose();
+#pragma comment(lib, "mscoree.lib")

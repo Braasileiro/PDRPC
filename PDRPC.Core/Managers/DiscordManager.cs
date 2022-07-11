@@ -21,7 +21,7 @@ namespace PDRPC.Core.Managers
         private static int _lastId = -1;
         private static int _currentId = 0;
 
-        public static bool Init()
+        public static void Init()
         {
             #pragma warning disable CS0162
             if (Constants.DiscordClientId <= 0)
@@ -47,8 +47,6 @@ namespace PDRPC.Core.Managers
                     _client.OnError += (sender, e) => OnClientNotReady();
                     _client.OnClose += (sender, e) => OnClientNotReady();
                     _client.OnConnectionFailed += (sender, e) => OnClientNotReady();
-
-                    return true;
                 }
                 catch (Exception e)
                 {
@@ -56,8 +54,6 @@ namespace PDRPC.Core.Managers
                 }
             }
             #pragma warning restore CS0162
-
-            return false;
         }
 
 
@@ -141,6 +137,11 @@ namespace PDRPC.Core.Managers
 
             // Update presence
             _client.SetPresence(_activity);
+        }
+
+        public static void Dispose()
+        {
+            _client?.Dispose();
         }
     }
 }
