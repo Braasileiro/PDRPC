@@ -15,13 +15,15 @@ namespace PDRPC.Core.Managers
         {
             try
             {
-                if (!File.Exists(Constants.DatabaseName))
+                var path = Path.Combine(Global.CurrentDirectory, Constants.DatabaseName);
+
+                if (!File.Exists(path))
                 {
                     Logger.Error("Database not found.");
                 }
                 else
                 {
-                    string json = File.ReadAllText(Constants.DatabaseName);
+                    string json = File.ReadAllText(path);
 
                     data = JsonConvert.DeserializeObject<List<SongModel>>(json);
 

@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using PDRPC.Core.Managers;
 
 namespace PDRPC.Core
@@ -8,6 +9,9 @@ namespace PDRPC.Core
         [DllExport]
         public static void OnInit()
         {
+            // Global
+            Global.CurrentDirectory = Environment.CurrentDirectory;
+
             // Running everything in a separate thread to avoid any blocking
             new Thread(() =>
             {

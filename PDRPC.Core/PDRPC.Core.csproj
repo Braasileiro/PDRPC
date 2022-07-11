@@ -75,6 +75,7 @@
     <Compile Include="Properties\BuildInfo.cs" />
     <Compile Include="Properties\Constants.cs" />
     <Compile Include="Properties\GameInfo.cs" />
+    <Compile Include="Properties\Global.cs" />
     <Compile Include="Utils\Logger.cs" />
   </ItemGroup>
   <ItemGroup>
