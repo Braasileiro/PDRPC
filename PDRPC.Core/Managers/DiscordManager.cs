@@ -142,6 +142,8 @@ namespace PDRPC.Core.Managers
         public static void Dispose()
         {
             _client?.Dispose();
+
+            Logger.Info("Discord RPC Client disposed.");
         }
     }
 }
