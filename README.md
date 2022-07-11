@@ -22,6 +22,9 @@ By default, information is being displayed in English. In the future I plan to a
 # Usage
 Just play the game my little PogChamp. The Discord Activity will show up.
 
+# Thanks
+This project uses an amazing library called [DllExport](https://github.com/3F/DllExport).
+
 # Showcase
 <p align="center">
   <img src="./Assets/Readme/discord_status.png">
