@@ -1,4 +1,5 @@
-﻿using PDRPC.Core.Managers;
+﻿using System.Threading;
+using PDRPC.Core.Managers;
 
 namespace PDRPC.Core
 {
@@ -7,16 +8,20 @@ namespace PDRPC.Core
         [DllExport]
         public static void OnInit()
         {
-            // Attempt to attach to the game process
-            if (ProcessManager.Attach(GameInfo.Process))
+            // Running everything in a separate thread to avoid any blocking
+            new Thread(() =>
             {
-                // Load Database
-                if (DatabaseManager.Load())
+                // Attempt to attach to the game process
+                if (ProcessManager.Attach(GameInfo.Process))
                 {
-                    // Init Discord RPC
-                    DiscordManager.Init();
+                    // Load Database
+                    if (DatabaseManager.Load())
+                    {
+                        // Init Discord RPC
+                        DiscordManager.Init();
+                    }
                 }
-            }
+            }).Start();
         }
 
         [DllExport]
