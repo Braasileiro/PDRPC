@@ -32,11 +32,11 @@ namespace PDRPC.Core.Managers
             {
                 try
                 {
-                    // Instantiate Discord RPC Client
+                    // Instantiate
                     _client = new DiscordRpcClient(Constants.DiscordClientId.ToString());
                     _client.Initialize();
 
-                    // Initialize cancellation token
+                    // Cancellation Token
                     _cancelToken = new CancellationTokenSource();
 
                     // Time Played
@@ -44,7 +44,6 @@ namespace PDRPC.Core.Managers
 
                     // Events
                     _client.OnReady += (sender, e) => OnClientReady();
-                    _client.OnError += (sender, e) => OnClientNotReady();
                     _client.OnClose += (sender, e) => OnClientNotReady();
                     _client.OnConnectionFailed += (sender, e) => OnClientNotReady();
                 }
@@ -62,21 +61,23 @@ namespace PDRPC.Core.Managers
          */
         private static void OnClientReady()
         {
-            // Activity update task
+            // Activity Update Task
             OnUpdateActivity();
         }
         
         private static void OnClientNotReady()
         {
-            // Request activity update task to stop
-            _cancelToken?.Cancel();
+            if (!_cancelToken.IsCancellationRequested)
+            {
+                // Request activity update task to stop
+                _cancelToken.Cancel();
 
-            Logger.Warning("Failed to connect to Discord. Please check if your Discord application is opened and reopen the game.");
+                Logger.Warning("Failed to connect to Discord. Please check if your Discord application is opened and reopen the game.");
+            }
         }
         
         private static void OnUpdateActivity()
         {
-            // Listening
             Logger.Info("Discord RPC Client is listening.");
 
             Task.Run(async () =>
@@ -110,13 +111,9 @@ namespace PDRPC.Core.Managers
             }, _cancelToken.Token);
         }
 
-
-        /*
-         * Functions
-         */
         private static void UpdateActivity()
         {
-            // Presence info
+            // Presence Info
             _activity = new RichPresence()
             {
                 Details = _activityModel.GetDetails(),
@@ -135,15 +132,18 @@ namespace PDRPC.Core.Managers
                 Buttons = ActivityModel.GetDefaultButtons()
             };
 
-            // Update presence
+            // Update Presence
             _client.SetPresence(_activity);
         }
 
         public static void Dispose()
         {
-            _client?.Dispose();
+            if (_client != null)
+            {
+                _client.Dispose();
 
-            Logger.Info("Discord RPC Client disposed.");
+                Logger.Info("Discord RPC Client disposed.");
+            }
         }
     }
 }
