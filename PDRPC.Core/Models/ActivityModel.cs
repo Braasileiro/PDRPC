@@ -38,7 +38,7 @@
         {
             if (!isPlaying)
             {
-                return $"{BuildInfo.Name} {BuildInfo.Version} by {BuildInfo.Author}";
+                return $"{BuildInfo.Name} {BuildInfo.Version}";
             }
 
             return CharacterModel.GetNames(song.performers);
