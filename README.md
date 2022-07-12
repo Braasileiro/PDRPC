@@ -13,8 +13,6 @@ Feel free to edit or add entries in the **"database.json"**. That way you can ad
 
 By default, information is being displayed in English. In the future I plan to add a way to configure the locale (English or Japanese) and display the current difficulty of the song.
 
-**Please make sure your Discord is open before the game. If you open Discord after the game, you will have to restart the game for the Discord status to work.**
-
 # Installation
 1. Install [Visual C++ Runtime 2015+ x64](https://aka.ms/vs/17/release/vc_redist.x64.exe) if you don't have already installed.
 2. Install [.NET Framework 4.8 Runtime](https://dotnet.microsoft.com/en-us/download/dotnet-framework/net48). If you have a minimally updated Windows 10 or higher, you will probably already have this installed by default. Install only if necessary.
@@ -23,6 +21,8 @@ By default, information is being displayed in English. In the future I plan to a
 
 # Usage
 Just play the game my little PogChamp. The Discord Activity will show up.
+
+**Please make sure your Discord is open before the game. If you open Discord after the game, you will have to restart the game for the Discord status to work.**
 
 # Thanks
 This project uses an amazing library called [DllExport](https://github.com/3F/DllExport).
