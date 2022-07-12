@@ -24,7 +24,7 @@ namespace PDRPC.Core.Models
 
         public static string GetNames(List<SongPerformerModel> charas)
         {
-            if (!charas.Any()) return "None characters for this song.";
+            if (!charas.Any()) return "No performers.";
 
             string names = string.Empty;
             SongPerformerModel performer;
@@ -45,6 +45,13 @@ namespace PDRPC.Core.Models
             }
 
             return names;
+        }
+
+        public static string GetPerformerImage(List<SongPerformerModel> charas)
+        {
+            if (!charas.Any()) return "default";
+
+            return $"chara_{charas[0].chara.ToLowerInvariant()}";
         }
     }
 }

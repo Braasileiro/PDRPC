@@ -31,7 +31,9 @@
 
         public string GetLargeImage()
         {
-            return "default";
+            if (!isPlaying) return "default";
+
+            return CharacterModel.GetPerformerImage(song.performers);
         }
 
         public string GetLargeImageText()
