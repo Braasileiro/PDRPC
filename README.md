@@ -17,7 +17,7 @@ By default, information is being displayed in English. In the future I plan to a
 1. Install [Visual C++ Runtime 2015+ x64](https://aka.ms/vs/17/release/vc_redist.x64.exe) if you don't have already installed.
 2. Install [.NET Framework 4.8 Runtime](https://dotnet.microsoft.com/en-us/download/dotnet-framework/net48). If you have a minimally updated Windows 10 or higher, you will probably already have this installed by default. Install only if necessary.
 3. Install [DivaModLoader](https://github.com/blueskythlikesclouds/DivaModLoader) or [DivaModManager](https://github.com/TekkaGB/DivaModManager).
-4. Download the [latest release](https://github.com/Braasileiro/PDRPC/releases/latest) and extract the zip contents on the **"mods"** folder in the Project DIVA installation directory. For DivaModManager, just drag and drop the zip file in the mod grid.
+4. Download the [latest release](https://github.com/Braasileiro/PDRPC/releases/latest) and extract the zip contents on the **"mods"** folder in the Project DIVA installation directory. For **DivaModManager**, just drag and drop the zip file in the mod grid.
 
 # Usage
 Just play the game my little PogChamp. The Discord Activity will show up.
