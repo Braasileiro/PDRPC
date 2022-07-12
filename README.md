@@ -29,5 +29,5 @@ This project uses an amazing library called [DllExport](https://github.com/3F/Dl
 
 # Showcase
 <p align="center">
-  <img src="./Assets/Readme/discord_status.png">
+  <img src="./Assets/Mod/preview.png">
 </p>

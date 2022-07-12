@@ -155,6 +155,7 @@ namespace PDRPC.Core.Managers
             {
                 if (!_client.IsDisposed)
                 {
+                    _client.ClearPresence();
                     _client.Dispose();
 
                     Logger.Info("Discord RPC Client disposed.");
