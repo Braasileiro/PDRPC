@@ -21,7 +21,7 @@ namespace PDRPC.Core.Managers
                 // Load Internal Database
                 database = JsonConvert.DeserializeObject<List<SongModel>>(Encoding.UTF8.GetString(Resources.database));
 
-                Logger.Info("Database loaded.");
+                Logger.Info("Internal database loaded.");
 
                 // User Database (?)
                 var path = Path.Combine(Global.CurrentDirectory, Constants.UserDatabaseName);
