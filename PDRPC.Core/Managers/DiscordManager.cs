@@ -104,14 +104,13 @@ namespace PDRPC.Core.Managers
                         {
                             _activityModel = new ActivityModel(isPlaying: true, song: _songModel);
 
-                            UpdateActivity();
                         }
                         else
                         {
                             _activityModel = new ActivityModel(isPlaying: false, song: null);
-
-                            UpdateActivity();
                         }
+
+                        UpdateActivity();
 
                         _lastId = _currentId;
                     }
