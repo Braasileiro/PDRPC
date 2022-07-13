@@ -38,18 +38,18 @@ Create the **database_user.json** file inside the PDRPC folder. Here's an exampl
     "file": null,
     "reading": null,
     "jp": {
-      "name": "My Custom Song Name In Japanese",
-      "arranger": "My Custom Arranger In Japanese",
-      "illustrator": "My Custom Illustrator In Japanese",
-      "lyrics": "My Custom Lyrics Author In Japanese",
-      "music": "My Custom Music Author In Japanese"
+      "name": "曲名",
+      "arranger": "ソングアレンジャー",
+      "illustrator": "ソング・イラストレーター",
+      "lyrics": "曲の歌詞",
+      "music": "歌謡曲"
     },
     "en": {
-      "name": "My Custom Song Name In English",
-      "arranger": "My Custom Arranger In English",
-      "illustrator": "My Custom Illustrator In English",
-      "lyrics": "My Custom Lyrics Author In English",
-      "music": "My Custom Music Author In English"
+      "name": "Song Name",
+      "arranger": "Song Arranger",
+      "illustrator": "Song Illustrator",
+      "lyrics": "Song Lyrics",
+      "music": "Song Music"
     },
     "performers": [
       {
