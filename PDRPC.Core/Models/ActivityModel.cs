@@ -9,10 +9,10 @@
         public readonly SongModel song;
 
 
-        public ActivityModel(bool isPlaying, SongModel song)
+        public ActivityModel(SongModel song)
         {
-            this.isPlaying = isPlaying;
             this.song = song;
+            isPlaying = this.song != null;
         }
 
         public string GetDetails()

@@ -100,15 +100,7 @@ namespace PDRPC.Core.Managers
                     {
                         _songModel = DatabaseManager.FindById(_currentId);
 
-                        if (_songModel != null)
-                        {
-                            _activityModel = new ActivityModel(isPlaying: true, song: _songModel);
-
-                        }
-                        else
-                        {
-                            _activityModel = new ActivityModel(isPlaying: false, song: null);
-                        }
+                        _activityModel = new ActivityModel(song: _songModel);
 
                         UpdateActivity();
 
