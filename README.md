@@ -68,9 +68,10 @@ The file is self explanatory. It's basically a comma separated array of objects,
 
 But pay attention to these fields:
 
-* **id**: The song id. If you put here any id that already exists within the game, this record will **overwrite** the data that rich presence will show.
-* **type**: I don't have any features for this yet, but I left this field for future updates. I recommend leaving it as **"USER"**, It's a required field anyway.
-* **performers**: An array that indicates the artists of the song. It can be an empty array, **[ ]**.
+* **id**: The song id. If you put here any id that already exists within the game, this record will **overwrite** the data that rich presence will show. Required field.
+* **type**: I don't have any features for this yet, but I left this field for future updates. I recommend leaving it as **"USER"**. Required field.
+* **jp** and **en**: The song info data. Required fields.
+* **performers**: An array that indicates the artists of the song. It can be **null**.
   
   * **chara**: The performer identifier.
     * **KAI**: KAITO
