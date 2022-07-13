@@ -15,7 +15,7 @@ By default, information is being displayed in English. In the future I plan to a
 
 # Installation
 * Windows 10 or higher.
-* Install [Visual C++ Runtime 2015+ x64](https://aka.ms/vs/17/release/vc_redist.x64.exe) if you don't have already installed.
+* Install [Visual C++ 2015+ x64 Runtime](https://aka.ms/vs/17/release/vc_redist.x64.exe) if you don't have already installed.
 * Install [DivaModLoader](https://github.com/blueskythlikesclouds/DivaModLoader) or [DivaModManager](https://github.com/TekkaGB/DivaModManager).
 * Download the [latest release](https://github.com/Braasileiro/PDRPC/releases/latest) and extract the zip contents on the **"mods"** folder in the Project DIVA installation directory. For **DivaModManager**, just drag and drop the zip file in the mod grid.
 
