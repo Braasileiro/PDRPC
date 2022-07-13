@@ -58,12 +58,14 @@ namespace PDRPC.Core.Managers
 
             if (userdata != null)
             {
-                result = userdata.First(o => o.id == id);
+                // Try User Database
+                result = userdata.FirstOrDefault(o => o.id == id);
             }
 
             if (result == null)
             {
-                result = database.First(o => o.id == id);
+                // Try Internal Database
+                result = database.FirstOrDefault(o => o.id == id);
             }
 
             return result;
