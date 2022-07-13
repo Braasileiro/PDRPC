@@ -9,8 +9,6 @@ Only official game songs are supported. Custom songs will not display informatio
 
 If the mod replaces an official song (same id), the mod will still display the official song data.
 
-Feel free to edit or add entries in the **"database.json"**. That way you can add new songs to the database (from custom song mods, for example) or edit existing official ones. Just keep the same pattern in the entries you add or edit.
-
 By default, information is being displayed in English. In the future I plan to add a way to configure the locale (English or Japanese) and display the current difficulty of the song.
 
 # Installation
@@ -25,6 +23,64 @@ By default, information is being displayed in English. In the future I plan to a
 Just play the game my little PogChamp. The Discord Activity will show up.
 
 **Please make sure your Discord is open before the game. If you open Discord after the game, you will have to restart the game for the Discord status to work.**
+
+# Custom Database
+The mod supports loading user custom data. With this you can add songs to the rich presence database (like song packs) or overwrite official song data. As of version 0.0.6 the static database is now internal to the mod, so the only way to add and edit entries is this way.
+
+Create the **database_user.json** file inside the PDRPC folder. Here's an example of what the file format should look like:
+```json
+[
+  {
+    "id": 999,
+    "type": "USER",
+    "bpm": null,
+    "date": null,
+    "file": null,
+    "reading": null,
+    "jp": {
+      "name": "My Custom Song Name In Japanese",
+      "arranger": "My Custom Arranger In Japanese",
+      "illustrator": "My Custom Illustrator In Japanese",
+      "lyrics": "My Custom Lyrics Author In Japanese",
+      "music": "My Custom Music Author In Japanese"
+    },
+    "en": {
+      "name": "My Custom Song Name In English",
+      "arranger": "My Custom Arranger In English",
+      "illustrator": "My Custom Illustrator In English",
+      "lyrics": "My Custom Lyrics Author In English",
+      "music": "My Custom Music Author In English"
+    },
+    "performers": [
+      {
+        "chara": "MIK",
+        "role": "VOCAL"
+      },
+      {
+        "chara": "RIN",
+        "role": "GUEST"
+      }
+    ]
+  }
+]
+```
+The file is self explanatory. It's basically a comma separated array of objects, a standard json array.
+
+But pay attention to these fields:
+
+* **id**: The song id. If you put here any id that already exists within the game, this record will **overwrite** the data that rich presence will show.
+* **type**: I don't have any features for this yet, but I left this field for future updates. I recommend leaving it as **"USER"**, It's a required field anyway.
+* **performers**: An array that indicates the artists of the song. It can be an empty array, **[ ]**.
+  
+  * **chara**: The performer identifier.
+    * **KAI**: KAITO
+    * **LEN**: Kagamine Len
+    * **LUK**: Megurine Luka
+    * **MEI**: MEIKO
+    * **MIK**: Hatsune Miku
+    * **RIN**: Kagamine Rin
+
+  * **role**: The performer role on the song. **VOCAL** or **GUEST**.
 
 # Thanks
 * [Newtonsoft.Json](https://github.com/JamesNK/Newtonsoft.Json).
