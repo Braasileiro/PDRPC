@@ -12,10 +12,10 @@ namespace PDRPC.Core.Models
         public string type { get; set; }
 
         [JsonProperty(Required = Required.AllowNull)]
-        public int bpm { get; set; }
+        public int? bpm { get; set; }
 
         [JsonProperty(Required = Required.AllowNull)]
-        public int date { get; set; }
+        public int? date { get; set; }
 
         [JsonProperty(Required = Required.AllowNull)]
         public string file { get; set; }
