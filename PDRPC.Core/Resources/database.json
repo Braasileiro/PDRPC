@@ -7391,5 +7391,117 @@
         "role": "VOCAL"
       }
     ]
+  },
+  {
+    "id": 19,
+    "type": "MOD_RESTORE_CUT_SONGS",
+    "bpm": 200,
+    "date": 20101125,
+    "file": "rom/sound/song/pv_019.ogg",
+    "reading": "はと",
+    "jp": {
+      "name": "ハト",
+      "arranger": "秦野P",
+      "illustrator": "神楽坂",
+      "lyrics": "秦野P",
+      "music": "秦野P"
+    },
+    "en": {
+      "name": "White Dove",
+      "arranger": "Hadano P",
+      "illustrator": "Kagurazaka",
+      "lyrics": "Hadano P",
+      "music": "Hadano P"
+    },
+    "performers": [
+      {
+        "chara": "MIK",
+        "role": "VOCAL"
+      }
+    ]
+  },
+  {
+    "id": 27,
+    "type": "MOD_RESTORE_CUT_SONGS",
+    "bpm": 119,
+    "date": 20160212,
+    "file": "rom/sound/song/pv_027.ogg",
+    "reading": "いえばんぽるっか",
+    "jp": {
+      "name": "Ievan Polkka",
+      "arranger": "Otomania",
+      "illustrator": "雪乃たまご",
+      "lyrics": null,
+      "music": "フィンランド民謡"
+    },
+    "en": {
+      "name": "Ievan Polkka",
+      "arranger": "Otomania",
+      "illustrator": "Yukino Tamago",
+      "lyrics": null,
+      "music": "Finnish folk song"
+    },
+    "performers": [
+      {
+        "chara": "MIK",
+        "role": "VOCAL"
+      }
+    ]
+  },
+  {
+    "id": 207,
+    "type": "MOD_RESTORE_CUT_SONGS",
+    "bpm": 137,
+    "date": 20101125,
+    "file": "rom/sound/song/pv_207.ogg",
+    "reading": "さちゅれいしょん",
+    "jp": {
+      "name": "saturation",
+      "arranger": "fatP",
+      "illustrator": "かわず",
+      "lyrics": "Harmonia",
+      "music": "fatP"
+    },
+    "en": {
+      "name": "Saturation",
+      "arranger": "fatP",
+      "illustrator": "Kawazu",
+      "lyrics": "Harmonia",
+      "music": "fatP"
+    },
+    "performers": [
+      {
+        "chara": "MIK",
+        "role": "VOCAL"
+      }
+    ]
+  },
+  {
+    "id": 221,
+    "type": "MOD_RESTORE_CUT_SONGS",
+    "bpm": 124,
+    "date": 20161208,
+    "file": "rom/sound/song/pv_221.ogg",
+    "reading": "ねこみみあーかいぶ",
+    "jp": {
+      "name": "ネコミミアーカイブ",
+      "arranger": "糞田舎P",
+      "illustrator": "yuna",
+      "lyrics": "糞田舎P",
+      "music": "糞田舎P"
+    },
+    "en": {
+      "name": "NekoMimi Archive",
+      "arranger": "Kusoinaka P",
+      "illustrator": "yuna",
+      "lyrics": "Kusoinaka P",
+      "music": "Kusoinaka P"
+    },
+    "performers": [
+      {
+        "chara": "MIK",
+        "role": "VOCAL"
+      }
+    ]
   }
 ]
