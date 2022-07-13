@@ -12,6 +12,9 @@ _OnInit p_OnInit;
 _OnDispose p_OnDispose;
 
 
+/*
+ * Entry
+ */
 BOOL APIENTRY DllMain(HMODULE hModule, DWORD reason, LPVOID lpReserved)
 {	
     switch (reason)
@@ -23,15 +26,22 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD reason, LPVOID lpReserved)
 	case DLL_THREAD_DETACH:
 		break;
 	case DLL_PROCESS_DETACH:
-		// Mod Dispose
-		p_OnDispose();
+		if (m_Library)
+		{
+			// Mod Dispose
+			p_OnDispose();
+		}
 		break;
 	}
 
     return TRUE;
 }
 
-bool LoadMod()
+
+/*
+ * Mod
+ */
+bool LoadModLibrary()
 {
 	m_Library = LoadLibraryA("PDRPC.Core.dll");
 
@@ -53,7 +63,7 @@ bool LoadMod()
 extern "C" __declspec(dllexport) void Init()
 {
 	// Load Mod Library
-	if (LoadMod())
+	if (LoadModLibrary())
 	{
 		// Mod Entry Point
 		p_OnInit();
