@@ -5,10 +5,6 @@ This mod adds support for Discord Rich Presence in the game.
 
 Displays information such as song name, author and current song performers.
 
-Only official game songs are supported. Custom songs will not display information as the mod refers to a static database that comes with it.
-
-If the mod replaces an official song (same id), the mod will still display the official song data.
-
 By default, information is being displayed in English. In the future I plan to add a way to configure the locale (English or Japanese) and display the current difficulty of the song.
 
 # Installation
