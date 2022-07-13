@@ -4648,7 +4648,7 @@
       "lyrics": null,
       "music": null
     },
-    "performers": []
+    "performers": null
   },
   {
     "id": 701,
@@ -4671,7 +4671,7 @@
       "lyrics": null,
       "music": null
     },
-    "performers": []
+    "performers": null
   },
   {
     "id": 710,
@@ -5274,7 +5274,7 @@
       "lyrics": "OSTER project",
       "music": "OSTER project"
     },
-    "performers": []
+    "performers": null
   },
   {
     "id": 832,
