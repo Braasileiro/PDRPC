@@ -2088,6 +2088,34 @@
     ]
   },
   {
+    "id": 221,
+    "type": "BASE",
+    "bpm": 124,
+    "date": 20130831,
+    "file": "rom/sound/song/pv_221.ogg",
+    "reading": "ねこみみあーかいぶ",
+    "jp": {
+      "name": "ネコミミアーカイブ",
+      "arranger": "糞田舎P",
+      "illustrator": "yuna",
+      "lyrics": "糞田舎P",
+      "music": "糞田舎P"
+    },
+    "en": {
+      "name": "NekoMimi Archive",
+      "arranger": "Kusoinaka P",
+      "illustrator": "yuna",
+      "lyrics": "Kusoinaka P",
+      "music": "Kusoinaka P"
+    },
+    "performers": [
+      {
+        "chara": "MIK",
+        "role": "VOCAL"
+      }
+    ]
+  },
+  {
     "id": 222,
     "type": "BASE",
     "bpm": 124,
@@ -7468,34 +7496,6 @@
       "illustrator": "Kawazu",
       "lyrics": "Harmonia",
       "music": "fatP"
-    },
-    "performers": [
-      {
-        "chara": "MIK",
-        "role": "VOCAL"
-      }
-    ]
-  },
-  {
-    "id": 221,
-    "type": "MOD_RESTORE_CUT_SONGS",
-    "bpm": 124,
-    "date": 20161208,
-    "file": "rom/sound/song/pv_221.ogg",
-    "reading": "ねこみみあーかいぶ",
-    "jp": {
-      "name": "ネコミミアーカイブ",
-      "arranger": "糞田舎P",
-      "illustrator": "yuna",
-      "lyrics": "糞田舎P",
-      "music": "糞田舎P"
-    },
-    "en": {
-      "name": "NekoMimi Archive",
-      "arranger": "Kusoinaka P",
-      "illustrator": "yuna",
-      "lyrics": "Kusoinaka P",
-      "music": "Kusoinaka P"
     },
     "performers": [
       {
