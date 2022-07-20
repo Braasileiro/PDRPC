@@ -19,15 +19,13 @@ Just play the game my little PogChamp. The Discord Activity will show up.
 **Please make sure your Discord is open before the game. If you open Discord after the game, you will have to restart the game for the Discord status to work.**
 
 # Configuration
-Some settings you can change in **config.toml** file:
+There are some settings you can change in **config.toml** file. Default values:
 
-* **album_art**: **true** or **false** [Default: **true**]
+**Album Art**: Enabled.
+<br>Shows the album art of the song. If no album art, defaults to the image of first performer. The mod contains album arts for all official songs and [Restore Cut Songs Mod](https://gamebanana.com/mods/383478).</br>
 
-Shows the album art of the song. If no album art, defaults to the image of first performer. The mod contains album arts for all official songs and [Restore Cut Songs Mod](https://gamebanana.com/mods/383478).
-
-* **japanese_names**: **true** or **false** [Default: **false**]
-
-Shows the song info in japanese whenever possible.
+**Japanese Names**: Disabled.
+<br>Shows the song info in japanese whenever possible.</br>
 
 # User Database
 The mod supports loading user custom data. With this you can add songs to the rich presence database (like song packs) or overwrite official song data. As of version 0.0.6 the static database is now internal to the mod, so the only way to add and edit entries is this way.
