@@ -66,19 +66,20 @@ The file is self explanatory. It's basically a comma separated array of objects,
 
 But pay attention to these fields:
 
-* **id**: The song id. If you put here any id that already exists within the game, this record will **overwrite** the data that rich presence will show. Required field.
-* **jp** and **en**: The song info data. Required fields.
-* **performers**: An array that indicates the artists of the song. It can be **null** or **not declared**.
-  
-  * **chara**: The performer identifier.
-    * **KAI**: KAITO
-    * **LEN**: Kagamine Len
-    * **LUK**: Megurine Luka
-    * **MEI**: MEIKO
-    * **MIK**: Hatsune Miku
-    * **RIN**: Kagamine Rin
+**id**: The song id. If you put here any id that already exists within the game, this record will **overwrite** the data that rich presence will show. Required field.
 
-  * **role**: The performer role on the song. **VOCAL** or **GUEST**.
+**jp** and **en**: The song info data. Required fields.
+
+**performers**: An array that indicates the artists of the song. It can be **null** or **not declared**
+* **chara**: The performer identifier.
+   * **KAI**: KAITO
+   * **LEN**: Kagamine Len
+   * **LUK**: Megurine Luka
+   * **MEI**: MEIKO
+   * **MIK**: Hatsune Miku
+   * **RIN**: Kagamine Rin
+
+* **role**: The performer role on the song. **VOCAL** or **GUEST**.
 
 # Thanks
 * [Newtonsoft.Json](https://github.com/JamesNK/Newtonsoft.Json).
