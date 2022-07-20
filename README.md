@@ -23,7 +23,7 @@ Some settings you can change in **config.toml** file:
 
 * **album_art**: **true** or **false** [Default: **true**]
 
-Shows the album art of the song. If no album art, defaults to the first performer. The mod contains album arts for all official songs and [Restore Cut Songs Mod](https://gamebanana.com/mods/383478).
+Shows the album art of the song. If no album art, defaults to the image of first performer. The mod contains album arts for all official songs and [Restore Cut Songs Mod](https://gamebanana.com/mods/383478).
 
 * **japanese_names**: **true** or **false** [Default: **false**]
 
