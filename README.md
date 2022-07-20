@@ -3,9 +3,7 @@ Discord Rich Presence for Hatsune Miku: Project DIVA Mega Mix+.
 
 This mod adds support for Discord Rich Presence in the game.
 
-Displays information such as song name, author and current song performers.
-
-By default, information is being displayed in English. In the future I plan to add a way to configure the locale (English or Japanese) and display the current difficulty of the song.
+Displays information such as song name, author, album art and current song performers.
 
 # Installation
 * Windows 10 or higher.
@@ -20,6 +18,12 @@ Just play the game my little PogChamp. The Discord Activity will show up.
 
 **Please make sure your Discord is open before the game. If you open Discord after the game, you will have to restart the game for the Discord status to work.**
 
+# Configuration
+Some settings you can change in **config.toml** file:
+
+* **album_art**: **true** or **false** [Default: **true**]. Shows the album art of the song. If no album art, defaults to the first performer. The mod contains album arts for official songs and [Restore Cut Songs Mod](https://gamebanana.com/mods/383478)).
+* **japanese_names**: **true** or **false** [Default: **false**]. Shows the song info in japanese whenever possible.
+
 # Custom Database
 The mod supports loading user custom data. With this you can add songs to the rich presence database (like song packs) or overwrite official song data. As of version 0.0.6 the static database is now internal to the mod, so the only way to add and edit entries is this way.
 
@@ -28,11 +32,6 @@ Create the **database_user.json** file inside the **PDRPC** mod folder. Here's a
 [
   {
     "id": 999,
-    "type": "USER",
-    "bpm": null,
-    "date": null,
-    "file": null,
-    "reading": null,
     "jp": {
       "name": "曲名",
       "arranger": "ソングアレンジャー",
@@ -65,9 +64,8 @@ The file is self explanatory. It's basically a comma separated array of objects,
 But pay attention to these fields:
 
 * **id**: The song id. If you put here any id that already exists within the game, this record will **overwrite** the data that rich presence will show. Required field.
-* **type**: I don't have any features for this yet, but I left this field for future updates. I recommend leaving it as **"USER"**. Required field.
 * **jp** and **en**: The song info data. Required fields.
-* **performers**: An array that indicates the artists of the song. It can be **null**.
+* **performers**: An array that indicates the artists of the song. It can be **null** or **not declared**.
   
   * **chara**: The performer identifier.
     * **KAI**: KAITO
