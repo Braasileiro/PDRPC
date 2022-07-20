@@ -8,7 +8,6 @@ namespace PDRPC.Core.Managers
 {
     internal class DiscordManager
     {
-
         // RPC
         private const int _delay = 5000;
         private static RichPresence _activity;
