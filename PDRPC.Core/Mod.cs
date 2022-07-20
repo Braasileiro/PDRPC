@@ -10,7 +10,7 @@ namespace PDRPC.Core
         public static void OnInit()
         {
             // Global
-            Global.CurrentDirectory = Environment.CurrentDirectory;
+            Settings.CurrentDirectory = Environment.CurrentDirectory;
 
             // Running everything in a separate thread to avoid any blocking
             new Thread(() =>
@@ -18,8 +18,11 @@ namespace PDRPC.Core
                 // Attempt to attach to the game process
                 if (ProcessManager.Attach(GameInfo.Process))
                 {
+                    // Load Settings
+                    DatabaseManager.LoadSettings();
+
                     // Load Database
-                    if (DatabaseManager.Load())
+                    if (DatabaseManager.LoadDatabase())
                     {
                         // Init Discord RPC
                         DiscordManager.Init();

@@ -19,19 +19,19 @@ namespace PDRPC.Core.Models
 
         public static string GetName(string chara)
         {
-            return Types.TryGetValue(chara, out string value) ? value : chara.ToString();
+            return Types.TryGetValue(chara.ToUpperInvariant(), out string value) ? value : chara.ToString();
         }
 
-        public static string GetNames(List<SongPerformerModel> charas)
+        public static string GetNames(List<SongPerformerModel> performers)
         {
-            if (charas == null || !charas.Any()) return "No performers.";
+            if (performers == null || !performers.Any()) return "No performers.";
 
             string names = string.Empty;
             SongPerformerModel performer;
 
-            for (int i = 0; i < charas.Count; i++)
+            for (int i = 0; i < performers.Count; i++)
             {
-                performer = charas[i];
+                performer = performers[i];
 
                 // First or only one
                 if (i == 0)
@@ -47,11 +47,14 @@ namespace PDRPC.Core.Models
             return names;
         }
 
-        public static string GetPerformerImage(List<SongPerformerModel> charas)
+        public static string GetPerformerImage(List<SongPerformerModel> performers)
         {
-            if (charas == null || !charas.Any()) return "default";
+            if (performers == null || !performers.Any())
+            {
+                return Constants.Discord.LargeImage;
+            }
 
-            return $"chara_{charas[0].chara.ToLowerInvariant()}";
+            return $"chara_{performers[0].chara.ToLowerInvariant()}";
         }
     }
 }

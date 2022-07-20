@@ -28,7 +28,7 @@ namespace PDRPC.Core.Managers
         public static void Init()
         {
             #pragma warning disable CS0162
-            if (Constants.DiscordClientId <= 0)
+            if (Constants.Discord.ClientId <= 0)
             {
                 Logger.Error("Please set an valid Discord ClientID.");
             }
@@ -37,7 +37,7 @@ namespace PDRPC.Core.Managers
                 try
                 {
                     // Instantiate
-                    _client = new DiscordRpcClient(Constants.DiscordClientId.ToString());
+                    _client = new DiscordRpcClient(Constants.Discord.ClientId.ToString());
                     _client.Initialize();
 
                     // Cancellation Token
@@ -132,7 +132,7 @@ namespace PDRPC.Core.Managers
                     {
                         Start = _timePlayed
                     },
-                    Buttons = ActivityModel.GetDefaultButtons()
+                    Buttons = Constants.Discord.DefaultButtons
                 };
 
                 // Update Presence

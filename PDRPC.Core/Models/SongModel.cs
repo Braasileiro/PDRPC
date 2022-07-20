@@ -8,19 +8,22 @@ namespace PDRPC.Core.Models
         [JsonProperty(Required = Required.Always)]
         public int id { get; set; }
 
-        [JsonProperty(Required = Required.Always)]
+        [JsonProperty(Required = Required.Default)]
+        public int? album { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
         public string type { get; set; }
 
-        [JsonProperty(Required = Required.AllowNull)]
+        [JsonProperty(Required = Required.Default)]
         public int? bpm { get; set; }
 
-        [JsonProperty(Required = Required.AllowNull)]
+        [JsonProperty(Required = Required.Default)]
         public int? date { get; set; }
 
-        [JsonProperty(Required = Required.AllowNull)]
+        [JsonProperty(Required = Required.Default)]
         public string file { get; set; }
 
-        [JsonProperty(Required = Required.AllowNull)]
+        [JsonProperty(Required = Required.Default)]
         public string reading { get; set; }
 
         [JsonProperty(Required = Required.Always)]

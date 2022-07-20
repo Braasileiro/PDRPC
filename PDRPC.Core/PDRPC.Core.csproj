@@ -47,7 +47,7 @@
     <DllExportPeCheck>2</DllExportPeCheck>
     <DllExportPatches>3</DllExportPatches>
     <DllExportPreProcType>1</DllExportPreProcType>
-    <DllExportILMerge>/attr:PDRPC.Core.dll Newtonsoft.Json.dll DiscordRPC.dll</DllExportILMerge>
+    <DllExportILMerge>/attr:PDRPC.Core.dll Newtonsoft.Json.dll DiscordRPC.dll Tommy.dll</DllExportILMerge>
     <DllExportPostProcType>0</DllExportPostProcType>
   </PropertyGroup>
   <ItemGroup>
@@ -67,6 +67,7 @@
     <Compile Include="Managers\ProcessManager.cs" />
     <Compile Include="Mod.cs" />
     <Compile Include="Models\ActivityModel.cs" />
+    <Compile Include="Models\AlbumModel.cs" />
     <Compile Include="Models\CharacterModel.cs" />
     <Compile Include="Models\SongInfoModel.cs" />
     <Compile Include="Models\SongModel.cs" />
@@ -75,7 +76,7 @@
     <Compile Include="Properties\BuildInfo.cs" />
     <Compile Include="Properties\Constants.cs" />
     <Compile Include="Properties\GameInfo.cs" />
-    <Compile Include="Properties\Global.cs" />
+    <Compile Include="Properties\Settings.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -91,6 +92,9 @@
     <PackageReference Include="ilmerge">
       <Version>3.0.29</Version>
     </PackageReference>
+    <PackageReference Include="Tommy">
+      <Version>3.1.2</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -101,7 +105,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="DllExportPreProc" BeforeTargets="DllExportMod" Label="8337224c9ad9e356:PreProc">
     <Copy SourceFiles="$(DllExportMetaLibFullPath)" DestinationFolder="$(TargetDir)" SkipUnchangedFiles="true" OverwriteReadOnlyFiles="true" />
-    <Exec Command="$(ILMergeConsolePath) /attr:PDRPC.Core.dll Newtonsoft.Json.dll DiscordRPC.dll $(TargetFileName) /out:$(TargetFileName) /ndebug" WorkingDirectory="$(TargetDir)" ContinueOnError="false" />
+    <Exec Command="$(ILMergeConsolePath) /attr:PDRPC.Core.dll Newtonsoft.Json.dll DiscordRPC.dll Tommy.dll $(TargetFileName) /out:$(TargetFileName) /ndebug" WorkingDirectory="$(TargetDir)" ContinueOnError="false" />
     <Delete Files="$(TargetDir)$(DllExportMetaLibName)" ContinueOnError="true" />
   </Target>
   <ImportGroup Label=".NET DllExport">

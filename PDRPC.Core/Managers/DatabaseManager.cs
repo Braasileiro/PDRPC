@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Tommy;
+using System;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -13,8 +14,49 @@ namespace PDRPC.Core.Managers
     {
         private static List<SongModel> database = null;
         private static List<SongModel> userdata = null;
+
         
-        public static bool Load()
+        public static void LoadSettings()
+        {
+            try
+            {
+                var path = Path.Combine(Settings.CurrentDirectory, Constants.Mod.Config);
+
+                if (File.Exists(path))
+                {
+                    try
+                    {
+                        // Config TextReader
+                        var reader = new StreamReader(path);
+
+                        // Parse config.toml
+                        var table = TOML.Parse(reader);
+
+                        // Load Settings
+                        Settings.AlbumArt = table["album_art"].AsBoolean;
+                        Settings.JapaneseNames = table["japanese_names"].AsBoolean;
+
+                        // Close TextReader
+                        reader.Close();
+
+                        Logger.Info("Settings loaded.");
+                    }
+                    catch (TomlParseException)
+                    {
+                        Logger.Error("Failed to load settings. Using defaults.");
+
+                        Settings.AlbumArt = true;
+                        Settings.JapaneseNames = false;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Logger.Error(e);
+            }
+        }
+
+        public static bool LoadDatabase()
         {
             try
             {
@@ -24,7 +66,7 @@ namespace PDRPC.Core.Managers
                 Logger.Info("Internal database loaded.");
 
                 // User Database (?)
-                var path = Path.Combine(Global.CurrentDirectory, Constants.UserDatabaseName);
+                var path = Path.Combine(Settings.CurrentDirectory, Constants.Mod.UserDatabase);
 
                 if (File.Exists(path))
                 {

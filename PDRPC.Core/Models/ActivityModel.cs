@@ -2,11 +2,8 @@
 {
     internal class ActivityModel
     {
-        // Basic Info
-        public readonly bool isPlaying;
-
-        // Song
         public readonly SongModel song;
+        public readonly bool isPlaying;
 
 
         public ActivityModel(SongModel song)
@@ -17,23 +14,53 @@
 
         public string GetDetails()
         {
-            if (!isPlaying) return "Menu";
+            if (!isPlaying)
+            {
+                return Constants.Discord.Details;
+            }
 
-            return song.en.name ?? song.jp.name ?? "Unknown Song";
+            if (!Settings.JapaneseNames)
+            {
+                return song.en.name ?? song.jp.name ?? Constants.Discord.DetailsUnknown;
+            }
+            else
+            {
+                return song.jp.name ?? song.en.name ?? Constants.Discord.DetailsUnknown;
+            }
         }
 
         public string GetState()
         {
-            if (!isPlaying) return "Browsing";
+            if (!isPlaying)
+            {
+                return Constants.Discord.State;
+            }
 
-            return song.en.music ?? song.jp.music ?? "Unknown Artist";
+            if (!Settings.JapaneseNames)
+            {
+                return song.en.music ?? song.jp.music ?? Constants.Discord.StateUnknown;
+            }
+            else
+            {
+                return song.jp.music ?? song.en.music ?? Constants.Discord.StateUnknown;
+            }
         }
 
         public string GetLargeImage()
         {
-            if (!isPlaying) return "default";
+            if (!isPlaying)
+            {
+                return Constants.Discord.LargeImage;
+            }
 
-            return CharacterModel.GetPerformerImage(song.performers);
+            if (Settings.AlbumArt)
+            {
+                return AlbumModel.GetAlbumImage(song.album);
+            }
+            else
+            {
+                return CharacterModel.GetPerformerImage(song.performers);
+            }
         }
 
         public string GetLargeImageText()
@@ -48,27 +75,22 @@
 
         public string GetSmallImage()
         {
-            if (!isPlaying) return string.Empty;
+            if (!isPlaying)
+            {
+                return string.Empty;
+            }
 
-            return "playing";
+            return Constants.Discord.SmallImage;
         }
 
         public string GetSmallImageText()
         {
-            if (!isPlaying) return string.Empty;
+            if (!isPlaying)
+            {
+                return string.Empty;
+            }
 
-            return "Playing";
-        }
-
-        public static DiscordRPC.Button[] GetDefaultButtons()
-        {
-            return new DiscordRPC.Button[] {
-                new DiscordRPC.Button()
-                {
-                    Label = "Check on GitHub",
-                    Url = BuildInfo.Link
-                }
-            };
+            return Constants.Discord.SmallImageText;
         }
     }
 }

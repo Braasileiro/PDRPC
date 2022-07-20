@@ -7,6 +7,5 @@
         public const string Author = "Brasileiro";
         public const string Company = "I love MS Lyrical Nanoha.";
         public const string Version = "0.0.7";
-        public const string Link = "https://github.com/Braasileiro/PDRPC";
     }
 }

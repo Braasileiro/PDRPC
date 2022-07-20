@@ -5,3 +5,6 @@ version = "0.0.7"
 date = "15.07.2022"
 author = "Brasileiro"
 dll = ["PDRPC.dll"]
+
+album_art = true
+japanese_names = false
