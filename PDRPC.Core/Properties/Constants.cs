@@ -9,7 +9,7 @@
             public const string SmallImage = "playing";
             public const string SmallImageText = "Playing";
             public const string Details = "Menu";
-            public const string State = "Menu";
+            public const string State = "Browsing";
             public const string DetailsUnknown = "Unknown Song";
             public const string StateUnknown = "Unknown Artist";
 
