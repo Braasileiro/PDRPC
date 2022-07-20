@@ -12,6 +12,7 @@
             public const string State = "Browsing";
             public const string DetailsUnknown = "Unknown Song";
             public const string StateUnknown = "Unknown Artist";
+            public const string LargeImageTextUnknown = "No performers.";
 
             public static DiscordRPC.Button[] DefaultButtons = new DiscordRPC.Button[] {
                 new DiscordRPC.Button() {

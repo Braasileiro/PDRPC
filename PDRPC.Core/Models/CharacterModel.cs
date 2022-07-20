@@ -24,7 +24,10 @@ namespace PDRPC.Core.Models
 
         public static string GetNames(List<SongPerformerModel> performers)
         {
-            if (performers == null || !performers.Any()) return "No performers.";
+            if (performers == null || !performers.Any())
+            {
+                return Constants.Discord.LargeImageTextUnknown;
+            }
 
             string names = string.Empty;
             SongPerformerModel performer;
