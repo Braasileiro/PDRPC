@@ -21,7 +21,7 @@ Just play the game my little PogChamp. The Discord Activity will show up.
 # Configuration
 Some settings you can change in **config.toml** file:
 
-* **album_art**: **true** or **false** [Default: **true**]. Shows the album art of the song. If no album art, defaults to the first performer. The mod contains album arts for official songs and [Restore Cut Songs Mod](https://gamebanana.com/mods/383478)).
+* **album_art**: **true** or **false** [Default: **true**]. Shows the album art of the song. If no album art, defaults to the first performer. The mod contains album arts for official songs and [Restore Cut Songs Mod](https://gamebanana.com/mods/383478).
 * **japanese_names**: **true** or **false** [Default: **false**]. Shows the song info in japanese whenever possible.
 
 # User Database
