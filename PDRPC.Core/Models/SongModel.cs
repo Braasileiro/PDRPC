@@ -32,7 +32,7 @@ namespace PDRPC.Core.Models
         [JsonProperty(Required = Required.Always)]
         public SongInfoModel en { get; set; }
 
-        [JsonProperty(Required = Required.AllowNull)]
+        [JsonProperty(Required = Required.Default)]
         public List<SongPerformerModel> performers { get; set; }
     }
 }
