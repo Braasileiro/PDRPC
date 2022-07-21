@@ -21,9 +21,6 @@ namespace PDRPC.Core.Models
         public int? date { get; set; }
 
         [JsonProperty(Required = Required.Default)]
-        public string file { get; set; }
-
-        [JsonProperty(Required = Required.Default)]
         public string reading { get; set; }
 
         [JsonProperty(Required = Required.Always)]
