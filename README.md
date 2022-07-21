@@ -28,7 +28,7 @@ There are some settings you can change in **config.toml** file. Default values:
 <br>Shows the song info in japanese whenever possible.</br>
 
 # User Database
-The mod supports loading user custom data. With this you can add songs to the rich presence database (like song packs) or overwrite official song data. As of version 0.0.6 the static database is now internal to the mod, so the only way to add and edit entries is this way.
+The mod supports loading user custom data. With this you can add songs to the rich presence database (like song packs) or overwrite official song data. As of version 0.0.6 the default database is now internal to the mod, so the only way to add and edit entries is this way.
 
 Create the **database_user.json** file inside the **PDRPC** mod folder. Here's an example of what the file format should look like:
 ```json
