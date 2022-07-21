@@ -7457,8 +7457,8 @@
     "id": 744,
     "album": 119,
     "type": "BASE",
-    "bpm": -1,
-    "date": -1,
+    "bpm": null,
+    "date": null,
     "reading": null,
     "jp": {
       "name": null,
