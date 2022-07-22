@@ -1,10 +1,11 @@
 #include "pch.h"
 
 // Mod Library
+int m_ProcessId;
 HMODULE m_Library;
 
 // Mod Types
-typedef void(__cdecl* _OnInit)();
+typedef void(__cdecl* _OnInit)(int processId);
 typedef void(__cdecl* _OnDispose)();
 typedef void(__cdecl* _OnSongUpdate)(int songId);
 
@@ -53,6 +54,9 @@ bool LoadModLibrary()
 		p_OnDispose = (_OnDispose)GetProcAddress(m_Library, "OnDispose");
 		p_OnSongUpdate = (_OnSongUpdate)GetProcAddress(m_Library, "OnSongUpdate");
 
+		// Current Process
+		m_ProcessId = GetCurrentProcessId();
+
 		return true;
 	}
 
@@ -83,7 +87,7 @@ SIG_SCAN
 /*
  * Hooks
  */
-HOOK(__int64, __fastcall, _SongStart, sigSongStart(), char* unknown1, __int64 unknown2, char* lightParam, int songId)
+HOOK(__int64*, __fastcall, _SongStart, sigSongStart(), char* unknown1, __int64 unknown2, char* lightParam, int songId)
 {
 	if (m_Library)
 	{
@@ -94,7 +98,7 @@ HOOK(__int64, __fastcall, _SongStart, sigSongStart(), char* unknown1, __int64 un
 	return original_SongStart(unknown1, unknown2, lightParam, songId);
 };
 
-HOOK(__int64, __fastcall, _SongEnd, sigSongEnd())
+HOOK(__int64*, __fastcall, _SongEnd, sigSongEnd())
 {
 	if (m_Library)
 	{
@@ -119,6 +123,6 @@ extern "C" __declspec(dllexport) void Init()
 		INSTALL_HOOK(_SongEnd);
 
 		// Mod Entry Point
-		p_OnInit();
+		p_OnInit(m_ProcessId);
 	}
 }
