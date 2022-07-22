@@ -83,7 +83,7 @@ SIG_SCAN
 /*
  * Hooks
  */
-HOOK(__int64, __fastcall, _SongStart, sigSongStart(), char* v34, __int64 unknown, char* lightParam, int songId)
+HOOK(__int64, __fastcall, _SongStart, sigSongStart(), char* unknown1, __int64 unknown2, char* lightParam, int songId)
 {
 	if (m_Library)
 	{
@@ -91,8 +91,7 @@ HOOK(__int64, __fastcall, _SongStart, sigSongStart(), char* v34, __int64 unknown
 		p_OnSongUpdate(songId);
 	}
 
-	// Call super()
-	return original_SongStart(v34, unknown, lightParam, songId);
+	return original_SongStart(unknown1, unknown2, lightParam, songId);
 };
 
 HOOK(__int64, __fastcall, _SongEnd, sigSongEnd())
@@ -103,7 +102,6 @@ HOOK(__int64, __fastcall, _SongEnd, sigSongEnd())
 		p_OnSongUpdate(0);
 	}
 
-	// Call super()
 	return original_SongEnd();
 };
 
