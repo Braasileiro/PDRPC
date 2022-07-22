@@ -32,6 +32,12 @@ namespace PDRPC.Core
         }
 
         [DllExport]
+        public static void OnSongUpdate(int songId)
+        {
+            Logger.Info($"OnSongUpdate: {songId}");
+        }
+
+        [DllExport]
         public static void OnDispose()
         {
             // Dispose things here

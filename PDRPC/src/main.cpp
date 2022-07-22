@@ -1,4 +1,4 @@
-#include "main.h"
+#include "pch.h"
 
 // Mod Library
 HMODULE m_Library;
@@ -6,19 +6,21 @@ HMODULE m_Library;
 // Mod Types
 typedef void(__cdecl* _OnInit)();
 typedef void(__cdecl* _OnDispose)();
+typedef void(__cdecl* _OnSongUpdate)(int songId);
 
 // Mod Pointers
 _OnInit p_OnInit;
 _OnDispose p_OnDispose;
+_OnSongUpdate p_OnSongUpdate;
 
 
 /*
  * Entry
  */
 BOOL APIENTRY DllMain(HMODULE hModule, DWORD reason, LPVOID lpReserved)
-{	
-    switch (reason)
-    {
+{
+	switch (reason)
+	{
 	case DLL_PROCESS_ATTACH:
 		break;
 	case DLL_THREAD_ATTACH:
@@ -34,12 +36,12 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD reason, LPVOID lpReserved)
 		break;
 	}
 
-    return TRUE;
+	return TRUE;
 }
 
 
 /*
- * Mod
+ * Core Library
  */
 bool LoadModLibrary()
 {
@@ -49,12 +51,61 @@ bool LoadModLibrary()
 	{
 		p_OnInit = (_OnInit)GetProcAddress(m_Library, "OnInit");
 		p_OnDispose = (_OnDispose)GetProcAddress(m_Library, "OnDispose");
+		p_OnSongUpdate = (_OnSongUpdate)GetProcAddress(m_Library, "OnSongUpdate");
 
 		return true;
 	}
 
 	return false;
 }
+
+
+/*
+ * Signatures
+ */
+SIG_SCAN
+(
+	sigSongStart,
+	0x14043A5C0,
+	"\xe8\x00\x00\x00\x00\x41\xb8\x00\x00\x00\x00\x48\x8d\x55\x00\x48\x8d\x0d\x00\x00\x00\x00\xe8\x00\x00\x00\x00\x84\xc0\x74\x00\xc7\x05\x00\x00\x00\x00\x00\x00\x00\x00\x41\xbe\x00\x00\x00\x00\xe9\x00\x00\x00\x00\x48\x8d\x0d\x00\x00\x00\x00\xe8\x00\x00\x00\x00\xc7\x05",
+	"x????xx????xxx?xxx????x????xxx?xx????????xx????x????xxx????x????xx"
+);
+
+SIG_SCAN
+(
+	sigSongEnd,
+	0x14043AFF8,
+	"\x48\x89\x5c\x24\x00\x57\x48\x83\xec\x00\x48\x8d\x0d\x00\x00\x00\x00\xe8\x00\x00\x00\x00\x48\x8b\x3d",
+	"xxxx?xxxx?xxx????x????xxx"
+);
+
+
+/*
+ * Hooks
+ */
+HOOK(__int64, __fastcall, _SongStart, sigSongStart(), char* v34, __int64 unknown, char* lightParam, int songId)
+{
+	if (m_Library)
+	{
+		// Song Update Event
+		p_OnSongUpdate(songId);
+	}
+
+	// Call super()
+	return original_SongStart(v34, unknown, lightParam, songId);
+};
+
+HOOK(__int64, __fastcall, _SongEnd, sigSongEnd())
+{
+	if (m_Library)
+	{
+		// Menus
+		p_OnSongUpdate(0);
+	}
+
+	// Call super()
+	return original_SongEnd();
+};
 
 
 /*
@@ -65,7 +116,11 @@ extern "C" __declspec(dllexport) void Init()
 	// Load Mod Library
 	if (LoadModLibrary())
 	{
+		// Hooks
+		INSTALL_HOOK(_SongStart);
+		INSTALL_HOOK(_SongEnd);
+
 		// Mod Entry Point
 		p_OnInit();
-	}	
+	}
 }
