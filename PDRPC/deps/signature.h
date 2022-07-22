@@ -1,12 +1,12 @@
-// Source: https://github.com/ActualMandM/DivaDllMods/blob/main/Dependencies/Signature.h
+// Source: https://github.com/blueskythlikesclouds/DivaModLoader/blob/master/Source/DivaModLoader/SigScan.cpp
 
 #pragma once
 
 #include <Psapi.h>
 
-inline bool sigValid = true;
+bool sigValid = true;
 
-inline void* sigScan(const char* signature, const char* mask, size_t sigSize, void* memory, const size_t memorySize)
+FORCEINLINE void* sigScan(const char* signature, const char* mask, size_t sigSize, void* memory, const size_t memorySize)
 {
     if (sigSize == 0)
         sigSize = strlen(mask);
@@ -29,9 +29,9 @@ inline void* sigScan(const char* signature, const char* mask, size_t sigSize, vo
     return nullptr;
 }
 
-inline MODULEINFO moduleInfo;
+MODULEINFO moduleInfo;
 
-inline const MODULEINFO& getModuleInfo()
+const MODULEINFO& getModuleInfo()
 {
     if (moduleInfo.SizeOfImage)
         return moduleInfo;
@@ -42,7 +42,7 @@ inline const MODULEINFO& getModuleInfo()
     return moduleInfo;
 }
 
-inline void* sigScan(const char* signature, const char* mask, void* hint)
+FORCEINLINE void* sigScan(const char* signature, const char* mask, void* hint)
 {
     const MODULEINFO& info = getModuleInfo();
     const size_t sigSize = strlen(mask);
@@ -71,7 +71,6 @@ inline void* sigScan(const char* signature, const char* mask, void* hint)
             if constexpr (x##Size == 2) \
             { \
                 x##Addr = sigScan(x##Data[0], x##Data[1], (void*)(y)); \
-                printf("[Signature] %s received: 0x%llx\n", #x, x##Addr); \
                 if (x##Addr) \
                     return x##Addr; \
             } \
@@ -80,7 +79,6 @@ inline void* sigScan(const char* signature, const char* mask, void* hint)
                 for (int i = 0; i < x##Size; i += 2) \
                 { \
                     x##Addr = sigScan(x##Data[i], x##Data[i + 1], (void*)(y)); \
-                    printf("[Signature] %s received: 0x%llx\n", #x, x##Addr); \
                     if (x##Addr) \
                         return x##Addr; \
                 } \

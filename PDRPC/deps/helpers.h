@@ -1,4 +1,4 @@
-﻿// Source: https://github.com/ActualMandM/DivaDllMods/blob/main/Dependencies/Helpers.h
+﻿// Source: https://github.com/blueskythlikesclouds/DivaModLoader/blob/master/Dependencies/Helpers.h
 
 #pragma once
 
@@ -66,6 +66,18 @@ const HMODULE MODULE_HANDLE = GetModuleHandle(nullptr);
         VirtualProtect((void*)(location), sizeof(data), oldProtect, &oldProtect); \
     }
 
+#define WRITE_JUMP(location, function) \
+    { \
+        WRITE_MEMORY(location, uint8_t, 0xE9); \
+        WRITE_MEMORY(location + 1, uint32_t, (uint32_t)(function) - (size_t)(location) - 5); \
+    }
+    
+#define WRITE_CALL(location, function) \
+    { \
+        WRITE_MEMORY(location, uint8_t, 0xE8); \
+        WRITE_MEMORY(location + 1, uint32_t, (uint32_t)(function) - (size_t)(location) - 5); \
+    }
+
 #define WRITE_NOP(location, count) \
     { \
         DWORD oldProtect; \
@@ -74,9 +86,3 @@ const HMODULE MODULE_HANDLE = GetModuleHandle(nullptr);
             *((uint8_t*)(location) + i) = 0x90; \
         VirtualProtect((void*)(location), (size_t)(count), oldProtect, &oldProtect); \
     }
-
-inline uint32_t readUnalignedU32(void* memory)
-{
-    uint8_t* p = (uint8_t*)memory;
-    return p[0] | (p[1] << 8) | (p[2] << 16) | (p[3] << 24);
-}
