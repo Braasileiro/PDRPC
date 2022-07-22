@@ -67,6 +67,8 @@ bool LoadModLibrary()
 /*
  * Signatures
  */
+
+ // sub_14043A5C0 proc near
 SIG_SCAN
 (
 	sigSongStart,
@@ -75,10 +77,11 @@ SIG_SCAN
 	"x????xx????xxx?xxx????x????xxx?xx????????xx????x????xxx????x????xx"
 );
 
+// 0x14043AFC8 call sub_1402A4E80
 SIG_SCAN
 (
 	sigSongEnd,
-	0x14043AFF8,
+	0x14043AFC8,
 	"\x48\x89\x5c\x24\x00\x57\x48\x83\xec\x00\x48\x8d\x0d\x00\x00\x00\x00\xe8\x00\x00\x00\x00\x48\x8b\x3d",
 	"xxxx?xxxx?xxx????x????xxx"
 );
@@ -87,18 +90,18 @@ SIG_SCAN
 /*
  * Hooks
  */
-HOOK(__int64*, __fastcall, _SongStart, sigSongStart(), char* unknown1, __int64 unknown2, char* lightParam, int songId)
+HOOK(__int64, __fastcall, _SongStart, sigSongStart(), char* unknown1, __int64 unknown2, char* lightParam, unsigned int songId)
 {
 	if (m_Library)
 	{
 		// Song Update Event
-		p_OnSongUpdate(songId);
+		p_OnSongUpdate((int) songId);
 	}
 
 	return original_SongStart(unknown1, unknown2, lightParam, songId);
 };
 
-HOOK(__int64*, __fastcall, _SongEnd, sigSongEnd())
+HOOK(__int64, __fastcall, _SongEnd, sigSongEnd())
 {
 	if (m_Library)
 	{
