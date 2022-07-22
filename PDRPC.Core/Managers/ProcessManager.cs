@@ -26,16 +26,16 @@ namespace PDRPC.Core.Managers
         private static Process mProcess;
         private static IntPtr mProcessHandle;
         
-        public static bool Attach(string name)
+        public static bool Attach(int id)
         {
             try
             {
-                var processes = Process.GetProcessesByName(name);
+                // Current Process
+                mProcess = Process.GetProcessById(id);
 
-                if (processes.Length > 0)
+                if (mProcess != null)
                 {
-                    // Current Process
-                    mProcess = processes[0];
+                    // Handle
                     mProcessHandle = OpenProcess(PROCESS_VM_READ, false, mProcess.Id);
 
                     Logger.Info("Attached to the game process.");
