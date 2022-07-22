@@ -116,8 +116,6 @@ namespace PDRPC.Core.Managers
         {
             if (_client != null && !_client.IsDisposed)
             {
-                Logger.Info($"UpdateActivity");
-
                 // Presence Info
                 _activity = new RichPresence()
                 {

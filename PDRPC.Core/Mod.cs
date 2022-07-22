@@ -13,8 +13,6 @@ namespace PDRPC.Core
             Settings.ProcessId = processId;
             Settings.CurrentDirectory = Environment.CurrentDirectory;
 
-            Logger.Info($"Current PID is {Settings.ProcessId}.");
-
             // Running everything in a separate thread to avoid any blocking
             new Thread(() =>
             {
@@ -33,8 +31,6 @@ namespace PDRPC.Core
         [DllExport]
         public static void OnSongUpdate(int songId)
         {
-            Logger.Info($"OnSongUpdate");
-
             // Update Presence
             DiscordManager.OnUpdateActivity(songId);
         }
