@@ -4,9 +4,9 @@
 
 #include <Psapi.h>
 
-bool sigValid = true;
+inline bool sigValid = true;
 
-FORCEINLINE void* sigScan(const char* signature, const char* mask, size_t sigSize, void* memory, const size_t memorySize)
+inline void* sigScan(const char* signature, const char* mask, size_t sigSize, void* memory, const size_t memorySize)
 {
     if (sigSize == 0)
         sigSize = strlen(mask);
@@ -29,9 +29,9 @@ FORCEINLINE void* sigScan(const char* signature, const char* mask, size_t sigSiz
     return nullptr;
 }
 
-MODULEINFO moduleInfo;
+inline MODULEINFO moduleInfo;
 
-const MODULEINFO& getModuleInfo()
+inline const MODULEINFO& getModuleInfo()
 {
     if (moduleInfo.SizeOfImage)
         return moduleInfo;
@@ -42,7 +42,7 @@ const MODULEINFO& getModuleInfo()
     return moduleInfo;
 }
 
-FORCEINLINE void* sigScan(const char* signature, const char* mask, void* hint)
+inline void* sigScan(const char* signature, const char* mask, void* hint)
 {
     const MODULEINFO& info = getModuleInfo();
     const size_t sigSize = strlen(mask);
