@@ -2,6 +2,6 @@
 {
     public static int ProcessId;
     public static string CurrentDirectory;
-    public static bool AlbumArt;
-    public static bool JapaneseNames;
+    public static bool AlbumArt = true;
+    public static bool JapaneseNames = false;
 }
