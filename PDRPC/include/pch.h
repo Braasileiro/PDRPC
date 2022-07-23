@@ -6,9 +6,9 @@
 #include <Windows.h>
 
 // Standard
-#include <string>
+//#include <string>
 
 // Deps
-#include "helpers.h"
-#include "signature.h"
-#include "detours/include/detours.h"
+//#include "helpers.h"
+//#include "signature.h"
+//#include "detours/include/detours.h"

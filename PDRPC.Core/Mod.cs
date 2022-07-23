@@ -16,23 +16,20 @@ namespace PDRPC.Core
             // Running everything in a separate thread to avoid any blocking
             new Thread(() =>
             {
-                // Load Settings
-                DatabaseManager.LoadSettings();
-
-                // Load Database
-                if (DatabaseManager.LoadDatabase())
+                // Attempt to attach to the game process
+                if (ProcessManager.Attach(Settings.ProcessId))
                 {
-                    // Init Discord RPC
-                    DiscordManager.Init();
+                    // Load Settings
+                    DatabaseManager.LoadSettings();
+
+                    // Load Database
+                    if (DatabaseManager.LoadDatabase())
+                    {
+                        // Init Discord RPC
+                        DiscordManager.Init();
+                    }
                 }
             }).Start();
-        }
-
-        [DllExport]
-        public static void OnSongUpdate(int songId)
-        {
-            // Update Presence
-            DiscordManager.OnUpdateActivity(songId);
         }
 
         [DllExport]

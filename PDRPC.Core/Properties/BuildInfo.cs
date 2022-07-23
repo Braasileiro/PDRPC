@@ -6,6 +6,6 @@
         public const string Description = "Discord Rich Presence for Hatsune Miku: Project DIVA Mega Mix+.";
         public const string Author = "Brasileiro";
         public const string Company = "I love MS Lyrical Nanoha.";
-        public const string Version = "0.0.9";
+        public const string Version = "0.1.0";
     }
 }
