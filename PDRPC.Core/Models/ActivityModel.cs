@@ -6,7 +6,7 @@
         public readonly bool isPlaying;
 
 
-        public ActivityModel(SongModel song)
+        public ActivityModel(SongModel song = null)
         {
             this.song = song;
             isPlaying = this.song != null;

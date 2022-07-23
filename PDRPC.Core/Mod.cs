@@ -7,29 +7,32 @@ namespace PDRPC.Core
     public class Mod
     {
         [DllExport]
-        public static void OnInit(int processId)
+        public static void OnInit(int pid)
         {
             // Global
-            Settings.ProcessId = processId;
+            Settings.ProcessId = pid;
             Settings.CurrentDirectory = Environment.CurrentDirectory;
 
             // Running everything in a separate thread to avoid any blocking
             new Thread(() =>
             {
-                // Attempt to attach to the game process
-                if (ProcessManager.Attach(Settings.ProcessId))
-                {
-                    // Load Settings
-                    DatabaseManager.LoadSettings();
+                // Load Settings
+                DatabaseManager.LoadSettings();
 
-                    // Load Database
-                    if (DatabaseManager.LoadDatabase())
-                    {
-                        // Init Discord RPC
-                        DiscordManager.Init();
-                    }
+                // Load Database
+                if (DatabaseManager.LoadDatabase())
+                {
+                    // Init Discord RPC
+                    DiscordManager.Init();
                 }
             }).Start();
+        }
+
+        [DllExport]
+        public static void OnSongUpdate(int songId)
+        {
+            // Update Activity
+            DiscordManager.CheckUpdates(songId);
         }
 
         [DllExport]
@@ -37,6 +40,9 @@ namespace PDRPC.Core
         {
             // Dispose things here
             DiscordManager.Dispose();
+
+            // Terminate .NET stuff
+            Environment.Exit(Environment.ExitCode);
         }
     }
 }

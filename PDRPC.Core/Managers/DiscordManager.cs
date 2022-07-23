@@ -9,7 +9,6 @@ namespace PDRPC.Core.Managers
     internal class DiscordManager
     {
         // RPC
-        private const int _delay = 5000;
         private static RichPresence _activity;
         private static DiscordRpcClient _client;
         private static CancellationTokenSource _cancelToken;
@@ -20,7 +19,7 @@ namespace PDRPC.Core.Managers
         private static ActivityModel _activityModel;
 
         // Current IDs
-        private static int _lastId = -1;
+        private static int _lastId = 0;
         private static int _currentId = 0;
 
 
@@ -66,8 +65,13 @@ namespace PDRPC.Core.Managers
         {
             if (!_cancelToken.IsCancellationRequested)
             {
-                // Activity Update Task
-                OnUpdateActivity();
+                Logger.Info("Discord RPC Client is listening.");
+
+                // Initial Activity
+                _activityModel = new ActivityModel();
+
+                // Menus
+                UpdateActivity();
             }
         }
 
@@ -85,35 +89,34 @@ namespace PDRPC.Core.Managers
             }
         }
 
-        private static void OnUpdateActivity()
+        public static void CheckUpdates(int songId)
         {
-            Logger.Info("Discord RPC Client is listening.");
-
-            Task.Run(async () =>
+            // Async update to avoid any blocking
+            Task.Run(() =>
             {
-                while (true)
+                if (!_cancelToken.IsCancellationRequested)
                 {
-                    _currentId = ProcessManager.Read2Byte(Settings.SongIdAddress);
+                    _currentId = songId;
 
                     if (_currentId != _lastId)
                     {
+                        // Find SongModel
                         _songModel = DatabaseManager.FindById(_currentId);
-
                         _activityModel = new ActivityModel(song: _songModel);
 
+                        // Update Activity
                         UpdateActivity();
 
+                        // Update LastId
                         _lastId = _currentId;
                     }
-
-                    await Task.Delay(_delay, _cancelToken.Token);
                 }
-            }, _cancelToken.Token);
+            });
         }
 
         private static void UpdateActivity()
         {
-            if (!_client.IsDisposed)
+            if (_client != null)
             {
                 // Presence Info
                 _activity = new RichPresence()
@@ -143,13 +146,11 @@ namespace PDRPC.Core.Managers
         {
             if (_client != null)
             {
-                if (!_client.IsDisposed)
-                {
-                    _client.ClearPresence();
-                    _client.Dispose();
+                _client.ClearPresence();
+                _client.Dispose();
+                _client = null;
 
-                    Logger.Info("Discord RPC Client disposed.");
-                }
+                Logger.Info("Discord RPC Client disposed.");
             }
         }
     }
