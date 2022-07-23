@@ -1,8 +1,7 @@
 ﻿using System;
 using DiscordRPC;
-using System.Threading;
+
 using PDRPC.Core.Models;
-using System.Threading.Tasks;
 
 namespace PDRPC.Core.Managers
 {
@@ -11,7 +10,6 @@ namespace PDRPC.Core.Managers
         // RPC
         private static RichPresence _activity;
         private static DiscordRpcClient _client;
-        private static CancellationTokenSource _cancelToken;
 
         // Song
         private static DateTime _timePlayed;
@@ -21,6 +19,7 @@ namespace PDRPC.Core.Managers
         // Current IDs
         private static int _lastId = 0;
         private static int _currentId = 0;
+        private static bool _cancelled = false;
 
 
         public static void Init()
@@ -37,9 +36,6 @@ namespace PDRPC.Core.Managers
                     // Instantiate
                     _client = new DiscordRpcClient(Constants.Discord.ClientId.ToString());
                     _client.Initialize();
-
-                    // Cancellation Token
-                    _cancelToken = new CancellationTokenSource();
 
                     // Time Played
                     _timePlayed = DateTime.UtcNow;
@@ -63,7 +59,7 @@ namespace PDRPC.Core.Managers
          */
         private static void OnClientReady()
         {
-            if (!_cancelToken.IsCancellationRequested)
+            if (!_cancelled)
             {
                 Logger.Info("Discord RPC Client is listening.");
 
@@ -77,12 +73,12 @@ namespace PDRPC.Core.Managers
 
         private static void OnClientNotReady()
         {
-            if (!_cancelToken.IsCancellationRequested)
+            if (!_cancelled)
             {
                 Logger.Warning("Failed to connect to Discord. Please check if your Discord application is opened and reopen the game.");
 
                 // Stop Activity Updates
-                _cancelToken.Cancel();
+                _cancelled = true;
 
                 // Dispose Client
                 Dispose();
@@ -91,33 +87,31 @@ namespace PDRPC.Core.Managers
 
         public static void CheckUpdates(int songId)
         {
-            // Async update to avoid any blocking
-            Task.Run(() =>
+            if (!_cancelled)
             {
-                if (!_cancelToken.IsCancellationRequested)
+                _currentId = songId;
+
+                if (_currentId != _lastId)
                 {
-                    _currentId = songId;
+                    // Find SongModel
+                    _songModel = DatabaseManager.FindById(_currentId);
+                    _activityModel = new ActivityModel(song: _songModel);
 
-                    if (_currentId != _lastId)
-                    {
-                        // Find SongModel
-                        _songModel = DatabaseManager.FindById(_currentId);
-                        _activityModel = new ActivityModel(song: _songModel);
+                    // Update Activity
+                    UpdateActivity();
 
-                        // Update Activity
-                        UpdateActivity();
-
-                        // Update LastId
-                        _lastId = _currentId;
-                    }
+                    // Update LastId
+                    _lastId = _currentId;
                 }
-            });
+            }
         }
 
         private static void UpdateActivity()
         {
             if (_client != null)
             {
+                Logger.Info($"UpdateActivity");
+
                 // Presence Info
                 _activity = new RichPresence()
                 {

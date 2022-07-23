@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using PDRPC.Core.Managers;
+using System.Threading.Tasks;
 
 namespace PDRPC.Core
 {
@@ -9,7 +10,7 @@ namespace PDRPC.Core
         [DllExport]
         public static void OnInit(int pid)
         {
-            // Global
+            // Initial Settings
             Settings.ProcessId = pid;
             Settings.CurrentDirectory = Environment.CurrentDirectory;
 
@@ -31,8 +32,13 @@ namespace PDRPC.Core
         [DllExport]
         public static void OnSongUpdate(int songId)
         {
-            // Update Activity
-            DiscordManager.CheckUpdates(songId);
+            Logger.Info($"SongId: {songId}");
+
+            // Async update to avoid any blocking
+            Task.Run(() =>
+            {
+                DiscordManager.CheckUpdates(songId);
+            });
         }
 
         [DllExport]
@@ -40,9 +46,6 @@ namespace PDRPC.Core
         {
             // Dispose things here
             DiscordManager.Dispose();
-
-            // Terminate .NET stuff
-            Environment.Exit(Environment.ExitCode);
         }
     }
 }
