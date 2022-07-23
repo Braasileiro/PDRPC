@@ -32,8 +32,6 @@ namespace PDRPC.Core
         [DllExport]
         public static void OnSongUpdate(int songId)
         {
-            Logger.Info($"SongId: {songId}");
-
             // Async update to avoid any blocking
             Task.Run(() =>
             {

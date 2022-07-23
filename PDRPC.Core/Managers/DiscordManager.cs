@@ -110,8 +110,6 @@ namespace PDRPC.Core.Managers
         {
             if (_client != null)
             {
-                Logger.Info($"UpdateActivity");
-
                 // Presence Info
                 _activity = new RichPresence()
                 {
