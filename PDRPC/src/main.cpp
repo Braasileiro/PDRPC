@@ -4,12 +4,14 @@
 HMODULE m_Library;
 
 // Mod Types
-typedef void(__cdecl* _OnInit)(int processId);
+typedef void(__cdecl* _OnInit)(int pid);
 typedef void(__cdecl* _OnDispose)();
+typedef void(__cdecl* _OnSongUpdate)(int songId);
 
 // Mod Functions
 _OnInit p_OnInit;
 _OnDispose p_OnDispose;
+_OnSongUpdate p_OnSongUpdate;
 
 
 /*
@@ -26,7 +28,11 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD reason, LPVOID lpReserved)
 	case DLL_THREAD_DETACH:
 		break;
 	case DLL_PROCESS_DETACH:
-		if (m_Library) p_OnDispose();
+		if (m_Library)
+		{
+			// Mod Dispose
+			p_OnDispose();
+		}
 		break;
 	}
 
@@ -41,6 +47,7 @@ bool LoadModLibrary()
 	{
 		p_OnInit = (_OnInit)GetProcAddress(m_Library, "OnInit");
 		p_OnDispose = (_OnDispose)GetProcAddress(m_Library, "OnDispose");
+		p_OnSongUpdate = (_OnSongUpdate)GetProcAddress(m_Library, "OnSongUpdate");
 
 		return true;
 	}
@@ -73,12 +80,24 @@ SIG_SCAN
 
 HOOK(void, __fastcall, _SongStart, sigSongStart(), int songId)
 {
+	if (m_Library)
+	{
+		// New SongId
+		p_OnSongUpdate(songId);
+	}
+
 	original_SongStart(songId);
 }
 
 HOOK(__int64, __cdecl, _SongEnd, sigSongEnd())
 {
-	original_SongEnd();
+	if (m_Library)
+	{
+		// Menus
+		p_OnSongUpdate(0);
+	}
+
+	return original_SongEnd();
 }
 
 
@@ -94,7 +113,10 @@ extern "C" __declspec(dllexport) void Init()
 		INSTALL_HOOK(_SongStart);
 		INSTALL_HOOK(_SongEnd);
 
+		// Current PID
+		auto pid = GetCurrentProcessId();
+
 		// Mod Entry Point
-		p_OnInit(GetCurrentProcessId());
+		p_OnInit(pid);
 	}
 }
