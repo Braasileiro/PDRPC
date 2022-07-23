@@ -1,18 +1,15 @@
 ﻿using System;
 using DiscordRPC;
-using System.Threading;
+
 using PDRPC.Core.Models;
-using System.Threading.Tasks;
 
 namespace PDRPC.Core.Managers
 {
     internal class DiscordManager
     {
         // RPC
-        private const int _delay = 5000;
         private static RichPresence _activity;
         private static DiscordRpcClient _client;
-        private static CancellationTokenSource _cancelToken;
 
         // Song
         private static DateTime _timePlayed;
@@ -20,8 +17,9 @@ namespace PDRPC.Core.Managers
         private static ActivityModel _activityModel;
 
         // Current IDs
-        private static int _lastId = -1;
+        private static int _lastId = 0;
         private static int _currentId = 0;
+        private static bool _cancelled = false;
 
 
         public static void Init()
@@ -38,9 +36,6 @@ namespace PDRPC.Core.Managers
                     // Instantiate
                     _client = new DiscordRpcClient(Constants.Discord.ClientId.ToString());
                     _client.Initialize();
-
-                    // Cancellation Token
-                    _cancelToken = new CancellationTokenSource();
 
                     // Time Played
                     _timePlayed = DateTime.UtcNow;
@@ -64,56 +59,56 @@ namespace PDRPC.Core.Managers
          */
         private static void OnClientReady()
         {
-            if (!_cancelToken.IsCancellationRequested)
+            if (!_cancelled)
             {
-                // Activity Update Task
-                OnUpdateActivity();
+                Logger.Info("Discord RPC Client is listening.");
+
+                // Initial Activity
+                _activityModel = new ActivityModel();
+
+                // Menus
+                UpdateActivity();
             }
         }
 
         private static void OnClientNotReady()
         {
-            if (!_cancelToken.IsCancellationRequested)
+            if (!_cancelled)
             {
                 Logger.Warning("Failed to connect to Discord. Please check if your Discord application is opened and reopen the game.");
 
                 // Stop Activity Updates
-                _cancelToken.Cancel();
+                _cancelled = true;
 
                 // Dispose Client
                 Dispose();
             }
         }
 
-        private static void OnUpdateActivity()
+        public static void CheckUpdates(int songId)
         {
-            Logger.Info("Discord RPC Client is listening.");
-
-            Task.Run(async () =>
+            if (!_cancelled)
             {
-                while (true)
+                _currentId = songId;
+
+                if (_currentId != _lastId)
                 {
-                    _currentId = ProcessManager.Read2Byte(Settings.SongIdAddress);
+                    // Find SongModel
+                    _songModel = DatabaseManager.FindById(_currentId);
+                    _activityModel = new ActivityModel(song: _songModel);
 
-                    if (_currentId != _lastId)
-                    {
-                        _songModel = DatabaseManager.FindById(_currentId);
+                    // Update Activity
+                    UpdateActivity();
 
-                        _activityModel = new ActivityModel(song: _songModel);
-
-                        UpdateActivity();
-
-                        _lastId = _currentId;
-                    }
-
-                    await Task.Delay(_delay, _cancelToken.Token);
+                    // Update LastId
+                    _lastId = _currentId;
                 }
-            }, _cancelToken.Token);
+            }
         }
 
         private static void UpdateActivity()
         {
-            if (!_client.IsDisposed)
+            if (_client != null)
             {
                 // Presence Info
                 _activity = new RichPresence()
@@ -143,13 +138,11 @@ namespace PDRPC.Core.Managers
         {
             if (_client != null)
             {
-                if (!_client.IsDisposed)
-                {
-                    _client.ClearPresence();
-                    _client.Dispose();
+                _client.ClearPresence();
+                _client.Dispose();
+                _client = null;
 
-                    Logger.Info("Discord RPC Client disposed.");
-                }
+                Logger.Info("Discord RPC Client disposed.");
             }
         }
     }
