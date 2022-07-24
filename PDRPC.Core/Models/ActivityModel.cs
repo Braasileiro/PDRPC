@@ -2,24 +2,34 @@
 {
     internal class ActivityModel
     {
-        public readonly SongModel song;
-        public readonly bool isPlaying;
+        private readonly SongModel song;
+        private readonly bool isPlaying;
+        private readonly bool isUnknownCustom;
 
 
-        public ActivityModel(SongModel song = null)
+        public ActivityModel(int id = 0, SongModel song = null)
         {
+            // Current Song
             this.song = song;
+
+            // Menu Check
             isPlaying = this.song != null;
+
+            // Unknown custom songs don't have entries, but have identifiers above zero
+            isUnknownCustom = this.song == null && id > 0;
         }
 
         public string GetDetails()
         {
-            if (!isPlaying)
+            if (isUnknownCustom)
             {
-                return Constants.Discord.Details;
+                return Constants.Discord.DetailsUnknownCustom;
             }
-
-            if (!Settings.JapaneseNames)
+            else if (!isPlaying)
+            {
+                return Constants.Discord.DetailsMenu;
+            }
+            else if (!Settings.JapaneseNames)
             {
                 return song.en.name ?? song.jp.name ?? Constants.Discord.DetailsUnknown;
             }
@@ -31,12 +41,15 @@
 
         public string GetState()
         {
-            if (!isPlaying)
+            if (isUnknownCustom)
             {
-                return Constants.Discord.State;
+                return Constants.Discord.StateUnknownCustom;
             }
-
-            if (!Settings.JapaneseNames)
+            else if (!isPlaying)
+            {
+                return Constants.Discord.StateMenu;
+            }
+            else if (!Settings.JapaneseNames)
             {
                 return song.en.music ?? song.jp.music ?? Constants.Discord.StateUnknown;
             }
@@ -48,12 +61,11 @@
 
         public string GetLargeImage()
         {
-            if (!isPlaying)
+            if (!isPlaying || isUnknownCustom)
             {
                 return Constants.Discord.LargeImage;
             }
-
-            if (Settings.AlbumArt)
+            else if (Settings.AlbumArt)
             {
                 return AlbumModel.GetAlbumImage(song.album);
             }
@@ -65,7 +77,7 @@
 
         public string GetLargeImageText()
         {
-            if (!isPlaying)
+            if (!isPlaying || isUnknownCustom)
             {
                 return $"{BuildInfo.Name} {BuildInfo.Version}";
             }

@@ -95,7 +95,7 @@ namespace PDRPC.Core.Managers
                 {
                     // Find SongModel
                     _songModel = DatabaseManager.FindById(_currentId);
-                    _activityModel = new ActivityModel(song: _songModel);
+                    _activityModel = new ActivityModel(_currentId, _songModel);
 
                     // Update Activity
                     UpdateActivity();

@@ -4,16 +4,28 @@
     {
         internal static class Discord
         {
+            // Discord ClientId
             public const long ClientId = -1;
+
+            // Default
             public const string LargeImage = "default";
             public const string SmallImage = "playing";
             public const string SmallImageText = "Playing";
-            public const string Details = "Menu";
-            public const string State = "Browsing";
+
+            // Menu
+            public const string DetailsMenu = "Menu";
+            public const string StateMenu = "Browsing";
+
+            // Unknown
             public const string DetailsUnknown = "Unknown Song";
             public const string StateUnknown = "Unknown Artist";
             public const string LargeImageTextUnknown = "No performers.";
 
+            // Unknown Custom
+            public const string DetailsUnknownCustom = "Custom Song";
+            public const string StateUnknownCustom = "Playing";
+
+            // Default Buttons
             public static DiscordRPC.Button[] DefaultButtons = new DiscordRPC.Button[] {
                 new DiscordRPC.Button() {
                     Label = "Check on GitHub",
