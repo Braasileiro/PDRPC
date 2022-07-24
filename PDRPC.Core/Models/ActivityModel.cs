@@ -15,7 +15,7 @@
             // Menu Check
             isPlaying = this.song != null;
 
-            // Unknown custom songs don't have entries, but have identifiers above zero
+            // Unknown custom songs doesn't have entries, but have identifiers above zero
             isUnknownCustom = this.song == null && id > 0;
         }
 
