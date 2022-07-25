@@ -69,7 +69,7 @@ But pay attention to these fields:
 
 **id**: The song id. If you put here any id that already exists within the game, this record will **overwrite** the data that rich presence will show. Required field.
 
-**album**: The album art id. It can be **null** or **not declared**. You can check all available arts [**here**](https://github.com/Braasileiro/PDRPC/tree/main/Assets/RPC/albums).
+**album**: The album art id. It can be **null** or **not declared**. You can check all available arts [**here**](ALBUMS.md).
 
 **jp** and **en**: The song info data. Required fields.
 
