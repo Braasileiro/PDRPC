@@ -69,11 +69,11 @@ But pay attention to these fields:
 
 **id**: The song id. If you put here any id that already exists within the game, this record will **overwrite** the data that rich presence will show. Required field.
 
-**album**: The album art id. You can check all available arts [**here**](https://github.com/Braasileiro/PDRPC/tree/main/Assets/RPC/albums).
+**album**: The album art id. It can be **null** or **not declared**. You can check all available arts [**here**](https://github.com/Braasileiro/PDRPC/tree/main/Assets/RPC/albums).
 
 **jp** and **en**: The song info data. Required fields.
 
-**performers**: An array that indicates the artists of the song. It can be **null** or **not declared**
+**performers**: An array that indicates the artists of the song. It can be **null** or **not declared**.
 * **chara**: The performer identifier.
    * **KAI**: KAITO
    * **LEN**: Kagamine Len
