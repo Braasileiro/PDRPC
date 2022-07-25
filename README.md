@@ -35,6 +35,7 @@ Create the **database_user.json** file inside the **PDRPC** mod folder. Here's a
 [
   {
     "id": 999,
+    "album": 233,
     "jp": {
       "name": "曲名",
       "arranger": "ソングアレンジャー",
@@ -67,6 +68,8 @@ The file is self explanatory. It's basically a comma separated array of objects,
 But pay attention to these fields:
 
 **id**: The song id. If you put here any id that already exists within the game, this record will **overwrite** the data that rich presence will show. Required field.
+
+**album**: The album art id. You can check all available arts [**here**](https://github.com/Braasileiro/PDRPC/tree/main/Assets/RPC/albums).
 
 **jp** and **en**: The song info data. Required fields.
 
