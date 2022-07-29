@@ -18,7 +18,7 @@ namespace PDRPC.Core.Managers
 
         // States
         private static int lastId = 0;
-        private static bool initialized = true;
+        private static bool initialized = false;
 
 
         public static void Init()
@@ -58,7 +58,7 @@ namespace PDRPC.Core.Managers
          */
         private static void OnClientReady()
         {
-            if (initialized)
+            if (!initialized)
             {
                 Logger.Info("Discord RPC Client is listening.");
 
@@ -67,6 +67,9 @@ namespace PDRPC.Core.Managers
 
                 // Menus
                 UpdateActivity();
+
+                // Allow Activity Updates
+                initialized = true;
             }
         }
 
@@ -77,7 +80,7 @@ namespace PDRPC.Core.Managers
                 Logger.Warning("Failed to connect to Discord. Please check if your Discord application is opened and reopen the game.");
 
                 // Stop Activity Updates
-                initialized = true;
+                initialized = false;
 
                 // Dispose Client
                 Dispose();
