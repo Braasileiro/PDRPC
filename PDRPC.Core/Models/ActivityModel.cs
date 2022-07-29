@@ -87,7 +87,7 @@
 
         public string GetSmallImage()
         {
-            if (!isPlaying)
+            if (!isPlaying && !isUnknownCustom)
             {
                 return string.Empty;
             }
@@ -97,7 +97,7 @@
 
         public string GetSmallImageText()
         {
-            if (!isPlaying)
+            if (!isPlaying && !isUnknownCustom)
             {
                 return string.Empty;
             }
