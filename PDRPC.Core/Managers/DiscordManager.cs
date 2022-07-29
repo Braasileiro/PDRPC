@@ -8,18 +8,17 @@ namespace PDRPC.Core.Managers
     internal class DiscordManager
     {
         // RPC
-        private static RichPresence _activity;
-        private static DiscordRpcClient _client;
+        private static RichPresence activity;
+        private static DiscordRpcClient client;
 
         // Song
-        private static DateTime _timePlayed;
-        private static SongModel _songModel;
-        private static ActivityModel _activityModel;
+        private static DateTime timePlayed;
+        private static SongModel songModel;
+        private static ActivityModel activityModel;
 
-        // Current IDs
-        private static int _lastId = 0;
-        private static int _currentId = 0;
-        private static bool _cancelled = false;
+        // States
+        private static int lastId = 0;
+        private static bool initialized = true;
 
 
         public static void Init()
@@ -34,16 +33,16 @@ namespace PDRPC.Core.Managers
                 try
                 {
                     // Instantiate
-                    _client = new DiscordRpcClient(Constants.Discord.ClientId.ToString());
-                    _client.Initialize();
+                    client = new DiscordRpcClient(Constants.Discord.ClientId.ToString());
+                    client.Initialize();
 
                     // Time Played
-                    _timePlayed = DateTime.UtcNow;
+                    timePlayed = DateTime.UtcNow;
 
                     // Events
-                    _client.OnReady += (sender, e) => OnClientReady();
-                    _client.OnClose += (sender, e) => OnClientNotReady();
-                    _client.OnConnectionFailed += (sender, e) => OnClientNotReady();
+                    client.OnReady += (sender, e) => OnClientReady();
+                    client.OnClose += (sender, e) => OnClientNotReady();
+                    client.OnConnectionFailed += (sender, e) => OnClientNotReady();
                 }
                 catch (Exception e)
                 {
@@ -59,12 +58,12 @@ namespace PDRPC.Core.Managers
          */
         private static void OnClientReady()
         {
-            if (!_cancelled)
+            if (initialized)
             {
                 Logger.Info("Discord RPC Client is listening.");
 
                 // Initial Activity
-                _activityModel = new ActivityModel();
+                activityModel = new ActivityModel();
 
                 // Menus
                 UpdateActivity();
@@ -73,12 +72,12 @@ namespace PDRPC.Core.Managers
 
         private static void OnClientNotReady()
         {
-            if (!_cancelled)
+            if (initialized)
             {
                 Logger.Warning("Failed to connect to Discord. Please check if your Discord application is opened and reopen the game.");
 
                 // Stop Activity Updates
-                _cancelled = true;
+                initialized = true;
 
                 // Dispose Client
                 Dispose();
@@ -87,60 +86,58 @@ namespace PDRPC.Core.Managers
 
         public static void CheckUpdates(int songId)
         {
-            if (!_cancelled)
+            if (initialized)
             {
-                _currentId = songId;
-
-                if (_currentId != _lastId)
+                if (songId != lastId)
                 {
                     // Find SongModel
-                    _songModel = DatabaseManager.FindById(_currentId);
-                    _activityModel = new ActivityModel(_currentId, _songModel);
+                    songModel = DatabaseManager.FindById(songId);
+                    activityModel = new ActivityModel(songId, songModel);
 
                     // Update Activity
                     UpdateActivity();
 
                     // Update LastId
-                    _lastId = _currentId;
+                    lastId = songId;
                 }
             }
         }
 
         private static void UpdateActivity()
         {
-            if (_client != null)
+            if (client != null)
             {
                 // Presence Info
-                _activity = new RichPresence()
+                activity = new RichPresence()
                 {
-                    Details = _activityModel.GetDetails(),
-                    State = _activityModel.GetState(),
+                    Details = activityModel.GetDetails(),
+                    State = activityModel.GetState(),
                     Assets = new Assets()
                     {
-                        LargeImageKey = _activityModel.GetLargeImage(),
-                        LargeImageText = _activityModel.GetLargeImageText(),
-                        SmallImageKey = _activityModel.GetSmallImage(),
-                        SmallImageText = _activityModel.GetSmallImageText(),
+                        LargeImageKey = activityModel.GetLargeImage(),
+                        LargeImageText = activityModel.GetLargeImageText(),
+                        SmallImageKey = activityModel.GetSmallImage(),
+                        SmallImageText = activityModel.GetSmallImageText(),
                     },
                     Timestamps = new Timestamps()
                     {
-                        Start = _timePlayed
+                        Start = timePlayed
                     },
                     Buttons = Constants.Discord.DefaultButtons
                 };
 
                 // Update Presence
-                _client.SetPresence(_activity);
+                client?.SetPresence(activity);
             }
         }
 
         public static void Dispose()
         {
-            if (_client != null)
+            if (client != null)
             {
-                _client.ClearPresence();
-                _client.Dispose();
-                _client = null;
+                client.ClearPresence();
+                client.Dispose();
+                client = null;
 
                 Logger.Info("Discord RPC Client disposed.");
             }
