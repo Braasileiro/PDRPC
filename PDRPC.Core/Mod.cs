@@ -44,6 +44,8 @@ namespace PDRPC.Core
         {
             // Dispose things here
             DiscordManager.Dispose();
+
+            Logger.Info("Discord RPC Client disposed.");
         }
     }
 }

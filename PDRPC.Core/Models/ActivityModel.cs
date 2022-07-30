@@ -2,6 +2,7 @@
 {
     internal class ActivityModel
     {
+        private readonly int id;
         private readonly SongModel song;
         private readonly bool isPlaying;
         private readonly bool isUnknownCustom;
@@ -10,13 +11,19 @@
         public ActivityModel(int id = 0, SongModel song = null)
         {
             // Current Song
+            this.id = id;
             this.song = song;
 
             // Menu Check
             isPlaying = this.song != null;
 
             // Unknown custom songs doesn't have entries, but have identifiers above zero
-            isUnknownCustom = this.song == null && id > 0;
+            isUnknownCustom = this.song == null && this.id > 0;
+        }
+
+        public int GetId()
+        {
+            return id;
         }
 
         public string GetDetails()

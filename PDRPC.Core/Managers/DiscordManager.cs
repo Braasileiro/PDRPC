@@ -1,6 +1,5 @@
 ﻿using System;
 using DiscordRPC;
-
 using PDRPC.Core.Models;
 
 namespace PDRPC.Core.Managers
@@ -10,14 +9,14 @@ namespace PDRPC.Core.Managers
         // RPC
         private static RichPresence activity;
         private static DiscordRpcClient client;
+        private static readonly DateTime timePlayed = DateTime.UtcNow;
 
         // Song
-        private static DateTime timePlayed;
-        private static SongModel songModel;
         private static ActivityModel activityModel;
 
         // States
         private static int lastId = 0;
+        private static bool waiting = false;
         private static bool initialized = false;
 
 
@@ -36,10 +35,7 @@ namespace PDRPC.Core.Managers
                     client = new DiscordRpcClient(Constants.Discord.ClientId.ToString());
                     client.Initialize();
 
-                    // Time Played
-                    timePlayed = DateTime.UtcNow;
-
-                    // Events
+                    // Register Events
                     client.OnReady += (sender, e) => OnClientReady();
                     client.OnClose += (sender, e) => OnClientNotReady();
                     client.OnConnectionFailed += (sender, e) => OnClientNotReady();
@@ -62,53 +58,61 @@ namespace PDRPC.Core.Managers
             {
                 Logger.Info("Discord RPC Client is listening.");
 
-                // Initial Activity
-                activityModel = new ActivityModel();
+                if (activityModel == null || activityModel.GetId() <= 0)
+                {
+                    // Menu Activity
+                    activityModel = new ActivityModel();
+                }
 
-                // Menus
-                UpdateActivity();
+                // Not Waiting
+                waiting = false;
 
                 // Allow Activity Updates
                 initialized = true;
+
+                // Update Current Activity
+                UpdateActivity();
             }
         }
 
         private static void OnClientNotReady()
         {
-            if (initialized)
+            // Dispose Current Client
+            Dispose();
+
+            // Waiting Message
+            if (!waiting)
             {
-                Logger.Warning("Failed to connect to Discord. Please check if your Discord application is opened and reopen the game.");
+                waiting = true;
 
-                // Stop Activity Updates
-                initialized = false;
-
-                // Dispose Client
-                Dispose();
+                Logger.Info("Waiting for Discord...");
             }
+
+            // Reinit
+            Init();
         }
 
         public static void CheckUpdates(int songId)
         {
-            if (initialized)
+            if (songId != lastId)
             {
-                if (songId != lastId)
-                {
-                    // Find SongModel
-                    songModel = DatabaseManager.FindById(songId);
-                    activityModel = new ActivityModel(songId, songModel);
+                // Build ActivityModel
+                activityModel = new ActivityModel(
+                    id: songId,
+                    song: DatabaseManager.FindById(songId)
+                );
 
-                    // Update Activity
-                    UpdateActivity();
+                // Update Activity
+                UpdateActivity();
 
-                    // Update LastId
-                    lastId = songId;
-                }
+                // Update LastId
+                lastId = songId;
             }
         }
 
         private static void UpdateActivity()
         {
-            if (client != null)
+            if (initialized)
             {
                 // Presence Info
                 activity = new RichPresence()
@@ -141,8 +145,7 @@ namespace PDRPC.Core.Managers
                 client.ClearPresence();
                 client.Dispose();
                 client = null;
-
-                Logger.Info("Discord RPC Client disposed.");
+                initialized = false;
             }
         }
     }
