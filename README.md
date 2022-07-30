@@ -16,7 +16,7 @@ Displays information such as song name, author, album art and current song perfo
 # Usage
 Just play the game my little PogChamp. The Discord Activity will show up.
 
-**Please make sure your Discord is open before the game. If you open Discord after the game, you will have to restart the game for the Discord status to work.**
+**The PDRPC will try to reconnect to Discord if it is closed or opened after the game, but preferably open the Discord before the game.**
 
 # Configuration
 There are some settings you can change in **config.toml** file. Default values:
