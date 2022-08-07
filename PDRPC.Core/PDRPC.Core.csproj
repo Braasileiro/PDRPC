@@ -63,6 +63,7 @@
     <Compile Include="Models\ActivityModel.cs" />
     <Compile Include="Models\AlbumModel.cs" />
     <Compile Include="Models\CharacterModel.cs" />
+    <Compile Include="Models\CustomSongModel.cs" />
     <Compile Include="Models\SongInfoModel.cs" />
     <Compile Include="Models\SongModel.cs" />
     <Compile Include="Models\SongPerformerModel.cs" />
