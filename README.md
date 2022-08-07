@@ -28,7 +28,7 @@ There are some settings you can change in **config.toml** file. Default values:
 <br>Shows the song info in japanese whenever possible.</br>
 
 # User Custom Data
-As of version 0.1.4, the application will try to fetch custom song data from memory, but still following the default priority: **Internal Data > User Data > Read Memory > Fallback**.
+As of version 0.1.4, the application will try to fetch custom song data from memory, but still following the default priority: **User Data > Internal Data > Read Memory > Fallback**.
 
 The mod supports loading user custom data. With this you can add songs to the rich presence database (like song packs) or overwrite official song data. As of version 0.0.6 the default database is now internal to the mod, so the only way to add and edit entries is this way.
 
