@@ -17,14 +17,18 @@ namespace PDRPC.Core
             // Running everything in a separate thread to avoid any blocking
             new Thread(() =>
             {
-                // Load Settings
-                DatabaseManager.LoadSettings();
-
-                // Load Database
-                if (DatabaseManager.LoadDatabase())
+                // Attach
+                if (ProcessManager.Attach(Settings.ProcessId))
                 {
-                    // Init Discord RPC
-                    DiscordManager.Init();
+                    // Load Settings
+                    DatabaseManager.LoadSettings();
+
+                    // Load Database
+                    if (DatabaseManager.LoadDatabase())
+                    {
+                        // Init Discord RPC
+                        DiscordManager.Init();
+                    }
                 }
             }).Start();
         }

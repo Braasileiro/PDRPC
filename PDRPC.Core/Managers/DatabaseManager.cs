@@ -112,5 +112,28 @@ namespace PDRPC.Core.Managers
 
             return result;
         }
+
+        public static string FindFromMemory()
+        {
+            string result = null;
+
+            try
+            {
+                long pointer = ProcessManager.ReadInt(Settings.SongNamePointer);
+                result = ProcessManager.ReadString(pointer, false);
+
+                if (string.IsNullOrEmpty(result))
+                {
+                    // Direct Read
+                    result = ProcessManager.ReadString(Settings.SongNamePointer);
+                }
+            }
+            catch (Exception e)
+            {
+                Logger.Error(e);
+            }
+
+            return result;
+        }
     }
 }

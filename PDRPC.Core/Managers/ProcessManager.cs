@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 
@@ -11,6 +12,7 @@ namespace PDRPC.Core.Managers
          */
         private const int PROCESS_VM_READ = 0x0010;
 
+
         /*
          * Imports
          */
@@ -19,6 +21,7 @@ namespace PDRPC.Core.Managers
 
         [DllImport("kernel32.dll")]
         public static extern bool ReadProcessMemory(IntPtr hProcess, UIntPtr lpBaseAddress, [Out] byte[] lpBuffer, UIntPtr nSize, IntPtr lpNumberOfBytesRead);
+
 
         /*
          * Interesting Stuff
@@ -55,19 +58,46 @@ namespace PDRPC.Core.Managers
             return false;
         }
 
-        public static int Read2Byte(long address)
+        private static UIntPtr GetAddress(long address, bool withBase)
         {
-            byte[] buffer = new byte[4];
+            if (withBase)
+            {
+                return (UIntPtr)((long)mProcess.MainModule.BaseAddress + address);
+            }
+            else
+            {
+                return (UIntPtr)address;
+            }
+        }
+
+        public static long ReadInt(long address, bool withBase = true)
+        {
+            byte[] buffer = new byte[UIntPtr.Size];
 
             ReadProcessMemory(
                 mProcessHandle,
-                (UIntPtr)((long)mProcess.MainModule.BaseAddress + address),
+                GetAddress(address, withBase),
                 buffer,
-                (UIntPtr)2,
+                (UIntPtr)UIntPtr.Size,
                 IntPtr.Zero
             );
 
-            return BitConverter.ToInt16(buffer, 0);
+            return BitConverter.ToInt64(buffer, 0);
+        }
+
+        public static string ReadString(long address, bool withBase = true)
+        {
+            byte[] buffer = new byte[128];
+
+            ReadProcessMemory(
+                mProcessHandle,
+                GetAddress(address, withBase),
+                buffer,
+                (UIntPtr)buffer.Length,
+                IntPtr.Zero
+            );
+
+            return Encoding.UTF8.GetString(buffer).Split('\0')[0];
         }
     }
 }

@@ -3,9 +3,10 @@
     internal class ActivityModel
     {
         private readonly int id;
-        private readonly SongModel song;
+        private readonly bool isCustom;
         private readonly bool isPlaying;
-        private readonly bool isUnknownCustom;
+        private readonly SongModel song;
+        private readonly CustomSongModel customSong;
 
 
         public ActivityModel(int id = 0, SongModel song = null)
@@ -17,8 +18,14 @@
             // Menu Check
             isPlaying = this.song != null;
 
-            // Unknown custom songs doesn't have entries, but have identifiers above zero
-            isUnknownCustom = this.song == null && this.id > 0;
+            // Custom songs doesn't have entries, but have identifiers above zero
+            isCustom = !isPlaying && this.id > 0;
+
+            // Try to read song info from memory
+            if (isCustom)
+            {
+                customSong = new CustomSongModel();
+            }
         }
 
         public int GetId()
@@ -28,9 +35,9 @@
 
         public string GetDetails()
         {
-            if (isUnknownCustom)
+            if (isCustom)
             {
-                return Constants.Discord.DetailsUnknownCustom;
+                return customSong.GetDetails();
             }
             else if (!isPlaying)
             {
@@ -48,9 +55,9 @@
 
         public string GetState()
         {
-            if (isUnknownCustom)
+            if (isCustom)
             {
-                return Constants.Discord.StateUnknownCustom;
+                return customSong.GetState();
             }
             else if (!isPlaying)
             {
@@ -68,7 +75,7 @@
 
         public string GetLargeImage()
         {
-            if (!isPlaying || isUnknownCustom)
+            if (!isPlaying || isCustom)
             {
                 return Constants.Discord.LargeImage;
             }
@@ -84,32 +91,38 @@
 
         public string GetLargeImageText()
         {
-            if (!isPlaying || isUnknownCustom)
+            if (!isPlaying || isCustom)
             {
                 return $"{BuildInfo.Name} {BuildInfo.Version}";
             }
-
-            return CharacterModel.GetNames(song.performers);
+            else
+            {
+                return CharacterModel.GetNames(song.performers);
+            }
         }
 
         public string GetSmallImage()
         {
-            if (!isPlaying && !isUnknownCustom)
+            if (!isPlaying && !isCustom)
             {
                 return string.Empty;
             }
-
-            return Constants.Discord.SmallImage;
+            else
+            {
+                return Constants.Discord.SmallImage;
+            }
         }
 
         public string GetSmallImageText()
         {
-            if (!isPlaying && !isUnknownCustom)
+            if (!isPlaying && !isCustom)
             {
                 return string.Empty;
             }
-
-            return Constants.Discord.SmallImageText;
+            else
+            {
+                return Constants.Discord.SmallImageText;
+            }
         }
     }
 }

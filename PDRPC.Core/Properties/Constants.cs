@@ -22,7 +22,7 @@
             public const string LargeImageTextUnknown = "No performers.";
 
             // Unknown Custom
-            public const string DetailsUnknownCustom = "Custom Song";
+            public const string StateCustom = "Custom Song";
             public const string StateUnknownCustom = "Playing";
 
             // Default Buttons
