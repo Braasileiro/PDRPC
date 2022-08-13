@@ -113,19 +113,20 @@ namespace PDRPC.Core.Managers
             return result;
         }
 
-        public static string FindFromMemory()
+        public static string FindSongName()
         {
             string result = null;
 
             try
             {
-                long pointer = ProcessManager.ReadInt(Settings.SongNamePointer);
-                result = ProcessManager.ReadString(pointer, false);
+                var address = ProcessManager.ReadInt(Settings.SongNameAddress);
+
+                result = ProcessManager.ReadString(address: address, withBase: false);
 
                 if (string.IsNullOrEmpty(result))
                 {
                     // Direct Read
-                    result = ProcessManager.ReadString(Settings.SongNamePointer);
+                    result = ProcessManager.ReadString(Settings.SongNameAddress);
                 }
             }
             catch (Exception e)

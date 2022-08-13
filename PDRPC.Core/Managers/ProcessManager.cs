@@ -85,9 +85,9 @@ namespace PDRPC.Core.Managers
             return BitConverter.ToInt64(buffer, 0);
         }
 
-        public static string ReadString(long address, bool withBase = true)
+        public static string ReadString(long address, int size = 128, bool withBase = true)
         {
-            byte[] buffer = new byte[128];
+            byte[] buffer = new byte[size];
 
             ReadProcessMemory(
                 mProcessHandle,

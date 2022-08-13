@@ -4,7 +4,7 @@ namespace PDRPC.Core.Models
 {
     internal class CustomSongModel
     {
-        private readonly string name = DatabaseManager.FindFromMemory();
+        private readonly string name = DatabaseManager.FindSongName();
 
         public string GetDetails()
         {
