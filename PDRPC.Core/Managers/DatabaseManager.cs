@@ -136,5 +136,29 @@ namespace PDRPC.Core.Managers
 
             return result;
         }
+
+        public static string FindSongMusic()
+        {
+            string result = null;
+
+            try
+            {
+                var address = ProcessManager.ReadInt(Settings.SongMusicAddress);
+
+                result = ProcessManager.ReadString(address: address, withBase: false);
+
+                if (string.IsNullOrEmpty(result))
+                {
+                    // Direct Read
+                    result = ProcessManager.ReadString(Settings.SongMusicAddress);
+                }
+            }
+            catch (Exception e)
+            {
+                Logger.Error(e);
+            }
+
+            return result;
+        }
     }
 }

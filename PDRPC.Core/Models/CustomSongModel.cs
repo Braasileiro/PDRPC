@@ -5,6 +5,7 @@ namespace PDRPC.Core.Models
     internal class CustomSongModel
     {
         private readonly string name = DatabaseManager.FindSongName();
+        private readonly string music = DatabaseManager.FindSongMusic();
 
         public string GetDetails()
         {
@@ -13,9 +14,9 @@ namespace PDRPC.Core.Models
 
         public string GetState()
         {
-            if (!string.IsNullOrEmpty(name))
+            if (!string.IsNullOrEmpty(music))
             {
-                return Constants.Discord.StateCustom;
+                return music;
             }
             else
             {
