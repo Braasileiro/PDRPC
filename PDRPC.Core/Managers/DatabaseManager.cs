@@ -123,9 +123,9 @@ namespace PDRPC.Core.Managers
 
                 result = ProcessManager.ReadString(address: address, withBase: false);
 
+                // If the string size is under 16, the value is stored directly
                 if (string.IsNullOrEmpty(result))
                 {
-                    // Direct Read
                     result = ProcessManager.ReadString(Settings.SongNameAddress);
                 }
             }
@@ -147,9 +147,9 @@ namespace PDRPC.Core.Managers
 
                 result = ProcessManager.ReadString(address: address, withBase: false);
 
+                // If the string size is under 16, the value is stored directly
                 if (string.IsNullOrEmpty(result))
                 {
-                    // Direct Read
                     result = ProcessManager.ReadString(Settings.SongMusicAddress);
                 }
             }
