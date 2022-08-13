@@ -119,11 +119,14 @@ namespace PDRPC.Core.Managers
 
             try
             {
-                var address = ProcessManager.ReadInt(Settings.SongNameAddress);
+                var pointer = ProcessManager.ReadInt(Settings.SongNameAddress);
 
-                result = ProcessManager.ReadString(address: address, withBase: false);
+                result = ProcessManager.ReadString(address: pointer, withBase: false);
 
-                // If the string size is under 16, the value is stored directly
+                /*
+                 * If the string size is under 16, the value is stored directly.
+                 * After the first string above 16, the value is always stored on the pointer.
+                 */
                 if (string.IsNullOrEmpty(result))
                 {
                     result = ProcessManager.ReadString(Settings.SongNameAddress);
@@ -143,11 +146,14 @@ namespace PDRPC.Core.Managers
 
             try
             {
-                var address = ProcessManager.ReadInt(Settings.SongMusicAddress);
+                var pointer = ProcessManager.ReadInt(Settings.SongMusicAddress);
 
-                result = ProcessManager.ReadString(address: address, withBase: false);
+                result = ProcessManager.ReadString(address: pointer, withBase: false);
 
-                // If the string size is under 16, the value is stored directly
+                /*
+                 * If the string size is under 16, the value is stored directly.
+                 * After the first string above 16, the value is always stored on the pointer.
+                 */
                 if (string.IsNullOrEmpty(result))
                 {
                     result = ProcessManager.ReadString(Settings.SongMusicAddress);
