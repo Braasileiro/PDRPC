@@ -9,7 +9,14 @@ namespace PDRPC.Core.Models
 
         public string GetDetails()
         {
-            return name ?? Constants.Discord.StateCustom;
+            if (!string.IsNullOrEmpty(name))
+            {
+                return name;
+            }
+            else
+            {
+                return Constants.Discord.StateCustom;
+            }
         }
 
         public string GetState()
@@ -20,7 +27,7 @@ namespace PDRPC.Core.Models
             }
             else
             {
-                return Constants.Discord.StateUnknownCustom;
+                return string.Empty;
             }
         }
     }

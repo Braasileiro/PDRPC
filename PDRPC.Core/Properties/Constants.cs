@@ -21,9 +21,8 @@
             public const string StateUnknown = "Unknown Artist";
             public const string LargeImageTextUnknown = "No performers.";
 
-            // Unknown Custom
+            // Custom
             public const string StateCustom = "Custom Song";
-            public const string StateUnknownCustom = "Playing";
 
             // Default Buttons
             public static DiscordRPC.Button[] DefaultButtons = new DiscordRPC.Button[] {
