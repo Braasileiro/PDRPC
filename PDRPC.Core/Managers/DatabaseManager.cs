@@ -125,7 +125,8 @@ namespace PDRPC.Core.Managers
 
                 /*
                  * If the string size is under 16, the value is stored directly.
-                 * After the first string above 16, the value is always stored on the pointer.
+                 * The result from the ReadString on the pointer returns NULL because it's not a pointer in the moment.
+                 * After the first string above 16, the value is always stored on the pointer regardless of size.
                  */
                 if (string.IsNullOrEmpty(result))
                 {
@@ -152,7 +153,8 @@ namespace PDRPC.Core.Managers
 
                 /*
                  * If the string size is under 16, the value is stored directly.
-                 * After the first string above 16, the value is always stored on the pointer.
+                 * The result from the ReadString on the pointer returns NULL because it's not a pointer in the moment.
+                 * After the first string above 16, the value is always stored on the pointer regardless of size.
                  */
                 if (string.IsNullOrEmpty(result))
                 {
