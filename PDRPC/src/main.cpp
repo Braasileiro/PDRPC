@@ -89,7 +89,7 @@ HOOK(void, __fastcall, _SongStart, sigSongStart(), int songId)
 	original_SongStart(songId);
 }
 
-HOOK(__int64, __cdecl, _SongEnd, sigSongEnd())
+HOOK(__int64, __stdcall, _SongEnd, sigSongEnd())
 {
 	if (m_Library)
 	{
