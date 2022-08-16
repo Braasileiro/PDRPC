@@ -26,18 +26,15 @@ namespace PDRPC.Core.Managers
                 {
                     try
                     {
-                        // Config TextReader
-                        var reader = new StreamReader(path);
+                        using (var reader = new StreamReader(path))
+                        {
+                            // Parse config.toml
+                            var table = TOML.Parse(reader);
 
-                        // Parse config.toml
-                        var table = TOML.Parse(reader);
-
-                        // Load Settings
-                        Settings.AlbumArt = table["album_art"].AsBoolean;
-                        Settings.JapaneseNames = table["japanese_names"].AsBoolean;
-
-                        // Close TextReader
-                        reader.Close();
+                            // Load Settings
+                            Settings.AlbumArt = table["album_art"].AsBoolean;
+                            Settings.JapaneseNames = table["japanese_names"].AsBoolean;
+                        }
 
                         Logger.Info("Settings loaded.");
                     }
@@ -119,7 +116,7 @@ namespace PDRPC.Core.Managers
 
             try
             {
-                var pointer = ProcessManager.ReadInt(Settings.SongNameAddress);
+                var pointer = ProcessManager.ReadInt64(Settings.SongNameAddress);
 
                 result = ProcessManager.ReadString(address: pointer, withBase: false);
 
@@ -147,7 +144,7 @@ namespace PDRPC.Core.Managers
 
             try
             {
-                var pointer = ProcessManager.ReadInt(Settings.SongMusicAddress);
+                var pointer = ProcessManager.ReadInt64(Settings.SongMusicAddress);
 
                 result = ProcessManager.ReadString(address: pointer, withBase: false);
 
