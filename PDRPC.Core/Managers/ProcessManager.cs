@@ -70,15 +70,30 @@ namespace PDRPC.Core.Managers
             }
         }
 
-        public static long ReadInt(long address, bool withBase = true)
+        public static int ReadInt32(long address, bool withBase = true)
         {
-            byte[] buffer = new byte[UIntPtr.Size];
+            byte[] buffer = new byte[4];
 
             ReadProcessMemory(
                 mProcessHandle,
                 GetAddress(address, withBase),
                 buffer,
-                (UIntPtr)UIntPtr.Size,
+                (UIntPtr)4,
+                IntPtr.Zero
+            );
+
+            return BitConverter.ToInt32(buffer, 0);
+        }
+
+        public static long ReadInt64(long address, bool withBase = true)
+        {
+            byte[] buffer = new byte[8];
+
+            ReadProcessMemory(
+                mProcessHandle,
+                GetAddress(address, withBase),
+                buffer,
+                (UIntPtr)8,
                 IntPtr.Zero
             );
 
