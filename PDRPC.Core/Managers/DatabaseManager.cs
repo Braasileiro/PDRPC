@@ -24,34 +24,28 @@ namespace PDRPC.Core.Managers
 
                 if (File.Exists(path))
                 {
-                    try
+                    using (var reader = new StreamReader(path))
                     {
-                        using (var reader = new StreamReader(path))
-                        {
-                            // Parse config.toml
-                            var table = TOML.Parse(reader);
+                        // Parse config.toml
+                        var table = TOML.Parse(reader);
 
-                            // Load Settings
-                            Settings.AlbumArt = table["album_art"].AsBoolean;
-                            Settings.JapaneseNames = table["japanese_names"].AsBoolean;
-                            Settings.ShowDifficulty = table["show_difficulty"].AsBoolean;
-                        }
-
-                        Logger.Info("Settings loaded.");
+                        // Load Settings
+                        Settings.AlbumArt = table["album_art"].AsBoolean;
+                        Settings.JapaneseNames = table["japanese_names"].AsBoolean;
+                        Settings.ShowDifficulty = table["show_difficulty"].AsBoolean;
                     }
-                    catch (TomlParseException)
-                    {
-                        Logger.Error("Failed to load settings. Using defaults.");
 
-                        Settings.AlbumArt = true;
-                        Settings.JapaneseNames = false;
-                        Settings.ShowDifficulty = true;
-                    }
+                    Logger.Info("Settings loaded.");
                 }
             }
             catch (Exception e)
             {
                 Logger.Error(e);
+                Logger.Warning("Failed to load settings. Using defaults.");
+
+                Settings.AlbumArt = true;
+                Settings.JapaneseNames = false;
+                Settings.ShowDifficulty = true;
             }
         }
 
