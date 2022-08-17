@@ -6,6 +6,6 @@
     public static bool JapaneseNames = false;
 
     // Addresses
-    public static long SongNameAddress = 0x0CC0B5F8;
-    public static long SongMusicAddress = 0x0CC0B618;
+    public const long SongNameAddress = 0x0CC0B5F8;
+    public const long SongMusicAddress = SongNameAddress + 0x20;
 }
