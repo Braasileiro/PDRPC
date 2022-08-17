@@ -172,27 +172,17 @@ namespace PDRPC.Core.Managers
             return false;
         }
 
-        public static string FindSongDifficulty()
+        public static int FindSongDifficulty(bool extra)
         {
             try
             {
-                var extra = ProcessManager.ReadInt32(Settings.SongDifficultyExtraAddress).Equals(1);
-
                 if (extra)
                 {
-                    return "Extra Extreme";
+                    return ProcessManager.ReadInt32(Settings.SongDifficultyExtraAddress);
                 }
                 else
                 {
-                    var difficulty = ProcessManager.ReadInt32(Settings.SongDifficultyAddress);
-
-                    switch (difficulty)
-                    {
-                        case 0: return "Easy";
-                        case 1: return "Normal";
-                        case 2: return "Hard";
-                        case 3: return "Extreme";
-                    }
+                    return ProcessManager.ReadInt32(Settings.SongDifficultyAddress);
                 }
             }
             catch (Exception e)
@@ -200,7 +190,7 @@ namespace PDRPC.Core.Managers
                 Logger.Error(e);
             }
 
-            return "Unknown Difficulty";
+            return -1;
         }
     }
 }

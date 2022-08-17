@@ -7,7 +7,6 @@ namespace PDRPC.Core.Models.Presence
         private static bool isPv;
         private static string name;
         private static string music;
-        private static string difficulty;
 
         public static void Fetch(bool isCustom)
         {
@@ -21,7 +20,8 @@ namespace PDRPC.Core.Models.Presence
 
             if (!isPv && Settings.ShowDifficulty)
             {
-                difficulty = DatabaseManager.FindSongDifficulty();
+                // Fetch Difficulty
+                DifficultyModel.Fetch();
             }
         }
 
@@ -55,6 +55,10 @@ namespace PDRPC.Core.Models.Presence
             {
                 return Constants.Discord.SmallImageWatching;
             }
+            else if (Settings.ShowDifficulty)
+            {
+                return DifficultyModel.GetDifficultyImage();
+            }
             else
             {
                 return Constants.Discord.SmallImagePlaying;
@@ -69,7 +73,7 @@ namespace PDRPC.Core.Models.Presence
             }
             else if (Settings.ShowDifficulty)
             {
-                return $"{Constants.Discord.SmallImagePlayingText} • {difficulty}";
+                return $"{Constants.Discord.SmallImagePlayingText} • {DifficultyModel.GetDifficultyName()}";
             }
             else
             {
