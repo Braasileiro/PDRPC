@@ -29,6 +29,9 @@ There are some settings you can change in **config.toml** file. Default values:
 **Japanese Names**: Disabled.
 <br>Shows the song info in japanese whenever possible.</br>
 
+**Show Difficulty**: Enabled.
+<br>Shows the difficulty of the current song with a colored icon (corresponding to the difficulty), in addition to the text in the small icon when hovering over.</br>
+
 # User Custom Data
 As of version 0.1.4, the application will try to fetch custom song data from memory, but still following the default priority: **User Data > Internal Data > Read Memory > Fallback**.
 
