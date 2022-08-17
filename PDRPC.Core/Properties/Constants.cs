@@ -8,35 +8,30 @@
             public const long ClientId = -1;
 
             // Default
-            public const string LargeImage = "default";
-            public const string SmallImage = "playing";
-            public const string SmallImageText = "Playing";
+            public const string DefaultImage = "default";
 
             // Menu
-            public const string DetailsMenu = "Menu";
-            public const string StateMenu = "Browsing";
+            public const string MenuTitle = "Menu";
+            public const string MenuBrowsing = "Browsing";
 
-            // Unknown
-            public const string DetailsUnknown = "Unknown Song";
-            public const string StateUnknown = "Unknown Artist";
-            public const string LargeImageTextUnknown = "No performers.";
+            // Status
+            public const string SmallImagePlaying = "playing";
+            public const string SmallImagePlayingText = "Playing";
+            public const string SmallImageWatching = "watching";
+            public const string SmallImageWatchingText = "Watching Music Video";
 
             // Custom
-            public const string StateCustom = "Custom Song";
+            public const string CustomSong = "Custom Song";
+
+            // Unknown
+            public const string UnknownSong = "Unknown Song";
+            public const string UnknownMusic = "Unknown Music";
+            public const string UnknownPerformers = "No performers.";
 
             // Default Buttons
             public static DiscordRPC.Button[] DefaultButtons = new DiscordRPC.Button[] {
-                new DiscordRPC.Button() {
-                    Label = "Check on GitHub",
-                    Url = "https://github.com/Braasileiro/PDRPC"
-                }
+                new DiscordRPC.Button() { Label = "Check on GitHub", Url = "https://github.com/Braasileiro/PDRPC" }
             };
-        }
-
-        internal static class Mod
-        {
-            public const string Config = "config.toml";
-            public const string UserDatabase = "database_user.json";
         }
     }
 }

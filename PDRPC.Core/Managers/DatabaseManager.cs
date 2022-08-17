@@ -20,7 +20,7 @@ namespace PDRPC.Core.Managers
         {
             try
             {
-                var path = Path.Combine(Settings.CurrentDirectory, Constants.Mod.Config);
+                var path = Path.Combine(Settings.CurrentDirectory, "config.toml");
 
                 if (File.Exists(path))
                 {
@@ -34,6 +34,7 @@ namespace PDRPC.Core.Managers
                             // Load Settings
                             Settings.AlbumArt = table["album_art"].AsBoolean;
                             Settings.JapaneseNames = table["japanese_names"].AsBoolean;
+                            Settings.ShowDifficulty = table["show_difficulty"].AsBoolean;
                         }
 
                         Logger.Info("Settings loaded.");
@@ -44,6 +45,7 @@ namespace PDRPC.Core.Managers
 
                         Settings.AlbumArt = true;
                         Settings.JapaneseNames = false;
+                        Settings.ShowDifficulty = true;
                     }
                 }
             }
@@ -63,7 +65,7 @@ namespace PDRPC.Core.Managers
                 Logger.Info("Internal database loaded.");
 
                 // User Database (?)
-                var path = Path.Combine(Settings.CurrentDirectory, Constants.Mod.UserDatabase);
+                var path = Path.Combine(Settings.CurrentDirectory, "database_user.json");
 
                 if (File.Exists(path))
                 {
@@ -164,6 +166,51 @@ namespace PDRPC.Core.Managers
             }
 
             return result;
+        }
+
+        public static bool FindPvFlag()
+        {
+            try
+            {
+                return ProcessManager.ReadInt32(Settings.SongPvFlagAddress).Equals(1);
+            }
+            catch (Exception e)
+            {
+                Logger.Error(e);
+            }
+
+            return false;
+        }
+
+        public static string FindSongDifficulty()
+        {
+            try
+            {
+                var extra = ProcessManager.ReadInt32(Settings.SongDifficultyExtraAddress).Equals(1);
+
+                if (extra)
+                {
+                    return "Extra Extreme";
+                }
+                else
+                {
+                    var difficulty = ProcessManager.ReadInt32(Settings.SongDifficultyAddress);
+
+                    switch (difficulty)
+                    {
+                        case 0: return "Easy";
+                        case 1: return "Normal";
+                        case 2: return "Hard";
+                        case 3: return "Extreme";
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Logger.Error(e);
+            }
+
+            return "Unknown Difficulty";
         }
     }
 }

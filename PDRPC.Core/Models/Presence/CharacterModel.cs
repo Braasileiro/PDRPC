@@ -27,7 +27,7 @@ namespace PDRPC.Core.Models.Presence
         {
             if (performers == null || !performers.Any())
             {
-                return Constants.Discord.LargeImageTextUnknown;
+                return Constants.Discord.UnknownPerformers;
             }
 
             string names = string.Empty;
@@ -37,9 +37,9 @@ namespace PDRPC.Core.Models.Presence
             {
                 performer = performers[i];
 
-                // First or only one
                 if (i == 0)
                 {
+                    // First or only one
                     names = GetName(performer.chara);
                 }
                 else
@@ -55,7 +55,7 @@ namespace PDRPC.Core.Models.Presence
         {
             if (performers == null || !performers.Any())
             {
-                return Constants.Discord.LargeImage;
+                return Constants.Discord.DefaultImage;
             }
 
             return $"chara_{performers[0].chara.ToLowerInvariant()}";

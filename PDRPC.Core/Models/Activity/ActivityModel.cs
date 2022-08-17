@@ -23,11 +23,8 @@ namespace PDRPC.Core.Models.Activity
             // Custom songs doesn't have entries, but have identifiers above zero
             isCustom = !isPlaying && this.id > 0;
 
-            // Try to read song info from memory
-            if (isCustom)
-            {
-                CustomSongModel.Fetch();
-            }
+            // Fetch Status
+            StatusModel.Fetch(isCustom);
         }
 
         public int GetId()
@@ -39,19 +36,19 @@ namespace PDRPC.Core.Models.Activity
         {
             if (isCustom)
             {
-                return CustomSongModel.GetDetails();
+                return StatusModel.GetCustomDetails();
             }
             else if (!isPlaying)
             {
-                return Constants.Discord.DetailsMenu;
+                return Constants.Discord.MenuTitle;
             }
             else if (!Settings.JapaneseNames)
             {
-                return song.en.name ?? song.jp.name ?? Constants.Discord.DetailsUnknown;
+                return song.en.name ?? song.jp.name ?? Constants.Discord.UnknownSong;
             }
             else
             {
-                return song.jp.name ?? song.en.name ?? Constants.Discord.DetailsUnknown;
+                return song.jp.name ?? song.en.name ?? Constants.Discord.UnknownSong;
             }
         }
 
@@ -59,19 +56,19 @@ namespace PDRPC.Core.Models.Activity
         {
             if (isCustom)
             {
-                return CustomSongModel.GetState();
+                return StatusModel.GetCustomState();
             }
             else if (!isPlaying)
             {
-                return Constants.Discord.StateMenu;
+                return Constants.Discord.MenuBrowsing;
             }
             else if (!Settings.JapaneseNames)
             {
-                return song.en.music ?? song.jp.music ?? Constants.Discord.StateUnknown;
+                return song.en.music ?? song.jp.music ?? Constants.Discord.UnknownMusic;
             }
             else
             {
-                return song.jp.music ?? song.en.music ?? Constants.Discord.StateUnknown;
+                return song.jp.music ?? song.en.music ?? Constants.Discord.UnknownMusic;
             }
         }
 
@@ -79,7 +76,7 @@ namespace PDRPC.Core.Models.Activity
         {
             if (!isPlaying || isCustom)
             {
-                return Constants.Discord.LargeImage;
+                return Constants.Discord.DefaultImage;
             }
             else if (Settings.AlbumArt)
             {
@@ -111,7 +108,7 @@ namespace PDRPC.Core.Models.Activity
             }
             else
             {
-                return Constants.Discord.SmallImage;
+                return StatusModel.GetSmallImage();
             }
         }
 
@@ -123,7 +120,7 @@ namespace PDRPC.Core.Models.Activity
             }
             else
             {
-                return Constants.Discord.SmallImageText;
+                return StatusModel.GetSmallImageText();
             }
         }
     }

@@ -6,7 +6,7 @@
         {
             if (albumId == null || albumId <= 0 || albumId > 233)
             {
-                return Constants.Discord.LargeImage;
+                return Constants.Discord.DefaultImage;
             }
 
             return $"album_{albumId}";
