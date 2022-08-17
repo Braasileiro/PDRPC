@@ -144,11 +144,7 @@ namespace PDRPC.Core.Managers
 
                 result = ProcessManager.ReadString(address: pointer, withBase: false);
 
-                /*
-                 * If the string size is under 16, the value is stored directly.
-                 * The result from the ReadString on the pointer returns NULL because it's not a pointer in the moment.
-                 * After the first string above 16, the value is always stored on the pointer regardless of size.
-                 */
+                // Same case of the song name
                 if (string.IsNullOrEmpty(result))
                 {
                     result = ProcessManager.ReadString(Settings.SongMusicAddress);
