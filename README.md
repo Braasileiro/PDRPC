@@ -3,7 +3,9 @@ Discord Rich Presence for Hatsune Miku: Project DIVA Mega Mix+.
 
 This mod adds support for Discord Rich Presence in the game.
 
-Displays information such as song name, author, album art and current song performers. **Including custom songs.**
+Displays information such as song name, author, album art, difficulty and current song performers, **including custom songs.**
+
+It also indicates when you are just watching the PV.
 
 # Installation
 * Windows 10 or higher.
