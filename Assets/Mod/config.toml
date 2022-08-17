@@ -6,4 +6,5 @@ date = "13.08.2022"
 author = "Brasileiro"
 album_art = true
 japanese_names = false
+show_difficulty = true
 dll = ["PDRPC.dll"]
