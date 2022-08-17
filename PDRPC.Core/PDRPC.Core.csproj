@@ -56,6 +56,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Defines\CharacterDefine.cs" />
+    <Compile Include="Defines\DifficultyDefine.cs" />
     <Compile Include="Managers\DatabaseManager.cs" />
     <Compile Include="Managers\DiscordManager.cs" />
     <Compile Include="Managers\ProcessManager.cs" />
@@ -63,6 +64,7 @@
     <Compile Include="Models\Activity\ActivityModel.cs" />
     <Compile Include="Models\Presence\AlbumModel.cs" />
     <Compile Include="Models\Presence\CharacterModel.cs" />
+    <Compile Include="Models\Presence\DifficultyModel.cs" />
     <Compile Include="Models\Presence\StatusModel.cs" />
     <Compile Include="Models\Database\SongInfoModel.cs" />
     <Compile Include="Models\Database\SongModel.cs" />
