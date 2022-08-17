@@ -1,8 +1,9 @@
 ﻿using System.Linq;
 using PDRPC.Core.Defines;
 using System.Collections.Generic;
+using PDRPC.Core.Models.Database;
 
-namespace PDRPC.Core.Models
+namespace PDRPC.Core.Models.Presence
 {
     internal class CharacterModel
     {

@@ -1,4 +1,4 @@
-﻿namespace PDRPC.Core.Models
+﻿namespace PDRPC.Core.Models.Presence
 {
     internal class AlbumModel
     {

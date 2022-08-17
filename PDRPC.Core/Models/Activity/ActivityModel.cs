@@ -1,4 +1,7 @@
-﻿namespace PDRPC.Core.Models
+﻿using PDRPC.Core.Models.Database;
+using PDRPC.Core.Models.Presence;
+
+namespace PDRPC.Core.Models.Activity
 {
     internal class ActivityModel
     {

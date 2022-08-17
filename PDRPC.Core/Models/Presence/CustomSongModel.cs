@@ -1,6 +1,6 @@
 ﻿using PDRPC.Core.Managers;
 
-namespace PDRPC.Core.Models
+namespace PDRPC.Core.Models.Presence
 {
     internal class CustomSongModel
     {

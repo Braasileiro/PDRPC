@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace PDRPC.Core.Models
+namespace PDRPC.Core.Models.Database
 {
     internal class SongPerformerModel
     {

@@ -4,9 +4,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
-using PDRPC.Core.Models;
 using PDRPC.Core.Properties;
 using System.Collections.Generic;
+using PDRPC.Core.Models.Database;
 
 namespace PDRPC.Core.Managers
 {

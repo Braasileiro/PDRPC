@@ -1,6 +1,6 @@
 ﻿using System;
 using DiscordRPC;
-using PDRPC.Core.Models;
+using PDRPC.Core.Models.Activity;
 
 namespace PDRPC.Core.Managers
 {
