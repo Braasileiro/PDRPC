@@ -6,7 +6,6 @@
         private readonly bool isCustom;
         private readonly bool isPlaying;
         private readonly SongModel song;
-        private readonly CustomSongModel customSong;
 
 
         public ActivityModel(int id = 0, SongModel song = null)
@@ -24,7 +23,7 @@
             // Try to read song info from memory
             if (isCustom)
             {
-                customSong = new CustomSongModel();
+                CustomSongModel.Fetch();
             }
         }
 
@@ -37,7 +36,7 @@
         {
             if (isCustom)
             {
-                return customSong.GetDetails();
+                return CustomSongModel.GetDetails();
             }
             else if (!isPlaying)
             {
@@ -57,7 +56,7 @@
         {
             if (isCustom)
             {
-                return customSong.GetState();
+                return CustomSongModel.GetState();
             }
             else if (!isPlaying)
             {

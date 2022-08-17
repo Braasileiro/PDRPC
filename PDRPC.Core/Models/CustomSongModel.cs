@@ -4,10 +4,16 @@ namespace PDRPC.Core.Models
 {
     internal class CustomSongModel
     {
-        private readonly string name = DatabaseManager.FindSongName();
-        private readonly string music = DatabaseManager.FindSongMusic();
+        private static string name;
+        private static string music;
 
-        public string GetDetails()
+        public static void Fetch()
+        {
+            name = DatabaseManager.FindSongName();
+            music = DatabaseManager.FindSongMusic();
+        }
+
+        public static string GetDetails()
         {
             if (!string.IsNullOrEmpty(name))
             {
@@ -19,7 +25,7 @@ namespace PDRPC.Core.Models
             }
         }
 
-        public string GetState()
+        public static string GetState()
         {
             if (!string.IsNullOrEmpty(music))
             {
