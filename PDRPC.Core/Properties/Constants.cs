@@ -11,7 +11,7 @@
             public const string DefaultImage = "default";
 
             // Menu
-            public const string MenuTitle = "Menu";
+            public const string MenuTitle = "In Menu";
             public const string MenuBrowsing = "Browsing";
 
             // Status
