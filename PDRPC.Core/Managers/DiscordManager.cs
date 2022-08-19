@@ -1,6 +1,6 @@
 ﻿using System;
 using DiscordRPC;
-using PDRPC.Core.Models.Activity;
+using PDRPC.Core.Models.Presence;
 
 namespace PDRPC.Core.Managers
 {

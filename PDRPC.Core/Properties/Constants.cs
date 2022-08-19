@@ -19,6 +19,8 @@
             public const string SmallImagePlayingText = "Playing";
             public const string SmallImageWatching = "watching";
             public const string SmallImageWatchingText = "Watching Music Video";
+            public const string SmallImagePracticing = "practicing";
+            public const string SmallImagePracticingText = "Practicing";
 
             // Custom
             public const string CustomSong = "Custom Song";

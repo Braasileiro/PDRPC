@@ -61,11 +61,10 @@
     <Compile Include="Managers\DiscordManager.cs" />
     <Compile Include="Managers\ProcessManager.cs" />
     <Compile Include="Mod.cs" />
-    <Compile Include="Models\Activity\ActivityModel.cs" />
+    <Compile Include="Models\Presence\ActivityModel.cs" />
+    <Compile Include="Models\Database\SongMemoryModel.cs" />
     <Compile Include="Models\Presence\AlbumModel.cs" />
     <Compile Include="Models\Presence\CharacterModel.cs" />
-    <Compile Include="Models\Presence\DifficultyModel.cs" />
-    <Compile Include="Models\Presence\StatusModel.cs" />
     <Compile Include="Models\Database\SongInfoModel.cs" />
     <Compile Include="Models\Database\SongModel.cs" />
     <Compile Include="Models\Database\SongPerformerModel.cs" />

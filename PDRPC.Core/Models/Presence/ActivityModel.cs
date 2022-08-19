@@ -1,7 +1,6 @@
 ﻿using PDRPC.Core.Models.Database;
-using PDRPC.Core.Models.Presence;
 
-namespace PDRPC.Core.Models.Activity
+namespace PDRPC.Core.Models.Presence
 {
     internal class ActivityModel
     {
@@ -9,6 +8,7 @@ namespace PDRPC.Core.Models.Activity
         private readonly bool isCustom;
         private readonly bool isPlaying;
         private readonly SongModel song;
+        private readonly SongMemoryModel memory;
 
 
         public ActivityModel(int id = 0, SongModel song = null)
@@ -23,8 +23,8 @@ namespace PDRPC.Core.Models.Activity
             // Custom songs doesn't have entries, but have identifiers above zero
             isCustom = !isPlaying && this.id > 0;
 
-            // Fetch Status
-            StatusModel.Fetch(isCustom);
+            // Current Memory Info
+            memory = new SongMemoryModel();
         }
 
         public int GetId()
@@ -36,7 +36,7 @@ namespace PDRPC.Core.Models.Activity
         {
             if (isCustom)
             {
-                return StatusModel.GetCustomDetails();
+                return memory.GetName();
             }
             else if (!isPlaying)
             {
@@ -44,11 +44,11 @@ namespace PDRPC.Core.Models.Activity
             }
             else if (!Settings.JapaneseNames)
             {
-                return song.en.name ?? song.jp.name ?? Constants.Discord.UnknownSong;
+                return song.en.name ?? song.jp.name ?? memory.GetName() ?? Constants.Discord.UnknownSong;
             }
             else
             {
-                return song.jp.name ?? song.en.name ?? Constants.Discord.UnknownSong;
+                return song.jp.name ?? song.en.name ?? memory.GetName() ?? Constants.Discord.UnknownSong;
             }
         }
 
@@ -56,7 +56,7 @@ namespace PDRPC.Core.Models.Activity
         {
             if (isCustom)
             {
-                return StatusModel.GetCustomState();
+                return memory.GetMusic();
             }
             else if (!isPlaying)
             {
@@ -64,11 +64,11 @@ namespace PDRPC.Core.Models.Activity
             }
             else if (!Settings.JapaneseNames)
             {
-                return song.en.music ?? song.jp.music ?? Constants.Discord.UnknownMusic;
+                return song.en.music ?? song.jp.music ?? memory.GetMusic() ?? Constants.Discord.UnknownMusic;
             }
             else
             {
-                return song.jp.music ?? song.en.music ?? Constants.Discord.UnknownMusic;
+                return song.jp.music ?? song.en.music ?? memory.GetMusic() ?? Constants.Discord.UnknownMusic;
             }
         }
 
@@ -106,9 +106,17 @@ namespace PDRPC.Core.Models.Activity
             {
                 return string.Empty;
             }
+            else if (memory.isPv)
+            {
+                return Constants.Discord.SmallImageWatching;
+            }
+            else if (Settings.ShowDifficulty)
+            {
+                return memory.GetDifficultyImage();
+            }
             else
             {
-                return StatusModel.GetSmallImage();
+                return Constants.Discord.SmallImagePlaying;
             }
         }
 
@@ -118,9 +126,17 @@ namespace PDRPC.Core.Models.Activity
             {
                 return string.Empty;
             }
+            else if (memory.isPv)
+            {
+                return Constants.Discord.SmallImageWatchingText;
+            }
+            else if (Settings.ShowDifficulty)
+            {
+                return memory.GetDifficultyName();
+            }
             else
             {
-                return StatusModel.GetSmallImageText();
+                return memory.GetDefaultStatus();
             }
         }
     }

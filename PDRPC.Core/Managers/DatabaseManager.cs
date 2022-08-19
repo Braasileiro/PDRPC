@@ -15,7 +15,7 @@ namespace PDRPC.Core.Managers
         private static List<SongModel> database = null;
         private static List<SongModel> userdata = null;
 
-        
+
         public static void LoadSettings()
         {
             try
@@ -156,41 +156,6 @@ namespace PDRPC.Core.Managers
             }
 
             return result;
-        }
-
-        public static bool FindPvFlag()
-        {
-            try
-            {
-                return ProcessManager.ReadInt32(Settings.SongPvFlagAddress).Equals(1);
-            }
-            catch (Exception e)
-            {
-                Logger.Error(e);
-            }
-
-            return false;
-        }
-
-        public static int FindSongDifficulty(bool extra)
-        {
-            try
-            {
-                if (extra)
-                {
-                    return ProcessManager.ReadInt32(Settings.SongDifficultyExtraAddress);
-                }
-                else
-                {
-                    return ProcessManager.ReadInt32(Settings.SongDifficultyAddress);
-                }
-            }
-            catch (Exception e)
-            {
-                Logger.Error(e);
-            }
-
-            return -1;
         }
     }
 }
