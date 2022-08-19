@@ -112,9 +112,9 @@ namespace PDRPC.Core.Managers
 
             try
             {
-                var pointer = ProcessManager.ReadUInt64(Settings.SongNameAddress);
+                var pointer = ProcessManager.ReadUInt64(ProcessManager.GetBaseAddr() + Settings.Addr.SongName);
 
-                result = ProcessManager.ReadString(address: pointer, withBase: false);
+                result = ProcessManager.ReadString(address: pointer);
 
                 /*
                  * If the string size is under 16, the value is stored directly.
@@ -123,7 +123,7 @@ namespace PDRPC.Core.Managers
                  */
                 if (string.IsNullOrEmpty(result))
                 {
-                    result = ProcessManager.ReadString(Settings.SongNameAddress);
+                    result = ProcessManager.ReadString(ProcessManager.GetBaseAddr() + Settings.Addr.SongName);
                 }
             }
             catch (Exception e)
@@ -140,14 +140,14 @@ namespace PDRPC.Core.Managers
 
             try
             {
-                var pointer = ProcessManager.ReadUInt64(Settings.SongMusicAddress);
+                var pointer = ProcessManager.ReadUInt64(ProcessManager.GetBaseAddr() + Settings.Addr.SongMusic);
 
-                result = ProcessManager.ReadString(address: pointer, withBase: false);
+                result = ProcessManager.ReadString(address: pointer);
 
                 // Same case of the song name
                 if (string.IsNullOrEmpty(result))
                 {
-                    result = ProcessManager.ReadString(Settings.SongMusicAddress);
+                    result = ProcessManager.ReadString(ProcessManager.GetBaseAddr() + Settings.Addr.SongMusic);
                 }
             }
             catch (Exception e)

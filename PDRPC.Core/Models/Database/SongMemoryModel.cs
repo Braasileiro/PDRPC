@@ -22,12 +22,12 @@ namespace PDRPC.Core.Models.Database
             // Retrieve Info
             name = DatabaseManager.FindSongName();
             music = DatabaseManager.FindSongMusic();
-            difficulty = ProcessManager.ReadInt32(Settings.SongDifficultyAddress);
+            difficulty = ProcessManager.ReadInt32(Settings.Addr.SongDifficulty);
 
             // Retrieve States
-            isPv = ProcessManager.ReadInt32(Settings.SongPvFlagAddress).Equals(1);
-            isPractice = ProcessManager.ReadInt32(Settings.SongPracticeFlagAddress).Equals(1);
-            isExtraExtreme = ProcessManager.ReadInt32(Settings.SongDifficultyExtraAddress).Equals(1);
+            isPv = ProcessManager.ReadInt32(Settings.Addr.SongPvFlag).Equals(1);
+            isPractice = ProcessManager.ReadInt32(Settings.Addr.SongPracticeFlag).Equals(1);
+            isExtraExtreme = ProcessManager.ReadInt32(Settings.Addr.SongExtraFlag).Equals(1);
 
             // Prefix
             prefixImage = isPractice ? Constants.Discord.SmallImagePracticing : Constants.Discord.SmallImagePlaying;

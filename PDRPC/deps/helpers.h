@@ -86,3 +86,10 @@ const HMODULE MODULE_HANDLE = GetModuleHandle(nullptr);
             *((uint8_t*)(location) + i) = 0x90; \
         VirtualProtect((void*)(location), (size_t)(count), oldProtect, &oldProtect); \
     }
+
+// ActualMandM
+inline uint32_t ReadUnalignedU32(void* memory)
+{
+    uint8_t* p = (uint8_t*)memory;
+    return p[0] | (p[1] << 8) | (p[2] << 16) | (p[3] << 24);
+}

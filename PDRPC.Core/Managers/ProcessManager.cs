@@ -58,25 +58,18 @@ namespace PDRPC.Core.Managers
             return false;
         }
 
-        private static UIntPtr GetAddress(ulong address, bool withBase)
+        public static ulong GetBaseAddr()
         {
-            if (withBase)
-            {
-                return (UIntPtr)((ulong)mProcess.MainModule.BaseAddress + address);
-            }
-            else
-            {
-                return (UIntPtr)address;
-            }
+            return (ulong)mProcess.MainModule.BaseAddress;
         }
 
-        public static int ReadInt32(ulong address, bool withBase = true)
+        public static int ReadInt32(ulong address)
         {
             byte[] buffer = new byte[4];
 
             ReadProcessMemory(
                 mProcessHandle,
-                GetAddress(address, withBase),
+                (UIntPtr)address,
                 buffer,
                 (UIntPtr)4,
                 IntPtr.Zero
@@ -85,13 +78,13 @@ namespace PDRPC.Core.Managers
             return BitConverter.ToInt32(buffer, 0);
         }
 
-        public static ulong ReadUInt64(ulong address, bool withBase = true)
+        public static ulong ReadUInt64(ulong address)
         {
             byte[] buffer = new byte[8];
 
             ReadProcessMemory(
                 mProcessHandle,
-                GetAddress(address, withBase),
+                (UIntPtr)address,
                 buffer,
                 (UIntPtr)8,
                 IntPtr.Zero
@@ -100,13 +93,13 @@ namespace PDRPC.Core.Managers
             return BitConverter.ToUInt64(buffer, 0);
         }
 
-        public static string ReadString(ulong address, int size = 128, bool withBase = true)
+        public static string ReadString(ulong address, int size = 128)
         {
             byte[] buffer = new byte[size];
 
             ReadProcessMemory(
                 mProcessHandle,
-                GetAddress(address, withBase),
+                (UIntPtr)address,
                 buffer,
                 (UIntPtr)buffer.Length,
                 IntPtr.Zero

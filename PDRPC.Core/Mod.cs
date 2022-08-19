@@ -10,11 +10,19 @@ namespace PDRPC.Core
     {
         [DllExport]
         public static void OnInit(
-            [MarshalAs(UnmanagedType.I4)] int pid)
+            [MarshalAs(UnmanagedType.I4)] int pid,
+            [MarshalAs(UnmanagedType.U8)] ulong pSongData)
         {
             // Initial Settings
             Settings.ProcessId = pid;
             Settings.CurrentDirectory = Environment.CurrentDirectory;
+
+            // Addresses
+            Settings.Addr.SongId = pSongData + 0x27;
+            Settings.Addr.SongDifficulty = pSongData + 0x7;
+            Settings.Addr.SongExtraFlag = pSongData + 0xB;
+            Settings.Addr.SongPracticeFlag = pSongData + 0x1F;
+            Settings.Addr.SongPvFlag = pSongData + 0x20;
 
             // Running everything in a separate thread to avoid any blocking
             new Thread(() =>

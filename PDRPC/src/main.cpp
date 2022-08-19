@@ -4,7 +4,7 @@
 HMODULE m_Library;
 
 // Mod Types
-typedef void(__cdecl* _OnInit)(int pid);
+typedef void(__cdecl* _OnInit)(int pid, uintptr_t pSongData);
 typedef void(__cdecl* _OnDispose)();
 typedef void(__cdecl* _OnSongUpdate)(int songId);
 
@@ -69,6 +69,15 @@ SIG_SCAN
 	"xxxxxxx?????????x"
 );
 
+// v1.02: 0x14040B270 (ActualMandM)
+SIG_SCAN
+(
+	sigSongData,
+	0x14040B270,
+	"\x48\x89\x5C\x24\x00\x48\x89\x6C\x24\x00\x48\x89\x74\x24\x00\x57\x48\x83\xEC\x20\x33\xED\x48\xC7\x41\x00\x00\x00\x00\x00\x48\x8B\xF9\x48\x89\x29\x48\x89\x69\x08\x48\x8D\x99\x00\x00\x00\x00\x40\x88\x69\x10\x8D\x75\x04\x48\x89\x69\x14\x66\x89\x69\x1C\x89\x69\x28\xC7\x41",
+	"xxxx?xxxx?xxxx?xxxxxxxxxx?????xxxxxxxxxxxxx????xxxxxxxxxxxxxxxxxxxx"
+)
+
 // 1.02: 0x14043B000
 SIG_SCAN
 (
@@ -117,6 +126,9 @@ extern "C" __declspec(dllexport) void Init()
 		auto pid = GetCurrentProcessId();
 
 		// Mod Entry Point
-		p_OnInit(pid);
+		auto addr = (uint8_t*)sigSongData() - 0x10;
+		auto pointer = (uintptr_t)(addr + ReadUnalignedU32(addr + 0x3));
+
+		p_OnInit(pid, pointer);
 	}
 }
