@@ -6,7 +6,7 @@ HMODULE m_Library;
 // Mod Types
 typedef void(__cdecl* _OnInit)(int pid, uintptr_t pSongData);
 typedef void(__cdecl* _OnDispose)();
-typedef void(__cdecl* _OnSongUpdate)(int songId);
+typedef void(__cdecl* _OnSongUpdate)(int songId, bool isPractice);
 
 // Mod Functions
 _OnInit p_OnInit;
@@ -60,6 +60,15 @@ bool LoadModLibrary()
  * Hooks
  */
 
+ // v1.02: 0x14040B270 (ActualMandM)
+SIG_SCAN
+(
+	sigSongData,
+	0x14040B270,
+	"\x48\x89\x5C\x24\x00\x48\x89\x6C\x24\x00\x48\x89\x74\x24\x00\x57\x48\x83\xEC\x20\x33\xED\x48\xC7\x41\x00\x00\x00\x00\x00\x48\x8B\xF9\x48\x89\x29\x48\x89\x69\x08\x48\x8D\x99\x00\x00\x00\x00\x40\x88\x69\x10\x8D\x75\x04\x48\x89\x69\x14\x66\x89\x69\x1C\x89\x69\x28\xC7\x41",
+	"xxxx?xxxx?xxxx?xxxxxxxxxx?????xxxxxxxxxxxxx????xxxxxxxxxxxxxxxxxxxx"
+)
+
 // 1.02: 0x14043B2D0
 SIG_SCAN
 (
@@ -69,14 +78,14 @@ SIG_SCAN
 	"xxxxxxx?????????x"
 );
 
-// v1.02: 0x14040B270 (ActualMandM)
+// 1.02: 0x14043B2D0
 SIG_SCAN
 (
-	sigSongData,
-	0x14040B270,
-	"\x48\x89\x5C\x24\x00\x48\x89\x6C\x24\x00\x48\x89\x74\x24\x00\x57\x48\x83\xEC\x20\x33\xED\x48\xC7\x41\x00\x00\x00\x00\x00\x48\x8B\xF9\x48\x89\x29\x48\x89\x69\x08\x48\x8D\x99\x00\x00\x00\x00\x40\x88\x69\x10\x8D\x75\x04\x48\x89\x69\x14\x66\x89\x69\x1C\x89\x69\x28\xC7\x41",
-	"xxxx?xxxx?xxxx?xxxxxxxxxx?????xxxxxxxxxxxxx????xxxxxxxxxxxxxxxxxxxx"
-)
+	sigSongPracticeStart,
+	0x1401E7A60,
+	"\xE9\x00\x00\x00\x00\xA3\xF6\x42\xF3\xF8\x58\xFD\x35\x1D",
+	"x????xxxxxxxxx"
+);
 
 // 1.02: 0x14043B000
 SIG_SCAN
@@ -91,19 +100,30 @@ HOOK(void, __fastcall, _SongStart, sigSongStart(), int songId)
 {
 	if (m_Library)
 	{
-		// New SongId
-		p_OnSongUpdate(songId);
+		// Playing
+		p_OnSongUpdate(songId, false);
 	}
 
 	original_SongStart(songId);
+}
+
+HOOK(__int64, __fastcall, _SongPracticeStart, sigSongPracticeStart(), __int64 a1, __int64 a2)
+{
+	if (m_Library)
+	{
+		// Practicing
+		p_OnSongUpdate(0, true);
+	}
+
+	return original_SongPracticeStart(a1, a2);
 }
 
 HOOK(__int64, __stdcall, _SongEnd, sigSongEnd())
 {
 	if (m_Library)
 	{
-		// Menus
-		p_OnSongUpdate(0);
+		// In Menu
+		p_OnSongUpdate(0, false);
 	}
 
 	return original_SongEnd();
@@ -121,6 +141,7 @@ extern "C" __declspec(dllexport) void Init()
 		// Install Hooks
 		INSTALL_HOOK(_SongStart);
 		INSTALL_HOOK(_SongEnd);
+		INSTALL_HOOK(_SongPracticeStart);
 
 		// Current PID
 		auto pid = GetCurrentProcessId();

@@ -92,8 +92,13 @@ namespace PDRPC.Core.Managers
             Init();
         }
 
-        public static void CheckUpdates(int songId)
+        public static void CheckUpdates(int songId, bool isPractice)
         {
+            if (isPractice)
+            {
+                songId = ProcessManager.ReadInt32(Settings.Addr.SongId);
+            }
+
             if (songId != lastId)
             {
                 // Build ActivityModel

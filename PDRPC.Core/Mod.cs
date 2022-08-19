@@ -45,12 +45,13 @@ namespace PDRPC.Core
 
         [DllExport]
         public static void OnSongUpdate(
-            [MarshalAs(UnmanagedType.I4)] int songId)
+            [MarshalAs(UnmanagedType.I4)] int songId,
+            [MarshalAs(UnmanagedType.I1)] bool isPractice)
         {
             // Async update to avoid any blocking
             Task.Run(() =>
             {
-                DiscordManager.CheckUpdates(songId);
+                DiscordManager.CheckUpdates(songId, isPractice);
             });
         }
 
