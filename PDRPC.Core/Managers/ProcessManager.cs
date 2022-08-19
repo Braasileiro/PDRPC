@@ -107,5 +107,20 @@ namespace PDRPC.Core.Managers
 
             return Encoding.UTF8.GetString(buffer).Split('\0')[0];
         }
+
+        public static bool ReadBoolean(ulong address)
+        {
+            byte[] buffer = new byte[1];
+
+            ReadProcessMemory(
+                mProcessHandle,
+                (UIntPtr)address,
+                buffer,
+                (UIntPtr)1,
+                IntPtr.Zero
+            );
+
+            return BitConverter.ToBoolean(buffer, 0);
+        }
     }
 }

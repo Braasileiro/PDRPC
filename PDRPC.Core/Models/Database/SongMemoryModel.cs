@@ -25,9 +25,9 @@ namespace PDRPC.Core.Models.Database
             difficulty = ProcessManager.ReadInt32(Settings.Addr.SongDifficulty);
 
             // Retrieve States
-            isPv = ProcessManager.ReadInt32(Settings.Addr.SongPvFlag).Equals(1);
-            isPractice = ProcessManager.ReadInt32(Settings.Addr.SongPracticeFlag).Equals(1);
-            isExtraExtreme = ProcessManager.ReadInt32(Settings.Addr.SongExtraFlag).Equals(1);
+            isPv = ProcessManager.ReadBoolean(Settings.Addr.SongPvFlag);
+            isPractice = ProcessManager.ReadBoolean(Settings.Addr.SongPracticeFlag);
+            isExtraExtreme = ProcessManager.ReadBoolean(Settings.Addr.SongExtraFlag);
 
             // Prefix
             prefixImage = isPractice ? Constants.Discord.SmallImagePracticing : Constants.Discord.SmallImagePlaying;
