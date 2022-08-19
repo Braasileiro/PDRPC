@@ -116,7 +116,7 @@ namespace PDRPC.Core.Models.Presence
             }
             else
             {
-                return Constants.Discord.SmallImagePlaying;
+                return memory.GetDefaultImage();
             }
         }
 

@@ -14,7 +14,8 @@ namespace PDRPC.Core.Models.Database
         public readonly bool isPv;
         public readonly bool isPractice;
         private readonly bool isExtraExtreme;
-        private readonly string status;
+        private readonly string prefixImage;
+        private readonly string prefixStatus;
 
         public SongMemoryModel()
         {
@@ -28,8 +29,9 @@ namespace PDRPC.Core.Models.Database
             isPractice = ProcessManager.ReadInt32(Settings.SongPracticeFlagAddress).Equals(1);
             isExtraExtreme = ProcessManager.ReadInt32(Settings.SongDifficultyExtraAddress).Equals(1);
 
-            // Status Prefix
-            status = isPractice ? Constants.Discord.SmallImagePracticingText : Constants.Discord.SmallImagePlayingText;
+            // Prefix
+            prefixImage = isPractice ? Constants.Discord.SmallImagePracticing : Constants.Discord.SmallImagePlaying;
+            prefixStatus = isPractice ? Constants.Discord.SmallImagePracticingText : Constants.Discord.SmallImagePlayingText;
         }
 
         public string GetName()
@@ -60,22 +62,22 @@ namespace PDRPC.Core.Models.Database
         {
             if (isExtraExtreme)
             {
-                return $"{status} • Extra Extreme";
+                return $"{prefixStatus} • Extra Extreme";
             }
             else
             {
                 switch (difficulty)
                 {
                     case DifficultyDefine.Easy:
-                        return $"{status} • Easy";
+                        return $"{prefixStatus} • Easy";
                     case DifficultyDefine.Normal:
-                        return $"{status} • Normal";
+                        return $"{prefixStatus} • Normal";
                     case DifficultyDefine.Hard:
-                        return $"{status} • Hard";
+                        return $"{prefixStatus} • Hard";
                     case DifficultyDefine.Extreme:
-                        return $"{status} • Extreme";
+                        return $"{prefixStatus} • Extreme";
                     default:
-                        return $"{status} • {Constants.Discord.UnknownDifficulty}";
+                        return $"{prefixStatus} • {Constants.Discord.UnknownDifficulty}";
                 }
             }
         }
@@ -84,29 +86,34 @@ namespace PDRPC.Core.Models.Database
         {
             if (isExtraExtreme)
             {
-                return $"{Constants.Discord.SmallImagePlaying}_extra_extreme";
+                return $"{prefixImage}_extra_extreme";
             }
             else
             {
                 switch (difficulty)
                 {
                     case DifficultyDefine.Easy:
-                        return $"{Constants.Discord.SmallImagePlaying}_easy";
+                        return $"{prefixImage}_easy";
                     case DifficultyDefine.Normal:
-                        return $"{Constants.Discord.SmallImagePlaying}_normal";
+                        return $"{prefixImage}_normal";
                     case DifficultyDefine.Hard:
-                        return $"{Constants.Discord.SmallImagePlaying}_hard";
+                        return $"{prefixImage}_hard";
                     case DifficultyDefine.Extreme:
-                        return $"{Constants.Discord.SmallImagePlaying}_extreme";
+                        return $"{prefixImage}_extreme";
                     default:
-                        return Constants.Discord.SmallImagePlaying;
+                        return prefixImage;
                 }
             }
         }
 
+        public string GetDefaultImage()
+        {
+            return prefixImage;
+        }
+        
         public string GetDefaultStatus()
         {
-            return status;
+            return prefixStatus;
         }
     }
 }
