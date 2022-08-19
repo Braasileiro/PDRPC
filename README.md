@@ -5,7 +5,7 @@ This mod adds support for Discord Rich Presence in the game.
 
 Displays information such as song name, author, album art, difficulty and current song performers, **including custom songs.**
 
-It also indicates when you are just watching the PV.
+It also indicates when you are just watching a **PV** or in **Practice Mode**.
 
 # Installation
 * .NET Framework 4.8 Runtime. This is normally built into minimally updated Windows.
