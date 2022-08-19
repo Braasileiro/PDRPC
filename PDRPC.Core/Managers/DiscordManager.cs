@@ -1,5 +1,6 @@
 ﻿using System;
 using DiscordRPC;
+using System.Threading;
 using PDRPC.Core.Models.Presence;
 
 namespace PDRPC.Core.Managers
@@ -96,7 +97,13 @@ namespace PDRPC.Core.Managers
         {
             if (isPractice)
             {
-                songId = ProcessManager.ReadInt32(Settings.Addr.SongId);
+                // Wait a few frames until the game until the game assigns a value
+                SpinWait.SpinUntil(() =>
+                {
+                    songId = ProcessManager.ReadInt32(Settings.Addr.SongId);
+
+                    return !songId.Equals(-1);
+                }, 1000);
             }
 
             if (songId != lastId)
