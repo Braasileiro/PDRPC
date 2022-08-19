@@ -92,9 +92,11 @@ But pay attention to these fields:
 * **role**: The performer role on the song. **VOCAL** or **GUEST**.
 
 # Thanks
-* [Newtonsoft.Json](https://github.com/JamesNK/Newtonsoft.Json).
-* [discord-rpc-sharp](https://github.com/Lachee/discord-rpc-csharp).
-* The amazing [DllExport](https://github.com/3F/DllExport).
+* [DivaModLoader](https://github.com/blueskythlikesclouds/DivaModLoader)
+* [DisableWatermark Mod](https://github.com/ActualMandM/DivaDllMods/tree/main/Source/DisableWatermark)
+* [Newtonsoft.Json](https://github.com/JamesNK/Newtonsoft.Json)
+* [discord-rpc-sharp](https://github.com/Lachee/discord-rpc-csharp)
+* The amazing [DllExport](https://github.com/3F/DllExport)
 
 # Showcase
 <p align="center">
