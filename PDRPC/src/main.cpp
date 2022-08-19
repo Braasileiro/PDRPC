@@ -78,7 +78,7 @@ SIG_SCAN
 	"xxxxxxx?????????x"
 );
 
-// 1.02: 0x14043B2D0
+// 1.02: 0x1401E7A60
 SIG_SCAN
 (
 	sigSongPracticeStart,
