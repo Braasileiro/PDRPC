@@ -60,7 +60,7 @@ bool LoadModLibrary()
  * Hooks
  */
 
- // v1.02: 0x14040B270 (ActualMandM), 0x14040B260 (Me)
+ // v1.02: 0x14040B270 (ActualMandM), 0x14040B260 (Direct Signature)
 SIG_SCAN
 (
 	sigSongData,
