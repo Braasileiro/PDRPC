@@ -60,13 +60,13 @@ bool LoadModLibrary()
  * Hooks
  */
 
- // v1.02: 0x14040B270 (ActualMandM)
+ // v1.02: 0x14040B270 (ActualMandM), 0x14040B260 (Me)
 SIG_SCAN
 (
 	sigSongData,
-	0x14040B270,
-	"\x48\x89\x5C\x24\x00\x48\x89\x6C\x24\x00\x48\x89\x74\x24\x00\x57\x48\x83\xEC\x20\x33\xED\x48\xC7\x41\x00\x00\x00\x00\x00\x48\x8B\xF9\x48\x89\x29\x48\x89\x69\x08\x48\x8D\x99\x00\x00\x00\x00\x40\x88\x69\x10\x8D\x75\x04\x48\x89\x69\x14\x66\x89\x69\x1C\x89\x69\x28\xC7\x41",
-	"xxxx?xxxx?xxxx?xxxxxxxxxx?????xxxxxxxxxxxxx????xxxxxxxxxxxxxxxxxxxx"
+	0x14040B260,
+	"\x48\x8D\x05\xCC\xCC\xCC\xCC\xC3\xCC\xCC\xCC\xCC\xCC\xCC\xCC\xCC\x48\x89\x5C\x24\x08\x48\x89\x6C\x24\x10\x48\x89\x74\x24\x18\x57\x48\x83\xEC\x20",
+	"xxx????x????????xxxxxxxxxxxxxxxxxxxx"
 )
 
 // 1.02: 0x14043B2D0
@@ -147,7 +147,7 @@ extern "C" __declspec(dllexport) void Init()
 		auto pid = GetCurrentProcessId();
 
 		// Mod Entry Point
-		auto addr = (uint8_t*)sigSongData() - 0x10;
+		auto addr = (uint8_t*)sigSongData();
 		auto pointer = (uintptr_t)(addr + ReadUnalignedU32(addr + 0x3));
 
 		p_OnInit(pid, pointer);
