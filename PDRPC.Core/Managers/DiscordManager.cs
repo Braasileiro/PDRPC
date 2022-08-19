@@ -97,7 +97,7 @@ namespace PDRPC.Core.Managers
         {
             if (isPractice)
             {
-                // Wait a few frames until the game until the game assigns a value
+                // Wait a few frames until the game assigns a value
                 SpinWait.SpinUntil(() =>
                 {
                     songId = ProcessManager.ReadInt32(Settings.Addr.SongId);
