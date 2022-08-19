@@ -112,7 +112,7 @@ namespace PDRPC.Core.Managers
 
             try
             {
-                var pointer = ProcessManager.ReadInt64(Settings.SongNameAddress);
+                var pointer = ProcessManager.ReadUInt64(Settings.SongNameAddress);
 
                 result = ProcessManager.ReadString(address: pointer, withBase: false);
 
@@ -140,7 +140,7 @@ namespace PDRPC.Core.Managers
 
             try
             {
-                var pointer = ProcessManager.ReadInt64(Settings.SongMusicAddress);
+                var pointer = ProcessManager.ReadUInt64(Settings.SongMusicAddress);
 
                 result = ProcessManager.ReadString(address: pointer, withBase: false);
 

@@ -58,11 +58,11 @@ namespace PDRPC.Core.Managers
             return false;
         }
 
-        private static UIntPtr GetAddress(long address, bool withBase)
+        private static UIntPtr GetAddress(ulong address, bool withBase)
         {
             if (withBase)
             {
-                return (UIntPtr)((long)mProcess.MainModule.BaseAddress + address);
+                return (UIntPtr)((ulong)mProcess.MainModule.BaseAddress + address);
             }
             else
             {
@@ -70,7 +70,7 @@ namespace PDRPC.Core.Managers
             }
         }
 
-        public static int ReadInt32(long address, bool withBase = true)
+        public static int ReadInt32(ulong address, bool withBase = true)
         {
             byte[] buffer = new byte[4];
 
@@ -85,7 +85,7 @@ namespace PDRPC.Core.Managers
             return BitConverter.ToInt32(buffer, 0);
         }
 
-        public static long ReadInt64(long address, bool withBase = true)
+        public static ulong ReadUInt64(ulong address, bool withBase = true)
         {
             byte[] buffer = new byte[8];
 
@@ -97,10 +97,10 @@ namespace PDRPC.Core.Managers
                 IntPtr.Zero
             );
 
-            return BitConverter.ToInt64(buffer, 0);
+            return BitConverter.ToUInt64(buffer, 0);
         }
 
-        public static string ReadString(long address, int size = 128, bool withBase = true)
+        public static string ReadString(ulong address, int size = 128, bool withBase = true)
         {
             byte[] buffer = new byte[size];
 
