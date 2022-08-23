@@ -24,15 +24,15 @@ namespace PDRPC.Core.Managers
 
                 if (File.Exists(path))
                 {
-                    using (var reader = new StreamReader(path))
+                    using (var reader = File.OpenText(path))
                     {
                         // Parse config.toml
                         var table = TOML.Parse(reader);
 
                         // Load Settings
-                        Settings.AlbumArt = table["album_art"].AsBoolean;
-                        Settings.JapaneseNames = table["japanese_names"].AsBoolean;
-                        Settings.ShowDifficulty = table["show_difficulty"].AsBoolean;
+                        Settings.AlbumArt = table["settings"]["album_art"].AsBoolean;
+                        Settings.JapaneseNames = table["settings"]["japanese_names"].AsBoolean;
+                        Settings.ShowDifficulty = table["settings"]["show_difficulty"].AsBoolean;
                     }
 
                     Logger.Info("Settings loaded.");

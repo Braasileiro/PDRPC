@@ -4,7 +4,9 @@ description = "Discord Rich Presence for Hatsune Miku: Project DIVA Mega Mix+."
 version = "0.1.7"
 date = "19.08.2022"
 author = "Brasileiro"
+dll = ["PDRPC.dll"]
+
+[settings]
 album_art = true
 japanese_names = false
 show_difficulty = true
-dll = ["PDRPC.dll"]
