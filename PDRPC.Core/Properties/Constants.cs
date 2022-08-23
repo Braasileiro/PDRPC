@@ -30,11 +30,6 @@
             public const string UnknownMusic = "Unknown Music";
             public const string UnknownPerformers = "No performers.";
             public const string UnknownDifficulty = "Unknown Difficulty";
-
-            // Default Buttons
-            public static DiscordRPC.Button[] DefaultButtons = new DiscordRPC.Button[] {
-                new DiscordRPC.Button() { Label = "Check on GitHub", Url = "https://github.com/Braasileiro/PDRPC" }
-            };
         }
     }
 }

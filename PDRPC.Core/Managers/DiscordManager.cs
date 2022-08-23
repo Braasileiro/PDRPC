@@ -141,8 +141,7 @@ namespace PDRPC.Core.Managers
                     Timestamps = new Timestamps()
                     {
                         Start = timePlayed
-                    },
-                    Buttons = Constants.Discord.DefaultButtons
+                    }
                 };
 
                 // Update Presence
