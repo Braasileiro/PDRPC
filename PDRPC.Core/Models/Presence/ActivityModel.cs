@@ -18,13 +18,16 @@ namespace PDRPC.Core.Models.Presence
             this.song = song;
 
             // Menu Check
-            isPlaying = this.song != null;
+            isPlaying = this.id > 0;
 
             // Custom songs doesn't have entries, but have identifiers above zero
-            isCustom = !isPlaying && this.id > 0;
+            isCustom = isPlaying && song == null;
 
-            // Current Memory Info
-            memory = new SongMemoryModel();
+            if (isPlaying || isCustom)
+            {
+                // Current Memory Info
+                memory = new SongMemoryModel();
+            }
         }
 
         public int GetId()
@@ -34,13 +37,13 @@ namespace PDRPC.Core.Models.Presence
 
         public string GetDetails()
         {
-            if (isCustom)
-            {
-                return memory.GetName();
-            }
-            else if (!isPlaying)
+            if (!isPlaying)
             {
                 return Constants.Discord.MenuTitle;
+            }
+            else if (isCustom)
+            {
+                return memory.GetName();
             }
             else if (!Settings.JapaneseNames)
             {
@@ -54,13 +57,13 @@ namespace PDRPC.Core.Models.Presence
 
         public string GetState()
         {
-            if (isCustom)
-            {
-                return memory.GetMusic();
-            }
-            else if (!isPlaying)
+            if (!isPlaying)
             {
                 return Constants.Discord.MenuBrowsing;
+            }
+            else if (isCustom)
+            {
+                return memory.GetMusic();
             }
             else if (!Settings.JapaneseNames)
             {
@@ -116,7 +119,7 @@ namespace PDRPC.Core.Models.Presence
             }
             else
             {
-                return memory.GetDefaultImage();
+                return memory.GetDefaultImagePrefix();
             }
         }
 
@@ -136,7 +139,7 @@ namespace PDRPC.Core.Models.Presence
             }
             else
             {
-                return memory.GetDefaultStatus();
+                return memory.GetDefaultStatusPrefix();
             }
         }
     }

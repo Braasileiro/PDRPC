@@ -106,12 +106,12 @@ namespace PDRPC.Core.Models.Database
             }
         }
 
-        public string GetDefaultImage()
+        public string GetDefaultImagePrefix()
         {
             return prefixImage;
         }
         
-        public string GetDefaultStatus()
+        public string GetDefaultStatusPrefix()
         {
             return prefixStatus;
         }
