@@ -7,8 +7,6 @@ Displays information such as song name, author, album art, difficulty and curren
 
 It also indicates when you are just **watching a PV** or in **Practice Mode**.
 
-**Custom Songs** will not show album art because the image has to be previously uploaded in the app console on Discord.
-
 # Installation
 * .NET Framework 4.8 Runtime. This is normally built into minimally updated Windows.
 * Install [Visual C++ 2015+ x64 Runtime](https://aka.ms/vs/17/release/vc_redist.x64.exe) if you don't have already installed.
@@ -27,6 +25,7 @@ There are some settings you can change in **config.toml** file on **[settings]**
 
 **Album Art**: Enabled.
 <br>Shows the album art of the song. If no album art, defaults to the image of first performer. The mod contains album arts for all official songs and [Restore Cut Songs Mod](https://gamebanana.com/mods/383478).</br>
+<br>**Custom Songs** will not show album art because the image has to be previously uploaded in the app console on Discord.</br>
 
 **Japanese Names**: Disabled.
 <br>Shows the song info in japanese whenever possible.</br>
