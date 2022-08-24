@@ -29,7 +29,7 @@ Shows the album art of the song. If no album art, defaults to the image of first
 
 **Japanese Names**: Disabled.
 Shows the song info in japanese whenever possible.
-<br>**\*\*** This setting will have no effect on custom songs. The reading of the strings is done from memory, so it will bring up exactly what is written in the game at the moment.</br>
+<br>**\*\*** This setting will have no effect on custom songs. The reading of the name and author on custom songs is done from memory, will appear exactly what is written in the game at the moment.</br>
 
 **Show Difficulty**: Enabled.
 <br>Shows the difficulty of the current song with a colored icon (corresponding to the difficulty), in addition to the text in the small icon when hovering over.</br>
