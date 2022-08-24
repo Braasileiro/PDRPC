@@ -93,9 +93,13 @@ namespace PDRPC.Core.Models.Presence
 
         public string GetLargeImageText()
         {
-            if (!isPlaying || isCustom)
+            if (!isPlaying)
             {
                 return $"{BuildInfo.Name} {BuildInfo.Version}";
+            }
+            else if (isCustom)
+            {
+                return Constants.Discord.CustomSong;
             }
             else
             {
