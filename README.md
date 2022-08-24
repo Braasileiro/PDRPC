@@ -9,8 +9,6 @@ It also indicates when you are just **watching a PV** or in **Practice Mode**.
 
 **Custom Songs** will not show album art because the image has to be previously uploaded in the app console on Discord.
 
-The **Japanese Names** setting will have no effect on custom songs. The reading of the strings is done from memory, so it will bring up exactly what is written in the game at the moment.
-
 # Installation
 * .NET Framework 4.8 Runtime. This is normally built into minimally updated Windows.
 * Install [Visual C++ 2015+ x64 Runtime](https://aka.ms/vs/17/release/vc_redist.x64.exe) if you don't have already installed.
@@ -32,6 +30,7 @@ There are some settings you can change in **config.toml** file on **[settings]**
 
 **Japanese Names**: Disabled.
 <br>Shows the song info in japanese whenever possible.</br>
+<br>This setting will have no effect on custom songs. The reading of the strings is done from memory, so it will bring up exactly what is written in the game at the moment.</br>
 
 **Show Difficulty**: Enabled.
 <br>Shows the difficulty of the current song with a colored icon (corresponding to the difficulty), in addition to the text in the small icon when hovering over.</br>
