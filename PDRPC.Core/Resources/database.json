@@ -6848,7 +6848,12 @@
       "lyrics": null,
       "music": null
     },
-    "performers": null
+    "performers": [
+      {
+        "chara": "MIK",
+        "role": "VOCAL"
+      }
+    ]
   },
   {
     "id": 701,
@@ -6871,7 +6876,12 @@
       "lyrics": null,
       "music": null
     },
-    "performers": null
+    "performers": [
+      {
+        "chara": "MIK",
+        "role": "VOCAL"
+      }
+    ]
   },
   {
     "id": 710,
