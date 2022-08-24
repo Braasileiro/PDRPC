@@ -7,6 +7,10 @@ Displays information such as song name, author, album art, difficulty and curren
 
 It also indicates when you are just **watching a PV** or in **Practice Mode**.
 
+**Custom Songs** will not show album art because the image has to be previously uploaded in the app console on Discord.
+
+The **Japanese Names** setting will have no effect on custom songs. The reading of the strings is done from memory, so it will bring up exactly what is written in the game at the moment.
+
 # Installation
 * .NET Framework 4.8 Runtime. This is normally built into minimally updated Windows.
 * Install [Visual C++ 2015+ x64 Runtime](https://aka.ms/vs/17/release/vc_redist.x64.exe) if you don't have already installed.
@@ -21,7 +25,7 @@ Just play the game my little PogChamp. The Discord Activity will show up.
 **The PDRPC will try to reconnect to Discord if it is closed or opened after the game, but preferably open the Discord before the game.**
 
 # Configuration
-There are some settings you can change in **config.toml** file. Default values:
+There are some settings you can change in **config.toml** file on **[settings]** section. Here are the default values:
 
 **Album Art**: Enabled.
 <br>Shows the album art of the song. If no album art, defaults to the image of first performer. The mod contains album arts for all official songs and [Restore Cut Songs Mod](https://gamebanana.com/mods/383478).</br>
@@ -71,8 +75,6 @@ Create the **database_user.json** file inside the **PDRPC** mod folder. Here's a
 ]
 ```
 The file is self explanatory. It's basically a comma separated array of objects, a standard json array.
-
-But pay attention to these fields:
 
 **id**: The song id. If you put here any id that already exists within the game, this record will **overwrite** the data that rich presence will show. Required field.
 
