@@ -6842,7 +6842,7 @@
       "music": "未設定"
     },
     "en": {
-      "name": "Ievan Polkka",
+      "name": null,
       "arranger": null,
       "illustrator": null,
       "lyrics": null,
@@ -6870,7 +6870,7 @@
       "music": "未設定"
     },
     "en": {
-      "name": "Ievan Polkka",
+      "name": null,
       "arranger": null,
       "illustrator": null,
       "lyrics": null,
@@ -7472,10 +7472,10 @@
     "reading": null,
     "jp": {
       "name": null,
-      "arranger": "kz",
+      "arranger": null,
       "illustrator": null,
-      "lyrics": "kz",
-      "music": "kz"
+      "lyrics": null,
+      "music": null
     },
     "en": {
       "name": "Piano X Forte X Scandal",
