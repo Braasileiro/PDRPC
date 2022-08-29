@@ -12,7 +12,7 @@ namespace PDRPC.Core.Models.Database
         public int? album { get; set; }
 
         [JsonProperty(Required = Required.Default)]
-        public string type { get; set; }
+        public int? type { get; set; }
 
         [JsonProperty(Required = Required.Default)]
         public int? bpm { get; set; }
