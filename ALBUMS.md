@@ -941,6 +941,14 @@ List of available album arts.
         <td align="center">233</td>
         <td align="center"><img src="./Assets/RPC/albums/album_233.png" style="width: 256px; height: auto;"></td>
       </tr>
+      <tr>
+        <td align="center">234</td>
+        <td align="center"><img src="./Assets/RPC/albums/album_234.png" style="width: 256px; height: auto;"></td>
+      </tr>
+      <tr>
+        <td align="center">235</td>
+        <td align="center"><img src="./Assets/RPC/albums/album_235.png" style="width: 256px; height: auto;"></td>
+      </tr>
     </tbody>
   </table>
 </p>
