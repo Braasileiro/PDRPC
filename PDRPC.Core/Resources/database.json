@@ -6912,6 +6912,34 @@
     ]
   },
   {
+    "id": 721,
+    "album": 234,
+    "type": 3,
+    "bpm": 199,
+    "date": 20190710,
+    "reading": "かげろうでいず",
+    "jp": {
+      "name": "カゲロウデイズ",
+      "arranger": "じん（自然の敵P）",
+      "illustrator": "しづ",
+      "lyrics": null,
+      "music": null
+    },
+    "en": {
+      "name": "Kagerou Daze",
+      "arranger": "Jin (Shizen no Teki-P)",
+      "illustrator": "Shidu",
+      "lyrics": "Jin (Shizen no Teki-P)",
+      "music": "Jin (Shizen no Teki-P)"
+    },
+    "performers": [
+      {
+        "chara": "MIK",
+        "role": "VOCAL"
+      }
+    ]
+  },
+  {
     "id": 722,
     "album": 215,
     "type": 0,
@@ -7295,6 +7323,38 @@
     "performers": [
       {
         "chara": "MEI",
+        "role": "VOCAL"
+      }
+    ]
+  },
+  {
+    "id": 735,
+    "album": 235,
+    "type": 3,
+    "bpm": 144,
+    "date": 20190710,
+    "reading": "かんたれらぐれーすえでぃしょんえふせかんどえでぃしょん",
+    "jp": {
+      "name": "カンタレラ ～grace edition～",
+      "arranger": "WhiteFlame（黒うさP）",
+      "illustrator": "exray",
+      "lyrics": "WhiteFlame（黒うさP）",
+      "music": "WhiteFlame（黒うさP）"
+    },
+    "en": {
+      "name": "Cantarella ～grace edition～",
+      "arranger": "WhiteFlame （Kurousa P）",
+      "illustrator": "exray",
+      "lyrics": "WhiteFlame （Kurousa P）",
+      "music": "WhiteFlame （Kurousa P）"
+    },
+    "performers": [
+      {
+        "chara": "KAI",
+        "role": "VOCAL"
+      },
+      {
+        "chara": "MIK",
         "role": "VOCAL"
       }
     ]
