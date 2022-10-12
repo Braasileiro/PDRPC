@@ -4,7 +4,7 @@
     {
         public static string GetAlbumImage(int? albumId)
         {
-            if (albumId == null || albumId <= 0 || albumId > 233)
+            if (albumId == null || albumId <= 0 || albumId > 235)
             {
                 return Constants.Discord.DefaultImage;
             }
