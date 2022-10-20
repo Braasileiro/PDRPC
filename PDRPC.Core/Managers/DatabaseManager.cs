@@ -106,13 +106,13 @@ namespace PDRPC.Core.Managers
             return result;
         }
 
-        public static string FindSongName()
+        public static string FindSongText(ulong address)
         {
             string result = null;
 
             try
             {
-                var pointer = ProcessManager.ReadUInt64(ProcessManager.GetBaseAddr() + Settings.Addr.SongName);
+                var pointer = ProcessManager.ReadUInt64(ProcessManager.GetBaseAddr() + address);
 
                 result = ProcessManager.ReadString(address: pointer);
 
@@ -123,31 +123,7 @@ namespace PDRPC.Core.Managers
                  */
                 if (string.IsNullOrEmpty(result))
                 {
-                    result = ProcessManager.ReadString(ProcessManager.GetBaseAddr() + Settings.Addr.SongName);
-                }
-            }
-            catch (Exception e)
-            {
-                Logger.Error(e);
-            }
-
-            return result;
-        }
-
-        public static string FindSongMusic()
-        {
-            string result = null;
-
-            try
-            {
-                var pointer = ProcessManager.ReadUInt64(ProcessManager.GetBaseAddr() + Settings.Addr.SongMusic);
-
-                result = ProcessManager.ReadString(address: pointer);
-
-                // Same case of the song name
-                if (string.IsNullOrEmpty(result))
-                {
-                    result = ProcessManager.ReadString(ProcessManager.GetBaseAddr() + Settings.Addr.SongMusic);
+                    result = ProcessManager.ReadString(ProcessManager.GetBaseAddr() + address);
                 }
             }
             catch (Exception e)

@@ -20,8 +20,8 @@ namespace PDRPC.Core.Models.Database
         public SongMemory()
         {
             // Retrieve Info
-            name = DatabaseManager.FindSongName();
-            music = DatabaseManager.FindSongMusic();
+            name = DatabaseManager.FindSongText(Settings.Addr.SongName);
+            music = DatabaseManager.FindSongText(Settings.Addr.SongMusic);
             difficulty = ProcessManager.ReadInt32(Settings.Addr.SongDifficulty);
 
             // Retrieve States
