@@ -1,4 +1,5 @@
-﻿using PDRPC.Core.Models.Database;
+﻿using PDRPC.Core.Managers;
+using PDRPC.Core.Models.Database;
 
 namespace PDRPC.Core.Models.Presence
 {
@@ -11,14 +12,14 @@ namespace PDRPC.Core.Models.Presence
         private readonly SongMemory memory;
 
 
-        public Activity(int id = 0, Song song = null)
+        public Activity(int songId = 0)
         {
             // Current Song
-            this.id = id;
-            this.song = song;
+            id = songId;
+            song = DatabaseManager.FindById(id);
 
             // Menu Check
-            isPlaying = this.id > 0;
+            isPlaying = id > 0;
 
             // Custom songs doesn't have entries, but have identifiers above zero
             isCustom = isPlaying && song == null;

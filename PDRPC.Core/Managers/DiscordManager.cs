@@ -12,7 +12,7 @@ namespace PDRPC.Core.Managers
         private static DiscordRpcClient client;
         private static readonly DateTime timePlayed = DateTime.UtcNow;
 
-        // Song
+        // Activity
         private static Activity activityModel;
 
         // States
@@ -109,10 +109,7 @@ namespace PDRPC.Core.Managers
             if (songId != lastId)
             {
                 // Build ActivityModel
-                activityModel = new Activity(
-                    id: songId,
-                    song: DatabaseManager.FindById(songId)
-                );
+                activityModel = new Activity(songId);
 
                 // Update Activity
                 UpdateActivity();

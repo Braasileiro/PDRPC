@@ -14,8 +14,10 @@
         public static ulong SongPracticeFlag;
         public static ulong SongPvFlag;
 
-        // Statics...
+        // 1.02: 0x0CC0B5F8
         public static ulong SongName = 0x0CC0B5F8;
+
+        // 1.02: 0x0CC0B618
         public static ulong SongMusic = 0x0CC0B618;
     }
 }
