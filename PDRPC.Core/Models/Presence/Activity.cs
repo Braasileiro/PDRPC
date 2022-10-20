@@ -2,16 +2,16 @@
 
 namespace PDRPC.Core.Models.Presence
 {
-    internal class ActivityModel
+    internal class Activity
     {
         private readonly int id;
         private readonly bool isCustom;
         private readonly bool isPlaying;
-        private readonly SongModel song;
-        private readonly SongMemoryModel memory;
+        private readonly Song song;
+        private readonly SongMemory memory;
 
 
-        public ActivityModel(int id = 0, SongModel song = null)
+        public Activity(int id = 0, Song song = null)
         {
             // Current Song
             this.id = id;
@@ -26,7 +26,7 @@ namespace PDRPC.Core.Models.Presence
             if (isPlaying || isCustom)
             {
                 // Current Memory Info
-                memory = new SongMemoryModel();
+                memory = new SongMemory();
             }
         }
 
@@ -83,11 +83,11 @@ namespace PDRPC.Core.Models.Presence
             }
             else if (Settings.AlbumArt)
             {
-                return AlbumModel.GetAlbumImage(song.album);
+                return Album.GetAlbumImage(song.album);
             }
             else
             {
-                return CharacterModel.GetPerformerImage(song.performers);
+                return Character.GetPerformerImage(song.performers);
             }
         }
 
@@ -103,7 +103,7 @@ namespace PDRPC.Core.Models.Presence
             }
             else
             {
-                return CharacterModel.GetNames(song.performers);
+                return Character.GetNames(song.performers);
             }
         }
 

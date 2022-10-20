@@ -12,8 +12,8 @@ namespace PDRPC.Core.Managers
 {
     internal class DatabaseManager
     {
-        private static List<SongModel> database = null;
-        private static List<SongModel> userdata = null;
+        private static List<Song> database = null;
+        private static List<Song> userdata = null;
 
 
         public static void LoadSettings()
@@ -54,7 +54,7 @@ namespace PDRPC.Core.Managers
             try
             {
                 // Load Internal Database
-                database = JsonConvert.DeserializeObject<List<SongModel>>(Encoding.UTF8.GetString(Resources.database));
+                database = JsonConvert.DeserializeObject<List<Song>>(Encoding.UTF8.GetString(Resources.database));
 
                 Logger.Info("Internal database loaded.");
 
@@ -65,7 +65,7 @@ namespace PDRPC.Core.Managers
                 {
                     try
                     {
-                        userdata = JsonConvert.DeserializeObject<List<SongModel>>(File.ReadAllText(path));
+                        userdata = JsonConvert.DeserializeObject<List<Song>>(File.ReadAllText(path));
 
                         Logger.Info("User database loaded.");
                     }
@@ -85,11 +85,11 @@ namespace PDRPC.Core.Managers
             return false;
         }
 
-        public static SongModel FindById(int id)
+        public static Song FindById(int id)
         {
             if (id <= 0) return null;
 
-            SongModel result = null;
+            Song result = null;
 
             if (userdata != null)
             {

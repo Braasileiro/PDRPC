@@ -2,7 +2,7 @@
 
 namespace PDRPC.Core.Models.Database
 {
-    internal class SongInfoModel
+    internal class SongInfo
     {
         [JsonProperty(Required = Required.AllowNull)]
         public string name { get; set; }

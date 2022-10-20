@@ -3,7 +3,7 @@ using PDRPC.Core.Managers;
 
 namespace PDRPC.Core.Models.Database
 {
-    internal class SongMemoryModel
+    internal class SongMemory
     {
         // Song Info
         private readonly string name;
@@ -17,7 +17,7 @@ namespace PDRPC.Core.Models.Database
         private readonly string prefixImage;
         private readonly string prefixStatus;
 
-        public SongMemoryModel()
+        public SongMemory()
         {
             // Retrieve Info
             name = DatabaseManager.FindSongName();

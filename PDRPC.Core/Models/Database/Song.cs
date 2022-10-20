@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace PDRPC.Core.Models.Database
 {
-    internal class SongModel
+    internal class Song
     {
         [JsonProperty(Required = Required.Always)]
         public int id { get; set; }
@@ -24,12 +24,12 @@ namespace PDRPC.Core.Models.Database
         public string reading { get; set; }
 
         [JsonProperty(Required = Required.Always)]
-        public SongInfoModel jp { get; set; }
+        public SongInfo jp { get; set; }
 
         [JsonProperty(Required = Required.Always)]
-        public SongInfoModel en { get; set; }
+        public SongInfo en { get; set; }
 
         [JsonProperty(Required = Required.Default)]
-        public List<SongPerformerModel> performers { get; set; }
+        public List<SongPerformer> performers { get; set; }
     }
 }

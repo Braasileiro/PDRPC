@@ -5,7 +5,7 @@ using PDRPC.Core.Models.Database;
 
 namespace PDRPC.Core.Models.Presence
 {
-    internal class CharacterModel
+    internal class Character
     {
         private static readonly Dictionary<string, string> Types = new Dictionary<string, string>()
         {
@@ -23,7 +23,7 @@ namespace PDRPC.Core.Models.Presence
             return Types.TryGetValue(chara.ToUpperInvariant(), out string value) ? value : chara.ToString();
         }
 
-        public static string GetNames(List<SongPerformerModel> performers)
+        public static string GetNames(List<SongPerformer> performers)
         {
             if (performers == null || !performers.Any())
             {
@@ -31,7 +31,7 @@ namespace PDRPC.Core.Models.Presence
             }
 
             string names = string.Empty;
-            SongPerformerModel performer;
+            SongPerformer performer;
 
             for (int i = 0; i < performers.Count; i++)
             {
@@ -51,7 +51,7 @@ namespace PDRPC.Core.Models.Presence
             return names;
         }
 
-        public static string GetPerformerImage(List<SongPerformerModel> performers)
+        public static string GetPerformerImage(List<SongPerformer> performers)
         {
             if (performers == null || !performers.Any())
             {

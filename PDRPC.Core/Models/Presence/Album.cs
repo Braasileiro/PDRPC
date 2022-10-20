@@ -1,6 +1,6 @@
 ﻿namespace PDRPC.Core.Models.Presence
 {
-    internal class AlbumModel
+    internal class Album
     {
         public static string GetAlbumImage(int? albumId)
         {

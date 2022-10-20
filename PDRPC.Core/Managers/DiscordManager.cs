@@ -13,7 +13,7 @@ namespace PDRPC.Core.Managers
         private static readonly DateTime timePlayed = DateTime.UtcNow;
 
         // Song
-        private static ActivityModel activityModel;
+        private static Activity activityModel;
 
         // States
         private static int lastId = 0;
@@ -62,7 +62,7 @@ namespace PDRPC.Core.Managers
                 if (activityModel == null || activityModel.GetId() <= 0)
                 {
                     // Menu Activity
-                    activityModel = new ActivityModel();
+                    activityModel = new Activity();
                 }
 
                 // Not Waiting
@@ -109,7 +109,7 @@ namespace PDRPC.Core.Managers
             if (songId != lastId)
             {
                 // Build ActivityModel
-                activityModel = new ActivityModel(
+                activityModel = new Activity(
                     id: songId,
                     song: DatabaseManager.FindById(songId)
                 );

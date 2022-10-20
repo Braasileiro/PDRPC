@@ -2,7 +2,7 @@
 
 namespace PDRPC.Core.Models.Database
 {
-    internal class SongPerformerModel
+    internal class SongPerformer
     {
         [JsonProperty(Required = Required.Always)]
         public string chara { get; set; }
