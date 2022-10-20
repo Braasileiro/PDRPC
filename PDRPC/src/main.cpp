@@ -32,6 +32,9 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD reason, LPVOID lpReserved)
 		{
 			// Mod Dispose
 			p_OnDispose();
+
+			// Unload Library
+			FreeLibrary(m_Library);
 		}
 		break;
 	}
@@ -39,28 +42,13 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD reason, LPVOID lpReserved)
 	return TRUE;
 }
 
-bool LoadModLibrary()
-{
-	m_Library = LoadLibraryA("PDRPC.Core.dll");
-
-	if (m_Library)
-	{
-		p_OnInit = (_OnInit)GetProcAddress(m_Library, "OnInit");
-		p_OnDispose = (_OnDispose)GetProcAddress(m_Library, "OnDispose");
-		p_OnSongUpdate = (_OnSongUpdate)GetProcAddress(m_Library, "OnSongUpdate");
-
-		return true;
-	}
-
-	return false;
-}
-
 
 /*
- * Hooks
+ * Signatures
  */
 
- // v1.02: 0x14040B270 (ActualMandM), 0x14040B260 (Direct Signature)
+// v1.02: 0x14040B270 (ActualMandM)
+//        0x14040B260 (Direct Signature)
 SIG_SCAN
 (
 	sigSongData,
@@ -96,6 +84,10 @@ SIG_SCAN
 	"xxxxxxxxxxxxx????x????xxx????xxxxxx"
 );
 
+
+/*
+ * Hooks
+ */
 HOOK(void, __fastcall, _SongStart, sigSongStart(), int songId)
 {
 	if (m_Library)
@@ -136,8 +128,15 @@ HOOK(__int64, __stdcall, _SongEnd, sigSongEnd())
 extern "C" __declspec(dllexport) void Init()
 {
 	// Load Mod Library
-	if (LoadModLibrary())
+	m_Library = LoadLibraryA("PDRPC.Core.dll");
+
+	if (m_Library)
 	{
+		// Mod Function Pointers
+		p_OnInit = (_OnInit)GetProcAddress(m_Library, "OnInit");
+		p_OnDispose = (_OnDispose)GetProcAddress(m_Library, "OnDispose");
+		p_OnSongUpdate = (_OnSongUpdate)GetProcAddress(m_Library, "OnSongUpdate");
+
 		// Install Hooks
 		INSTALL_HOOK(_SongStart);
 		INSTALL_HOOK(_SongEnd);
@@ -146,10 +145,13 @@ extern "C" __declspec(dllexport) void Init()
 		// Current PID
 		auto pid = GetCurrentProcessId();
 
-		// Mod Entry Point
+		// 1.02: 0x14040B260
 		auto addr = (uint8_t*)sigSongData();
+
+		// 1.02: 0x1416E2B89
 		auto pointer = (uintptr_t)(addr + ReadUnalignedU32(addr + 0x3));
 
+		// Mod Entry Point
 		p_OnInit(pid, pointer);
 	}
 }
