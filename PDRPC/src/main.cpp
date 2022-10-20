@@ -32,9 +32,6 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD reason, LPVOID lpReserved)
 		{
 			// Mod Dispose
 			p_OnDispose();
-
-			// Unload Library
-			FreeLibrary(m_Library);
 		}
 		break;
 	}
