@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading;
 using PDRPC.Core.Managers;
-using System.Threading.Tasks;
 using System.Runtime.InteropServices;
 
 namespace PDRPC.Core
@@ -9,9 +8,7 @@ namespace PDRPC.Core
     public class Mod
     {
         [DllExport]
-        public static void OnInit(
-            [MarshalAs(UnmanagedType.I4)] int pid,
-            [MarshalAs(UnmanagedType.U8)] ulong pSongData)
+        public static void OnInit([MarshalAs(UnmanagedType.I4)] int pid, [MarshalAs(UnmanagedType.U8)] ulong pSongData)
         {
             // Initial Settings
             Settings.ProcessId = pid;
@@ -44,15 +41,9 @@ namespace PDRPC.Core
         }
 
         [DllExport]
-        public static void OnSongUpdate(
-            [MarshalAs(UnmanagedType.I4)] int songId,
-            [MarshalAs(UnmanagedType.I1)] bool isPractice)
+        public static void OnSongUpdate([MarshalAs(UnmanagedType.I4)] int songId, [MarshalAs(UnmanagedType.I1)] bool isPractice)
         {
-            // Async update to avoid any blocking
-            Task.Run(() =>
-            {
-                DiscordManager.CheckUpdates(songId, isPractice);
-            });
+            DiscordManager.CheckUpdates(songId, isPractice);
         }
 
         [DllExport]
