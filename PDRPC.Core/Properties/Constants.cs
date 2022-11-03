@@ -5,7 +5,7 @@
         internal static class Discord
         {
             // Discord ClientId
-            public const long ClientId = -1;
+            public const long ClientId = 995195946218557440;
 
             // Default
             public const string DefaultImage = "default";
