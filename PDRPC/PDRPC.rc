@@ -51,8 +51,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 0,1,8,0
- PRODUCTVERSION 0,1,8,0
+ FILEVERSION 0,1,9,0
+ PRODUCTVERSION 0,1,9,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -65,21 +65,21 @@ VS_VERSION_INFO VERSIONINFO
 BEGIN
     BLOCK "StringFileInfo"
     BEGIN
-        BLOCK "040904b0"
+        BLOCK "000004b0"
         BEGIN
             VALUE "CompanyName", "I love Mahou Shoujo Lyrical Nanoha."
             VALUE "FileDescription", "Entry wrapper for PDRPC."
-            VALUE "FileVersion", "0.1.8.0"
+            VALUE "FileVersion", "0.1.9.0"
             VALUE "InternalName", "PDRPC.dll"
             VALUE "LegalCopyright", "Brasileiro"
             VALUE "OriginalFilename", "PDRPC.dll"
             VALUE "ProductName", "PDRPC"
-            VALUE "ProductVersion", "0.1.8.0"
+            VALUE "ProductVersion", "0.1.9.0"
         END
     END
     BLOCK "VarFileInfo"
     BEGIN
-        VALUE "Translation", 0x0, 1252
+        VALUE "Translation", 0x0, 1200
     END
 END
 
