@@ -23,30 +23,21 @@ namespace PDRPC.Core.Managers
 
         public static void Init()
         {
-            #pragma warning disable CS0162
-            if (Constants.Discord.ClientId <= 0)
+            try
             {
-                Logger.Error("Please set an valid Discord ClientID.");
-            }
-            else
-            {
-                try
-                {
-                    // Instantiate
-                    client = new DiscordRpcClient(Constants.Discord.ClientId.ToString());
-                    client.Initialize();
+                // Instantiate
+                client = new DiscordRpcClient(Constants.Discord.ClientId.ToString());
+                client.Initialize();
 
-                    // Register Events
-                    client.OnReady += (sender, e) => OnClientReady();
-                    client.OnClose += (sender, e) => OnClientNotReady();
-                    client.OnConnectionFailed += (sender, e) => OnClientNotReady();
-                }
-                catch (Exception e)
-                {
-                    Logger.Error(e);
-                }
+                // Register Events
+                client.OnReady += (sender, e) => OnClientReady();
+                client.OnClose += (sender, e) => OnClientNotReady();
+                client.OnConnectionFailed += (sender, e) => OnClientNotReady();
             }
-            #pragma warning restore CS0162
+            catch (Exception e)
+            {
+                Logger.Error(e);
+            }
         }
 
 
@@ -102,7 +93,7 @@ namespace PDRPC.Core.Managers
                 {
                     songId = ProcessManager.ReadInt32(Settings.Addr.SongId);
 
-                    return !songId.Equals(-1);
+                    return songId > 0;
                 }, 1000);
             }
 
