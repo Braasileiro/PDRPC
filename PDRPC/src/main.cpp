@@ -64,8 +64,9 @@ SIG_SCAN
 	"xxxxxxx?????????x"
 );
 
-// 1.02: 0x1401E7A60 [0x1401E7990 + 0xD0]
-// 1.03: 0x1401E7A70 [0x1401E79A0 + 0xD0]
+// 1.02: 0x1401E7A60 [0x1401E7990]
+// 1.03: 0x1401E7A70 [0x1401E79A0]
+// Offset: 0xD0
 SIG_SCAN
 (
 	sigSongPracticeStart,
@@ -88,35 +89,34 @@ SIG_SCAN
 /*
  * Hooks
  */
-HOOK(void, __fastcall, _SongStart, sigSongStart(), int songId)
+static void Update(int songId, bool isPractice)
 {
 	if (m_Library)
 	{
-		// Playing
-		p_OnSongUpdate(songId, false);
+		p_OnSongUpdate(songId, isPractice);
 	}
+}
+
+HOOK(void, __fastcall, _SongStart, sigSongStart(), int songId)
+{
+	// Playing
+	Update(songId, false);
 
 	original_SongStart(songId);
 }
 
-HOOK(__int64, __fastcall, _SongPracticeStart, (uintptr_t)sigSongPracticeStart() + 0xD0)
+HOOK(void, __fastcall, _SongPracticeStart, (uintptr_t)sigSongPracticeStart() + 0xD0, int a1, int *a2)
 {
-	if (m_Library)
-	{
-		// Practicing
-		p_OnSongUpdate(0, true);
-	}
+	// Practicing
+	Update(0, true);
 
-	return original_SongPracticeStart();
+	original_SongPracticeStart(a1, a2);
 }
 
 HOOK(__int64, __stdcall, _SongEnd, sigSongEnd())
 {
-	if (m_Library)
-	{
-		// In Menu
-		p_OnSongUpdate(0, false);
-	}
+	// In Menu
+	Update(0, false);
 
 	return original_SongEnd();
 }
