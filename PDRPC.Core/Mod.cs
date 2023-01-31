@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using PDRPC.Core.Managers;
+using System.Threading.Tasks;
 using System.Runtime.InteropServices;
 
 namespace PDRPC.Core
@@ -43,7 +44,9 @@ namespace PDRPC.Core
         [DllExport]
         public static void OnSongUpdate([MarshalAs(UnmanagedType.I4)] int songId, [MarshalAs(UnmanagedType.I1)] bool isPractice)
         {
-            DiscordManager.CheckUpdates(songId, isPractice);
+            Task.Run(() => {
+                DiscordManager.CheckUpdates(songId, isPractice);
+            });
         }
 
         [DllExport]
