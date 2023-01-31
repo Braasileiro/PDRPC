@@ -64,15 +64,14 @@ SIG_SCAN
 	"xxxxxxx?????????x"
 );
 
-// 1.02: 0x1401E7A60 [0x1401E7990]
-// 1.03: 0x1401E7A70 [0x1401E79A0]
-// Offset: 0xD0
+// 1.02: 0x1401E7A60
+// 1.03: 0x1401E7A70
 SIG_SCAN
 (
 	sigSongPracticeStart,
-	0x1401E79A0,
-	"\x48\x89\x5C\x24\x18\x56\x57\x41\x54\x41\x56\x41\x57\x48\x83\xEC\x40\x41\x0F\xB6\xD9\x4D\x8B\xE0\x4C\x8B\xFA\x48\x8B\xF1\x48\x89\x4C\x24\x30\x4C\x8B\x31\x80\x7A\x19\x00\x0F\x85\x87\x00\x00\x00\x48\x89\x4C\x24\x20\x48\xC7\x44\x24\x28\x00\x00\x00\x00\xB9\x38",
-	"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+	0x1401E7A70,
+	"\xE9\x00\x00\x00\x00\x58\x3C\xB4",
+	"x????xxx"
 );
 
 // 1.02: 0x14043B000
@@ -105,7 +104,7 @@ HOOK(void, __fastcall, _SongStart, sigSongStart(), int songId)
 	original_SongStart(songId);
 }
 
-HOOK(void, __fastcall, _SongPracticeStart, (uintptr_t)sigSongPracticeStart() + 0xD0, int a1, int *a2)
+HOOK(void, __fastcall, _SongPracticeStart, sigSongPracticeStart(), int a1, int *a2)
 {
 	// Practicing
 	Update(0, true);
