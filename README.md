@@ -23,16 +23,23 @@ Just play the game my little PogChamp. The Discord Activity will show up.
 # Configuration
 There are some settings you can change in **config.toml** file on **[settings]** section. Here are the default values:
 
-**Album Art**: Enabled.
+**album_art**: Enabled.
 Shows the album art of the song. If no album art, defaults to the image of first performer. The mod contains album arts for all official songs and [Restore Cut Songs Mod](https://gamebanana.com/mods/383478).
 <br>**\*\* Custom Songs** will not show album art because the image has to be previously uploaded in the app console on Discord.</br>
 
-**Japanese Names**: Disabled.
+**japanese_names**: Disabled.
 Shows the song info in japanese whenever possible.
 <br>**\*\*** This setting will have no effect on custom songs. The reading of the name and author on custom songs is done from memory, will appear exactly what is written in the game at the moment.</br>
 
-**Show Difficulty**: Enabled.
+**show_difficulty**: Enabled.
 <br>Shows the difficulty of the current song with a colored icon (corresponding to the difficulty), in addition to the text in the small icon when hovering over.</br>
+
+**song_info_output**: Disabled.
+<br>Writes the output of the current song to a text file '**current_song_info.txt**' inside the mod directory in the format below:</br>
+```txt
+Name
+Author
+```
 
 # User Custom Data
 As of version 0.1.4, the application will try to fetch custom song data from memory, but still following the default priority: **User Data > Internal Data > Read Memory > Fallback**.
