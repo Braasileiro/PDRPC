@@ -109,6 +109,16 @@ namespace PDRPC.Core.Managers
 
                 // Update LastId
                 lastId = songId;
+
+                // Song info output (?)
+                if (activityModel.isPlaying && Settings.SongInfoOutput)
+                {
+                    File.WriteAllText(
+                        Settings.SongInfoOutputDirectory,
+                        activityModel.GetSongInfoOutput(),
+                        Encoding.UTF8
+                    );
+                }
             }
         }
 
@@ -136,16 +146,6 @@ namespace PDRPC.Core.Managers
 
                 // Update Presence
                 client?.SetPresence(activity);
-
-				// Song info output (?)
-				if (Settings.SongInfoOutput)
-                {
-                    File.WriteAllText(
-                        Settings.SongInfoOutputDirectory,
-                        activityModel.GetSongInfoOutput(),
-                        Encoding.UTF8
-                    );
-                }
             }
         }
 
