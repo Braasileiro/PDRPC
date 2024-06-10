@@ -1,5 +1,7 @@
 ﻿using System;
+using System.IO;
 using DiscordRPC;
+using System.Text;
 using System.Threading;
 using PDRPC.Core.Models.Presence;
 
@@ -134,6 +136,16 @@ namespace PDRPC.Core.Managers
 
                 // Update Presence
                 client?.SetPresence(activity);
+
+				// Song info output (?)
+				if (Settings.SongInfoOutput)
+                {
+                    File.WriteAllText(
+                        Settings.SongInfoOutputDirectory,
+                        activityModel.GetSongInfoOutput(),
+                        Encoding.UTF8
+                    );
+                }
             }
         }
 

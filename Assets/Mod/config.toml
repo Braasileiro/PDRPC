@@ -10,3 +10,4 @@ dll = ["PDRPC.dll"]
 album_art = true
 japanese_names = false
 show_difficulty = true
+song_info_output = false

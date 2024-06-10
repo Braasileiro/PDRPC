@@ -147,5 +147,10 @@ namespace PDRPC.Core.Models.Presence
                 return memory.GetDefaultStatusPrefix();
             }
         }
+
+        public string GetSongInfoOutput()
+        {
+            return $"{GetDetails()}\n${GetState()}";
+        }
     }
 }

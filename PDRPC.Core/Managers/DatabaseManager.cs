@@ -26,14 +26,16 @@ namespace PDRPC.Core.Managers
                 {
                     using (var reader = File.OpenText(path))
                     {
-                        // Parse config.toml
-                        var table = TOML.Parse(reader);
+                        // Parse '[settings]' from config.toml
+                        var settings = TOML.Parse(reader)["settings"];
 
                         // Load Settings
-                        Settings.AlbumArt = table["settings"]["album_art"].AsBoolean;
-                        Settings.JapaneseNames = table["settings"]["japanese_names"].AsBoolean;
-                        Settings.ShowDifficulty = table["settings"]["show_difficulty"].AsBoolean;
-                    }
+                        Settings.AlbumArt = settings["album_art"].AsBoolean;
+                        Settings.JapaneseNames = settings["japanese_names"].AsBoolean;
+                        Settings.ShowDifficulty = settings["show_difficulty"].AsBoolean;
+                        Settings.SongInfoOutput = settings["song_info_output"].AsBoolean;
+                        Settings.SongInfoOutputDirectory = Path.Combine(Settings.CurrentDirectory, "current_song_info.txt");
+					}
 
                     Logger.Info("Settings loaded.");
                 }
@@ -46,7 +48,8 @@ namespace PDRPC.Core.Managers
                 Settings.AlbumArt = true;
                 Settings.JapaneseNames = false;
                 Settings.ShowDifficulty = true;
-            }
+				Settings.SongInfoOutput = false;
+			}
         }
 
         public static bool LoadDatabase()

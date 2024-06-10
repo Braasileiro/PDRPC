@@ -5,7 +5,9 @@
     public static bool AlbumArt = true;
     public static bool JapaneseNames = false;
     public static bool ShowDifficulty = true;
-
+    public static bool SongInfoOutput = false;
+    public static string SongInfoOutputDirectory;
+    
     internal static class Addr
     {
         public static ulong SongId;
