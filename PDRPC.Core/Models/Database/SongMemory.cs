@@ -115,5 +115,22 @@ namespace PDRPC.Core.Models.Database
         {
             return prefixStatus;
         }
+
+        public string GetDefaultDifficultyName()
+        {
+            switch (difficulty)
+            {
+                case DifficultyDefine.Easy:
+                    return "Easy";
+                case DifficultyDefine.Normal:
+                    return "Normal";
+                case DifficultyDefine.Hard:
+                    return "Hard";
+                case DifficultyDefine.Extreme:
+                    return "Extreme";
+                default:
+                    return Constants.Discord.UnknownDifficulty;
+            }
+        }
     }
 }

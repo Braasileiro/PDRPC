@@ -7,7 +7,7 @@ namespace PDRPC.Core.Models.Presence
     {
         private readonly int id;
         private readonly bool isCustom;
-        private readonly bool isPlaying;
+        public readonly bool isPlaying;
         private readonly Song song;
         private readonly SongMemory memory;
 
@@ -92,7 +92,7 @@ namespace PDRPC.Core.Models.Presence
             }
         }
 
-        public string GetLargeImageText()
+        public string GetLargeImageText(string separator = " • ")
         {
             if (!isPlaying)
             {
@@ -104,7 +104,7 @@ namespace PDRPC.Core.Models.Presence
             }
             else
             {
-                return Character.GetNames(song.performers);
+                return Character.GetNames(song.performers, separator);
             }
         }
 
@@ -150,7 +150,18 @@ namespace PDRPC.Core.Models.Presence
 
         public string GetSongInfoOutput()
         {
-            return $"{GetDetails()}\n${GetState()}";
+            if (isPlaying)
+            {
+                return $"{GetDetails()}\n" +
+                    $"{GetState()}\n" +
+                    $"{GetLargeImageText(", ")}\n" +
+                    $"{memory.GetDefaultStatusPrefix()}\n" +
+                    $"{memory.GetDefaultDifficultyName()}";
+            }
+            else
+            {
+                return string.Empty;
+            }
         }
     }
 }

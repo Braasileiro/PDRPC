@@ -23,7 +23,7 @@ namespace PDRPC.Core.Models.Presence
             return Types.TryGetValue(chara.ToUpperInvariant(), out string value) ? value : chara.ToString();
         }
 
-        public static string GetNames(List<SongPerformer> performers)
+        public static string GetNames(List<SongPerformer> performers, string separator)
         {
             if (performers == null || !performers.Any())
             {
@@ -44,8 +44,9 @@ namespace PDRPC.Core.Models.Presence
                 }
                 else
                 {
-                    names += $" • {GetName(performer.chara)}";
+                    names += $"{separator}{GetName(performer.chara)}";
                 }
+
             }
 
             return names;

@@ -37,8 +37,11 @@ Shows the song info in japanese whenever possible.
 **song_info_output**: Disabled.
 <br>Writes the output of the current song to a text file '**current_song_info.txt**' inside the mod directory in the format below:</br>
 ```txt
-Name
-Author
+Rin-chan Now!                              -- Name
+Owata P                                    -- Author
+Hatsune Miku, Megurine Luka, Kagamine Rin  -- Performers
+Playing                                    -- Mode (Playing, Watching Music Video, Practicing)
+Extreme                                    -- Difficulty
 ```
 
 # User Custom Data
