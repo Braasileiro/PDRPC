@@ -84,7 +84,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="DiscordRichPresence">
-      <Version>1.1.3.18</Version>
+      <Version>1.2.1.24</Version>
     </PackageReference>
     <PackageReference Include="DllExport">
       <Version>1.7.4</Version>
